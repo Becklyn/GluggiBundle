@@ -1,0 +1,23 @@
+{
+    "name":         "becklyn/gluggi-bundle",
+    "description":  "Modular layout preview system, to be used within a symfony app.",
+    "type":         "symfony-bundle",
+    "homepage":     "https://github.com/Becklyn/BecklynGluggiBundle",
+    "license":      "Apache-2.0",
+    "authors": [{
+        "name":     "Becklyn Studios",
+        "homepage": "http://becklyn.com/"
+    }],
+    "autoload": {
+        "psr-4": { "Becklyn\\GluggiBundle\\": "" }
+    },
+    "require": {
+        "php": "^7.0",
+        "sensio/framework-extra-bundle": "^3.0",
+        "symfony/framework-bundle": "^2.8 | ^3.0",
+        "symfony/http-kernel": "^2.8 | ^3.0",
+        "symfony/finder": "^2.8 | ^3.0",
+        "twig/twig": "^1.26",
+        "becklyn/rad-bundle": "^2.2.0"
+    }
+}

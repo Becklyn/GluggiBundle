@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Gluggi</title>
+
+        <link rel="stylesheet" href="{{ asset("bundles/becklyngluggi/css/gluggi.css") }}">
+
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+        <link rel="icon" sizes="16x16 32x32 48x48" href="{{ asset('favicon.ico') }}">
+        <link rel="apple-touch-icon-precomposed" href="{{ asset('apple-touch-icon-precomposed.png') }}">
+        <meta name="msapplication-TileColor" content="#1C57E1">
+        <meta name="msapplication-TileImage" content="{{ asset('metro-tile-icon.png') }}">
+    </head>
+    <body {% block body_attributes "" %} >
+        {% block body %}
+
+            {% block header %}
+                {# @var type string #}
+                {# @var component \Becklyn\GluggiBundle\Data\Component|null #}
+                <header class="gluggi-header">
+                    <ul>
+                        <li><a href="{{ path("gluggi") }}">Gluggi</a></li>
+
+                        {% if type is defined %}
+                            <li><a href="{{ path("gluggi.type", {type: type}) }}#gluggi-content">{{ type | title }}</a></li>
+                            {% if component is defined %}
+                                <li>{{ component.name }}</li>
+                            {% endif %}
+                        {% endif %}
+                    </ul>
+                </header>
+            {% endblock %}
+
+            {% block content "" %}
+
+        {% endblock %}
+        {% block javascripts "" %}
+    </body>
+</html>

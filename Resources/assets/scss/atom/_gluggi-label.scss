@@ -1,0 +1,18 @@
+@import "../helpers/mixins";
+
+.gluggi-label {
+    @include gluggi-font;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 30px;
+    transition: opacity .1s ease-in-out;
+    cursor: pointer;
+    color: black;
+    text-decoration: none;
+    outline: 0;
+
+    &:hover {
+        opacity: 0;
+    }
+}

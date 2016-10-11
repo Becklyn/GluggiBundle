@@ -1,0 +1,9 @@
+{% extends "@BecklynGluggi/layout.html.twig" %}
+
+{% block content %}
+    <main id="gluggi-content">
+        {{ include("@BecklynGluggi/Gluggi/_componentPreview.html.twig", {
+            component: component,
+        }) }}
+    </main>
+{% endblock %}

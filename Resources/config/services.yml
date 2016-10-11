@@ -1,0 +1,24 @@
+parameters:
+    gluggi.routing.requirements.key: '[a-z0-9-_]+'
+
+services:
+
+    gluggi.layout_paths:
+        class: Becklyn\GluggiBundle\Loader\LayoutPaths
+        arguments:
+            - '@kernel'
+        public: false
+
+    gluggi.finder:
+        class: Becklyn\GluggiBundle\Loader\ComponentFinder
+        arguments:
+            - '@gluggi.layout_paths'
+
+
+    gluggi.twig.extension:
+        class: Becklyn\GluggiBundle\Twig\GluggiTwigExtension
+        arguments:
+            - '@gluggi.finder'
+            - '@service_container'
+        tags:
+            - { name: twig.extension }

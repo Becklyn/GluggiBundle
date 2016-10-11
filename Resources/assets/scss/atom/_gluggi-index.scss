@@ -1,0 +1,43 @@
+@import "../helpers/mixins";
+@import "../helpers/variables";
+
+.gluggi-index {
+    @include gluggi-font;
+    max-width: 1000px;
+    margin: 50px 80px 100px;
+
+    h2 {
+        font-size: 40px;
+        margin: 0 0 20px;
+
+        a {
+            font-size: 16px;
+        }
+    }
+
+    * + h2 {
+        margin-top: 60px;
+    }
+
+    ul {
+        list-style: none;
+    }
+
+    li + li {
+        margin-top: 3px;
+    }
+
+    a {
+        color: $gluggi-accent;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .gluggi-link-single {
+        margin-left: 20px;
+        font-size: 12px;
+    }
+}
