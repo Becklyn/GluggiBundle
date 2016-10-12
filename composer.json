@@ -18,6 +18,6 @@
         "symfony/http-kernel": "^2.8 | ^3.0",
         "symfony/finder": "^2.8 | ^3.0",
         "twig/twig": "^1.26",
-        "becklyn/rad-bundle": "^2.2.0"
+        "becklyn/rad-bundle": "^4.0.0-beta.1"
     }
 }
