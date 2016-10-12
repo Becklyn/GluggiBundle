@@ -14,7 +14,9 @@
         <meta name="msapplication-TileColor" content="#1C57E1">
         <meta name="msapplication-TileImage" content="{{ asset('metro-tile-icon.png') }}">
 
-        {{ render(controller("GluggiBundle:Gluggi:layoutCSSAssets")) }}
+        {% block stylesheets %}
+            {{ render(controller("GluggiBundle:Gluggi:layoutCSSAssets")) }}
+        {% endblock %}
     </head>
     <body {% block body_attributes "" %} >
         {% block body %}
