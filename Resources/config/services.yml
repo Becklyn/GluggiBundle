@@ -9,6 +9,12 @@ services:
             - '@kernel'
         public: false
 
+    gluggi.assets:
+        class: Becklyn\GluggiBundle\Loader\LayoutAssets
+        arguments:
+            - ~ # CSS files: set via configuration
+            - ~ # JavaScript files: set via configuration
+
     gluggi.finder:
         class: Becklyn\GluggiBundle\Loader\ComponentFinder
         arguments:

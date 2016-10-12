@@ -76,4 +76,38 @@ class GluggiController extends Controller
             "type" => $type,
         ];
     }
+
+
+
+    /**
+     * Includes all layout-related CSS <link> tags
+     *
+     * @Template("@Gluggi/Gluggi/_layoutCSSAssets.html.twig")
+     * @return array
+     */
+    public function layoutCSSAssetsAction ()
+    {
+        $assets = $this->get("gluggi.assets");
+
+        return [
+            "files" => $assets->getCssFiles(),
+        ];
+    }
+
+
+
+    /**
+     * Includes all layout-related JavaScript <script> tags
+     *
+     * @Template("@Gluggi/Gluggi/_layoutJavaScriptAssets.html.twig")
+     * @return array
+     */
+    public function layoutJavaScriptAssetsAction ()
+    {
+        $assets = $this->get("gluggi.assets");
+
+        return [
+            "files" => $assets->getJavaScriptFiles(),
+        ];
+    }
 }
