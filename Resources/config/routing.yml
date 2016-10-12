@@ -1,13 +1,13 @@
 gluggi:
     path: /
     defaults:
-        _controller: BecklynGluggiBundle:Gluggi:index
+        _controller: GluggiBundle:Gluggi:index
 
 
 gluggi.type:
     path: /{type}/
     defaults:
-        _controller: BecklynGluggiBundle:Gluggi:type
+        _controller: GluggiBundle:Gluggi:type
     requirements:
         type: '%gluggi.routing.requirements.key%'
 
@@ -15,7 +15,7 @@ gluggi.type:
 gluggi.component:
     path: /{type}/{key}/
     defaults:
-        _controller: BecklynGluggiBundle:Gluggi:component
+        _controller: GluggiBundle:Gluggi:component
     requirements:
         type: '%gluggi.routing.requirements.key%'
         key: '%gluggi.routing.requirements.key%'

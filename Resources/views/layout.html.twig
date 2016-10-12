@@ -6,13 +6,15 @@
 
         <title>Gluggi</title>
 
-        <link rel="stylesheet" href="{{ asset("bundles/becklyngluggi/css/gluggi.css") }}">
+        <link rel="stylesheet" href="{{ asset("bundles/gluggi/css/gluggi.css") }}">
 
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
         <link rel="icon" sizes="16x16 32x32 48x48" href="{{ asset('favicon.ico') }}">
         <link rel="apple-touch-icon-precomposed" href="{{ asset('apple-touch-icon-precomposed.png') }}">
         <meta name="msapplication-TileColor" content="#1C57E1">
         <meta name="msapplication-TileImage" content="{{ asset('metro-tile-icon.png') }}">
+
+        {{ render(controller("GluggiBundle:Gluggi:layoutCSSAssets")) }}
     </head>
     <body {% block body_attributes "" %} >
         {% block body %}
@@ -37,6 +39,8 @@
             {% block content "" %}
 
         {% endblock %}
-        {% block javascripts "" %}
+        {% block javascripts %}
+            {{ render(controller("GluggiBundle:Gluggi:layoutJavaScriptAssets")) }}
+        {% endblock %}
     </body>
 </html>
