@@ -14,6 +14,7 @@ services:
         arguments:
             - ~ # CSS files: set via configuration
             - ~ # JavaScript files: set via configuration
+            - '@assets.packages'
 
     gluggi.finder:
         class: Becklyn\GluggiBundle\Loader\ComponentFinder
