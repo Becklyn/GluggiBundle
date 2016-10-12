@@ -24,6 +24,30 @@ Installation
     ```
 
 
+
+Configuration
+-------------
+
+You can define several config values in your `app/config.yml`:
+
+
+| Key   | Type       | Required | Description |
+| ----- | ---------- | -------- | ----------- |
+| `css` | `string[]` | no       | The CSS files that will automatically be loaded. All paths are relative to `LayoutBundle/Resources/public/css`. |
+| `js`  | `string[]` | no       | The JavaScript files that will automatically be loaded. All paths are relative to `LayoutBundle/Resources/public/js`. |
+
+
+### Default configuration
+
+```yml
+gluggi:
+    css:
+        - "app.css"
+    js: 
+        - "app.js"
+```
+
+
 Usage
 -----
 
