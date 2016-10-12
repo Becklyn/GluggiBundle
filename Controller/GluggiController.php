@@ -90,7 +90,7 @@ class GluggiController extends Controller
         $assets = $this->get("gluggi.assets");
 
         return [
-            "files" => $assets->getCssFiles(),
+            "urls" => $assets->getCssUrls(),
         ];
     }
 
@@ -107,7 +107,7 @@ class GluggiController extends Controller
         $assets = $this->get("gluggi.assets");
 
         return [
-            "files" => $assets->getJavaScriptFiles(),
+            "urls" => $assets->getJavaScriptUrls(),
         ];
     }
 }

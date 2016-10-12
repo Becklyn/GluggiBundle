@@ -2,6 +2,8 @@
 
 namespace Becklyn\GluggiBundle\Loader;
 
+use Symfony\Component\Asset\Packages;
+
 
 /**
  * Contains a list of all CSS and JavaScript files used in the layout.
@@ -20,15 +22,52 @@ class LayoutAssets
     private $javaScriptFiles;
 
 
+    /**
+     * @var Packages
+     */
+    private $assetsPackages;
+
+
 
     /**
      * @param string[] $cssFiles
      * @param string[] $javaScriptFiles
+     * @param Packages $assetsPackages
      */
-    public function __construct (array $cssFiles, array $javaScriptFiles)
+    public function __construct (array $cssFiles, array $javaScriptFiles, Packages $assetsPackages)
     {
-        $this->cssFiles = $cssFiles;
-        $this->javaScriptFiles = $javaScriptFiles;
+        $this->assetsPackages = $assetsPackages;
+
+        $this->cssFiles = $this->transformToUrl($cssFiles, "css");
+        $this->javaScriptFiles = $this->transformToUrl($javaScriptFiles, "js");
+    }
+
+
+
+    /**
+     * Transforms the paths in the config to full URLs
+     *
+     * @param string[] $assets
+     * @param string   $directory
+     *
+     * @return string[]
+     */
+    private function transformToUrl (array $assets, string $directory) : array
+    {
+        return array_map(
+            function (string $path) use ($directory)
+            {
+                if (1 === preg_match('~^(https?\\:\/)?\/~', $path))
+                {
+                    return $path;
+                }
+                else
+                {
+                    return $this->assetsPackages->getUrl("bundles/layout/{$directory}/{$path}");
+                }
+            },
+            $assets
+        );
     }
 
 
@@ -36,7 +75,7 @@ class LayoutAssets
     /**
      * @return string[]
      */
-    public function getCssFiles () : array
+    public function getCssUrls () : array
     {
         return $this->cssFiles;
     }
@@ -46,7 +85,7 @@ class LayoutAssets
     /**
      * @return string[]
      */
-    public function getJavaScriptFiles () : array
+    public function getJavaScriptUrls () : array
     {
         return $this->javaScriptFiles;
     }
