@@ -19,7 +19,7 @@ Installation
 
     ```yml
     layout:
-        resource: "@BecklynGluggiBundle/Resources/config/routing.yml"
+        resource: "@GluggiBundle/Resources/config/routing.yml"
         prefix: /_layout/
     ```
 
