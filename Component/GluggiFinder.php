@@ -42,7 +42,7 @@ class GluggiFinder
 
 
     /**
-     * Returns all known components
+     * Finds the component type with the given type key
      *
      * @param string $type
      *

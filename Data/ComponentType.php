@@ -116,7 +116,7 @@ class ComponentType
 
 
     /**
-     * Returns a single component by
+     * Returns a single component by key
      *
      * @param string $key
      *
