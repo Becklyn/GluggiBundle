@@ -63,9 +63,13 @@ class GluggiController extends Controller
     {
         $component = $this->get("gluggi.finder")->findComponent($type, $key);
 
-        if (null === $component)
+        if (null === $component || $component->isHidden())
         {
-            throw $this->createNotFoundException(sprintf("No component found: '%s/%s'", $type, $key));
+            $message = null === $component
+                ? "No component found: '%s/%s'"
+                : "The component '%s/%s' has no single view.";
+
+            throw $this->createNotFoundException(sprintf($message, $type, $key));
         }
 
         return [

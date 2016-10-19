@@ -24,6 +24,12 @@ class Component
 
 
     /**
+     * @var bool
+     */
+    private $hidden;
+
+
+    /**
      * @var ComponentType
      */
     private $type;
@@ -39,6 +45,7 @@ class Component
         $this->fileName = $file->getBasename();
         $this->key = $file->getBasename('.html.twig');
         $this->name = $this->generateName($this->key);
+        $this->hidden = "_" === substr($file->getBasename(), 0, 1);
         $this->type = $type;
     }
 
@@ -95,6 +102,16 @@ class Component
     public function getType () : ComponentType
     {
         return $this->type;
+    }
+
+
+
+    /**
+     * @return boolean
+     */
+    public function isHidden () : bool
+    {
+        return $this->hidden;
     }
 
 

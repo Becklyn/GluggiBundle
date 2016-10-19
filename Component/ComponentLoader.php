@@ -47,7 +47,6 @@ class ComponentLoader
             ->files()
             ->in($path)
             ->depth("== 0")
-            ->notName("_*")
             ->name("*.html.twig")
             ->sortByName();
 
