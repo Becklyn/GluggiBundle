@@ -98,6 +98,24 @@ class ComponentType
 
 
     /**
+     * Returns all standalone components
+     *
+     * @return Component[]
+     */
+    public function getStandaloneComponents () : array
+    {
+        return array_filter(
+            $this->getComponents(),
+            function (Component $component)
+            {
+                return !$component->isHidden();
+            }
+        );
+    }
+
+
+
+    /**
      * Returns a single component by
      *
      * @param string $key
@@ -116,12 +134,12 @@ class ComponentType
 
 
     /**
-     * Returns whether the type has components
+     * Returns whether the type has standalone components
      *
      * @return bool
      */
-    public function hasComponents ()
+    public function hasStandaloneComponents ()
     {
-        return !empty($this->getComponents());
+        return !empty($this->getStandaloneComponents());
     }
 }

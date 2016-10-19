@@ -38,7 +38,7 @@ class GluggiController extends Controller
     {
         $componentType = $this->get("gluggi.finder")->findType($type);
 
-        if (!$componentType->hasComponents())
+        if (!$componentType->hasStandaloneComponents())
         {
             throw $this->createNotFoundException(sprintf("No components found in type '%s'.", $type));
         }
