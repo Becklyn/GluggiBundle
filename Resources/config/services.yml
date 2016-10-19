@@ -3,12 +3,6 @@ parameters:
 
 services:
 
-    gluggi.layout_paths:
-        class: Becklyn\GluggiBundle\Loader\LayoutPaths
-        arguments:
-            - '@kernel'
-        public: false
-
     gluggi.assets:
         class: Becklyn\GluggiBundle\Assets\LayoutAssets
         arguments:
@@ -20,6 +14,13 @@ services:
         class: Becklyn\GluggiBundle\Loader\ComponentFinder
         arguments:
             - '@gluggi.layout_paths'
+
+    gluggi.layout.bundle_paths:
+        class: Becklyn\GluggiBundle\LayoutBundleIntegration\BundlePaths
+        arguments:
+            - '@kernel'
+        public: false
+
 
 
     gluggi.twig.extension:

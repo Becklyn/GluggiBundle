@@ -1,6 +1,6 @@
 <?php
 
-namespace Becklyn\GluggiBundle\Loader;
+namespace Becklyn\GluggiBundle\LayoutBundleIntegration;
 
 use Becklyn\GluggiBundle\Exception\LayoutBundleNotInstalledException;
 use LayoutBundle\LayoutBundle;
@@ -10,7 +10,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
 /**
  * Builds directory paths to the layout bundle
  */
-class LayoutPaths
+class BundlePaths
 {
     /**
      * @var string
@@ -27,7 +27,7 @@ class LayoutPaths
         try
         {
             $layoutBundle = $kernel->getBundle('LayoutBundle', true);
-            $this->baseDir = "{$layoutBundle->getPath()}/Resources";
+            $this->baseDir = $layoutBundle->getPath();
         }
         catch (\InvalidArgumentException $e)
         {
@@ -43,15 +43,12 @@ class LayoutPaths
 
 
     /**
-     * Returns the path to one directory
-     *
-     * @param string[] ...$parts
+     * Returns the base dir
      *
      * @return string
      */
-    public function get (...$parts) : string
+    public function getResourcesDir () : string
     {
-        array_unshift($parts, $this->baseDir);
-        return implode("/", $parts);
+        return "{$this->baseDir}/Resources";
     }
 }
