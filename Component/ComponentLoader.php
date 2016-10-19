@@ -12,16 +12,16 @@ class ComponentLoader
     /**
      * @var string
      */
-    private $resourcesDir;
+    private $viewsDir;
 
 
 
     /**
-     * @param string $resourcesDir
+     * @param string $viewsDir
      */
-    public function __construct (string $resourcesDir)
+    public function __construct (string $viewsDir)
     {
-        $this->resourcesDir = rtrim($resourcesDir, "/");
+        $this->viewsDir = rtrim($viewsDir, "/");
     }
 
 
@@ -35,7 +35,7 @@ class ComponentLoader
      */
     public function loadComponents (ComponentType $type) : array
     {
-        $path = "{$this->resourcesDir}/views/{$type->getDirectory()}";
+        $path = "{$this->viewsDir}/{$type->getDirectory()}";
 
         if (!is_dir($path) || !is_readable($path))
         {

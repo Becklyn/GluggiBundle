@@ -25,7 +25,7 @@ class ComponentTypeRegistry
      */
     public function __construct (BundlePaths $layoutPaths)
     {
-        $loader = new ComponentLoader($layoutPaths->getResourcesDir());
+        $loader = new ComponentLoader($layoutPaths->getViewsDir());
 
         $this->prepareComponentList([
             new ComponentType("atom", $loader),

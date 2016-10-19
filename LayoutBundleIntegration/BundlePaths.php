@@ -43,12 +43,24 @@ class BundlePaths
 
 
     /**
-     * Returns the base dir
+     * Returns the path to the Resources dir
      *
      * @return string
      */
     public function getResourcesDir () : string
     {
         return "{$this->baseDir}/Resources";
+    }
+
+
+
+    /**
+     * Returns the path to the views dir
+     *
+     * @return string
+     */
+    public function getViewsDir () : string
+    {
+        return "{$this->getResourcesDir()}/views";
     }
 }
