@@ -22,14 +22,15 @@
         {% block body %}
 
             {% block header %}
-                {# @var type string #}
-                {# @var component \Becklyn\GluggiBundle\Data\Component|null #}
+                {# @var type \Becklyn\GluggiBundle\Data\ComponentType #}
+                {# @var component \Becklyn\GluggiBundle\Data\Component #}
                 <header class="gluggi-header">
                     <ul>
                         <li><a href="{{ path("gluggi") }}">Gluggi</a></li>
 
                         {% if type is defined %}
-                            <li><a href="{{ path("gluggi.type", {type: type}) }}#gluggi-content">{{ type | title }}</a></li>
+                            <li><a href="{{ path("gluggi.type", {type: type.key}) }}#gluggi-content">{{ type.name }}</a></li>
+
                             {% if component is defined %}
                                 <li>{{ component.name }}</li>
                             {% endif %}

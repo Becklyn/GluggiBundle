@@ -11,9 +11,9 @@ services:
             - '@assets.packages'
 
     gluggi.finder:
-        class: Becklyn\GluggiBundle\Loader\ComponentFinder
+        class: Becklyn\GluggiBundle\Component\GluggiFinder
         arguments:
-            - '@gluggi.layout_paths'
+            - '@gluggi.component_type_registry'
 
     gluggi.layout.bundle_paths:
         class: Becklyn\GluggiBundle\LayoutBundleIntegration\BundlePaths
@@ -21,6 +21,11 @@ services:
             - '@kernel'
         public: false
 
+    gluggi.component_type_registry:
+        class: Becklyn\GluggiBundle\ComponentType\ComponentTypeRegistry
+        arguments:
+            - '@gluggi.layout.bundle_paths'
+        public: false
 
 
     gluggi.twig.extension:

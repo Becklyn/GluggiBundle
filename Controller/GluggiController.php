@@ -18,10 +18,8 @@ class GluggiController extends Controller
      */
     public function indexAction ()
     {
-        $finder = $this->get("gluggi.finder");
-
         return [
-            "allTypes" => $finder->findAll(),
+            "types" => $this->get("gluggi.finder")->getAllTypes(),
         ];
     }
 
@@ -38,16 +36,15 @@ class GluggiController extends Controller
      */
     public function typeAction (string $type)
     {
-        $components = $this->get("gluggi.finder")->findByType($type);
+        $componentType = $this->get("gluggi.finder")->findType($type);
 
-        if (empty($components))
+        if (!$componentType->hasComponents())
         {
             throw $this->createNotFoundException(sprintf("No components found in type '%s'.", $type));
         }
 
         return [
-            "components" => $components,
-            "type" => $type,
+            "type" => $componentType,
         ];
     }
 
@@ -64,7 +61,7 @@ class GluggiController extends Controller
      */
     public function componentAction (string $type, string $key)
     {
-        $component = $this->get("gluggi.finder")->find($type, $key);
+        $component = $this->get("gluggi.finder")->findComponent($type, $key);
 
         if (null === $component)
         {
@@ -73,7 +70,7 @@ class GluggiController extends Controller
 
         return [
             "component" => $component,
-            "type" => $type,
+            "type" => $component->getType(),
         ];
     }
 
