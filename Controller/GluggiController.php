@@ -20,6 +20,7 @@ class GluggiController extends Controller
     {
         return [
             "types" => $this->get("gluggi.finder")->getAllTypes(),
+            "pageTitle" => "Index",
         ];
     }
 
@@ -45,6 +46,7 @@ class GluggiController extends Controller
 
         return [
             "type" => $componentType,
+            "pageTitle" => $componentType->getName(),
         ];
     }
 
@@ -75,6 +77,7 @@ class GluggiController extends Controller
         return [
             "component" => $component,
             "type" => $component->getType(),
+            "pageTitle" => $component->getType()->getName() . " // " . $component->getName(),
         ];
     }
 
