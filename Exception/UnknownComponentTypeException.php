@@ -15,7 +15,7 @@ class UnknownComponentTypeException extends \InvalidArgumentException
      */
     public function __construct (string $type, array $knownTypes = [], \Exception $previous = null)
     {
-        $message = null !== $knownTypes
+        $message = !empty($knownTypes)
             ? "Unknown type '%s', known types are '%s'."
             : "Unknown type '%s'.";
 
