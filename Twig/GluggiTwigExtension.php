@@ -2,12 +2,14 @@
 
 namespace Becklyn\GluggiBundle\Twig;
 
-
-
+use Becklyn\GluggiBundle\Exception\UnknownComponentException;
 use Becklyn\GluggiBundle\Loader\ComponentFinder;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 
+/**
+ * Exposes all gluggi-related twig functions
+ */
 class GluggiTwigExtension extends \Twig_Extension
 {
     /**
@@ -44,14 +46,14 @@ class GluggiTwigExtension extends \Twig_Extension
      *
      * @return string
      */
-    public function renderGluggiComponent (string $type, string $component, array $context = [])
+    public function renderGluggiComponent (string $type, string $name, array $context = [])
     {
         $twig = $this->container->get("twig");
-        $component = $this->finder->find($type, $component);
+        $component = $this->finder->find($type, $name);
 
         if (null === $component)
         {
-            return "";
+            throw new UnknownComponentException($name, $type);
         }
 
         $context = array_replace([
