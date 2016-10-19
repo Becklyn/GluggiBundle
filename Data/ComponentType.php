@@ -89,13 +89,7 @@ class ComponentType
     {
         if (null === $this->components)
         {
-            $this->components = [];
-
-            foreach ($this->loader->loadComponents($this) as $component)
-            {
-                $this->components[$component->getKey()] = $component;
-            }
-
+            $this->components = $this->loader->loadComponents($this);
         }
 
         return $this->components;

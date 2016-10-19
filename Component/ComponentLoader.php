@@ -31,7 +31,7 @@ class ComponentLoader
      *
      * @param ComponentType $type
      *
-     * @return Component[]
+     * @return Component[] indexed by component key
      */
     public function loadComponents (ComponentType $type) : array
     {
@@ -51,12 +51,14 @@ class ComponentLoader
             ->name("*.html.twig")
             ->sortByName();
 
-        return array_map(
-            function (\SplFileInfo $file) use ($type)
-            {
-                return new Component($file, $type);
-            },
-            iterator_to_array($files)
-        );
+        $result = [];
+
+        foreach ($files as $file)
+        {
+            $component = new Component($file, $type);
+            $result[$component->getKey()] = $component;
+        }
+
+        return $result;
     }
 }
