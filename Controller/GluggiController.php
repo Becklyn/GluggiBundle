@@ -13,23 +13,20 @@ use Symfony\Component\HttpFoundation\Response;
 class GluggiController extends Controller
 {
     /**
-     * @Template()
      * @return array
      */
     public function indexAction ()
     {
-        return [
+        return $this->render("@Gluggi/Gluggi/index.html.twig", [
             "types" => $this->get("gluggi.finder")->getAllTypes(),
             "pageTitle" => "Index",
-        ];
+        ]);
     }
 
 
 
     /**
      * Renders a list of all components in the given type
-     *
-     * @Template()
      *
      * @param string $type
      *
@@ -44,17 +41,16 @@ class GluggiController extends Controller
             throw $this->createNotFoundException(sprintf("No components found in type '%s'.", $type));
         }
 
-        return [
+        return $this->render("@Gluggi/Gluggi/type.html.twig", [
             "type" => $componentType,
             "pageTitle" => $componentType->getName(),
-        ];
+        ]);
     }
 
 
 
     /**
      * Renders a component in single view
-     * @Template()
      *
      * @param string $type
      * @param string $key
@@ -74,11 +70,11 @@ class GluggiController extends Controller
             throw $this->createNotFoundException(sprintf($message, $type, $key));
         }
 
-        return [
+        return $this->render("@Gluggi/Gluggi/component.html.twig", [
             "component" => $component,
             "type" => $component->getType(),
             "pageTitle" => $component->getType()->getName() . " // " . $component->getName(),
-        ];
+        ]);
     }
 
 
@@ -86,16 +82,15 @@ class GluggiController extends Controller
     /**
      * Includes all layout-related CSS <link> tags
      *
-     * @Template("@Gluggi/Gluggi/_layoutCSSAssets.html.twig")
      * @return array
      */
     public function layoutCSSAssetsAction ()
     {
         $assets = $this->get("gluggi.assets");
 
-        return [
+        return $this->render("@Gluggi/Gluggi/_layoutCSSAssets.html.twig", [
             "urls" => $assets->getCssUrls(),
-        ];
+        ]);
     }
 
 
@@ -103,15 +98,14 @@ class GluggiController extends Controller
     /**
      * Includes all layout-related JavaScript <script> tags
      *
-     * @Template("@Gluggi/Gluggi/_layoutJavaScriptAssets.html.twig")
      * @return array
      */
     public function layoutJavaScriptAssetsAction ()
     {
         $assets = $this->get("gluggi.assets");
 
-        return [
+        return $this->render("@Gluggi/Gluggi/_layoutJavaScriptAssets.html.twig", [
             "urls" => $assets->getJavaScriptUrls(),
-        ];
+        ]);
     }
 }
