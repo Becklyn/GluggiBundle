@@ -13,7 +13,7 @@ class ComponentLoaderTest extends \PHPUnit_Framework_TestCase
 {
     private function loadAtoms ()
     {
-        $loader = new ComponentLoader(__DIR__ . "/../fixtures/Resources/views");
+        $loader = new ComponentLoader(__DIR__ . "/../app/src/LayoutBundle/Resources/views");
         $type = self::getMockBuilder(ComponentType::class)
             ->disableOriginalConstructor()
             ->getMock();

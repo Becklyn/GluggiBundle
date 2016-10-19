@@ -9,11 +9,14 @@
 >
     <php>
         <ini name="error_reporting" value="-1" />
+        <server name="KERNEL_DIR" value="tests/app" />
     </php>
 
     <testsuites>
         <testsuite name="Bundle tests">
             <directory>tests</directory>
+            <exclude>tests/app</exclude>
+            <exclude>tests/fixtures</exclude>
         </testsuite>
     </testsuites>
 </phpunit>

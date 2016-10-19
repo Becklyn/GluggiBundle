@@ -18,7 +18,7 @@ class ComponentTest extends \PHPUnit_Framework_TestCase
             ->method("getDirectory")
             ->willReturn("atom");
 
-        return new Component(new \SplFileInfo(__DIR__ . "/../fixtures/Resources/views/atom/{$fileName}"), $type);
+        return new Component(new \SplFileInfo(__DIR__ . "/../app/src/LayoutBundle/Resources/views/atom/{$fileName}"), $type);
     }
 
 
