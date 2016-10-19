@@ -10,7 +10,7 @@ services:
         public: false
 
     gluggi.assets:
-        class: Becklyn\GluggiBundle\Loader\LayoutAssets
+        class: Becklyn\GluggiBundle\Assets\LayoutAssets
         arguments:
             - ~ # CSS files: set via configuration
             - ~ # JavaScript files: set via configuration

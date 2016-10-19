@@ -1,6 +1,6 @@
 <?php
 
-namespace Becklyn\GluggiBundle\Loader;
+namespace Becklyn\GluggiBundle\Assets;
 
 use Symfony\Component\Asset\Packages;
 
