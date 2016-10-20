@@ -54,3 +54,30 @@ Usage
 Create a `LayoutBundle` and load it in your `AppKernel`.
 
 You can add your views in `LayoutBundle/Resources/views/{atom,molecule,organism,template,page}`.
+
+
+### Using assets in views
+
+#### CSS assets
+Place your images under `Resources/public/img` (just as in any other Symfony bundle) and reference the image in your SCSS file via `url("../img/...")`.
+
+#### Inline assets
+Load the assets directly from the bundle via Symfony's own `asset()` function:
+
+```jinja
+<!-- Resources/views/atom/example.html.twig -->
+
+<div class="example">
+    <img src="{{ asset("bundles/layout/img/example.jpg") }}" alt="Example Image">
+</div>
+```
+
+
+#### Separating content and layout assets
+In a regular layout project, there are some assets that are required for the layout to function (like logos, background images, etc...). And there are content images, that act
+as placeholders in the layout previews.
+
+It is recommended to separate the two images into two directories:
+
+* `Resources/public/img` for layout assets
+* `Resources/public/content` for content placeholder assets
