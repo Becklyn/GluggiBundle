@@ -54,7 +54,7 @@ class GluggiControllerTest extends WebTestCase
             ["molecule", true],
             ["organism", true],
             ["template", true],
-            // ["page", false],
+            ["page", false],
         ];
     }
 

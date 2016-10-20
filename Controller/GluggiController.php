@@ -70,7 +70,11 @@ class GluggiController extends Controller
             throw $this->createNotFoundException(sprintf($message, $type, $key));
         }
 
-        return $this->render("@Gluggi/Gluggi/component.html.twig", [
+        $template = $component->getType()->isIsolatedComponentViewMode()
+            ? "isolatedComponent"
+            : "component";
+
+        return $this->render("@Gluggi/Gluggi/{$template}.html.twig", [
             "component" => $component,
             "type" => $component->getType(),
             "pageTitle" => $component->getType()->getName() . " // " . $component->getName(),
