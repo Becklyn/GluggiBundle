@@ -5,6 +5,7 @@ Modular layout system
 
 
 
+
 Installation
 ------------
 
@@ -25,6 +26,7 @@ Installation
 
 
 
+
 Configuration
 -------------
 
@@ -35,6 +37,7 @@ You can define several config values in your `app/config.yml`:
 | ----- | ---------- | -------- | ----------- |
 | `css` | `string[]` | no       | The CSS files that will automatically be loaded. All paths are relative to `LayoutBundle/Resources/public/css`. |
 | `js`  | `string[]` | no       | The JavaScript files that will automatically be loaded. All paths are relative to `LayoutBundle/Resources/public/js`. |
+
 
 
 ### Default configuration
@@ -48,12 +51,15 @@ gluggi:
 ```
 
 
+
+
 Usage
 -----
 
 Create a `LayoutBundle` and load it in your `AppKernel`.
 
 You can add your views in `LayoutBundle/Resources/views/{atom,molecule,organism,template,page}`.
+
 
 
 ### Including views in other views
@@ -101,6 +107,7 @@ To allow overwriting certain values, the [`|default(...)` filter from Twig](http
 ```
 
 
+
 ### Predefined template variables
 
 This is list of predefined variables:
@@ -109,12 +116,11 @@ This is list of predefined variables:
 | ------------ | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `standalone` | `bool` | Defines, whether the component is previewed standalone or embedded in another component. Defaults to `false` in any `gluggi()` embed, `true` otherwise. |
 
-
-
 You can overwrite predefined values in included templates, by passing an explicit value as template parameter:
 ```jinja
 {{ gluggi("atom", "example", {standalone: true}) }}
 ```
+
 
 
 #### `standalone`
@@ -141,10 +147,13 @@ This is for example important if a component receives its actual width from the 
 </div>
 ```
 
+
+
 ### Using assets in views
 
 #### CSS assets
 Place your images under `Resources/public/img` (just as in any other Symfony bundle) and reference the image in your SCSS file via `url("../img/...")`.
+
 
 #### Inline assets
 Load the assets directly from the bundle via Symfony's own `asset()` function:
