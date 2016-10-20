@@ -47,8 +47,9 @@ class GluggiControllerTest extends WebTestCase
 
 
 
-    public function dataProviderComponentInTypeViews ()
+    public function dataProviderComponentTypes ()
     {
+        // mapping component type on "should have staged view"
         return [
             ["atom", true],
             ["molecule", true],
@@ -61,7 +62,7 @@ class GluggiControllerTest extends WebTestCase
 
 
     /**
-     * @dataProvider dataProviderComponentInTypeViews
+     * @dataProvider dataProviderComponentTypes
      */
     public function testGluggiWrapperOnTypeComponentView (string $type, bool $shouldHaveWrapper)
     {
@@ -86,5 +87,19 @@ class GluggiControllerTest extends WebTestCase
         {
             self::assertSame($count, count($crawler->filter($selector)), "{$selector} {$message}");
         }
+    }
+
+
+    /**
+     * @dataProvider dataProviderComponentTypes
+     */
+    public function testDisabledListView (string $type, bool $listViewAvailable)
+    {
+        $client = static::createClient();
+        $client->request("GET", "/{$type}/");
+
+        $expectedStatusCode = $listViewAvailable ? 200 : 404;
+
+        self::assertSame($expectedStatusCode, $client->getResponse()->getStatusCode());
     }
 }
