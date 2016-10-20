@@ -3,23 +3,29 @@ parameters:
 
 services:
 
-    gluggi.layout_paths:
-        class: Becklyn\GluggiBundle\Loader\LayoutPaths
-        arguments:
-            - '@kernel'
-        public: false
-
     gluggi.assets:
-        class: Becklyn\GluggiBundle\Loader\LayoutAssets
+        class: Becklyn\GluggiBundle\Assets\LayoutAssets
         arguments:
             - ~ # CSS files: set via configuration
             - ~ # JavaScript files: set via configuration
             - '@assets.packages'
 
     gluggi.finder:
-        class: Becklyn\GluggiBundle\Loader\ComponentFinder
+        class: Becklyn\GluggiBundle\Component\GluggiFinder
         arguments:
-            - '@gluggi.layout_paths'
+            - '@gluggi.component_type_registry'
+
+    gluggi.layout.bundle_paths:
+        class: Becklyn\GluggiBundle\LayoutBundleIntegration\BundlePaths
+        arguments:
+            - '@kernel'
+        public: false
+
+    gluggi.component_type_registry:
+        class: Becklyn\GluggiBundle\ComponentType\ComponentTypeRegistry
+        arguments:
+            - '@gluggi.layout.bundle_paths'
+        public: false
 
 
     gluggi.twig.extension:

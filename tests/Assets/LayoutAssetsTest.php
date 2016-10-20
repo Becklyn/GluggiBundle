@@ -1,7 +1,8 @@
 <?php
 
-namespace Becklyn\GluggiBundle\Loader;
+namespace Tests\Becklyn\GluggiBundle\Assets;
 
+use Becklyn\GluggiBundle\Assets\LayoutAssets;
 use Symfony\Component\Asset\Packages;
 
 

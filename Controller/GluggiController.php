@@ -13,16 +13,14 @@ use Symfony\Component\HttpFoundation\Response;
 class GluggiController extends Controller
 {
     /**
-     * @Template()
      * @return array
      */
     public function indexAction ()
     {
-        $finder = $this->get("gluggi.finder");
-
-        return [
-            "allTypes" => $finder->findAll(),
-        ];
+        return $this->render("@Gluggi/Gluggi/index.html.twig", [
+            "types" => $this->get("gluggi.finder")->getAllTypes(),
+            "pageTitle" => "Index",
+        ]);
     }
 
 
@@ -30,32 +28,29 @@ class GluggiController extends Controller
     /**
      * Renders a list of all components in the given type
      *
-     * @Template()
-     *
      * @param string $type
      *
      * @return array
      */
     public function typeAction (string $type)
     {
-        $components = $this->get("gluggi.finder")->findByType($type);
+        $componentType = $this->get("gluggi.finder")->findType($type);
 
-        if (empty($components))
+        if (!$componentType->hasStandaloneComponents())
         {
             throw $this->createNotFoundException(sprintf("No components found in type '%s'.", $type));
         }
 
-        return [
-            "components" => $components,
-            "type" => $type,
-        ];
+        return $this->render("@Gluggi/Gluggi/type.html.twig", [
+            "type" => $componentType,
+            "pageTitle" => $componentType->getName(),
+        ]);
     }
 
 
 
     /**
      * Renders a component in single view
-     * @Template()
      *
      * @param string $type
      * @param string $key
@@ -64,17 +59,22 @@ class GluggiController extends Controller
      */
     public function componentAction (string $type, string $key)
     {
-        $component = $this->get("gluggi.finder")->find($type, $key);
+        $component = $this->get("gluggi.finder")->findComponent($type, $key);
 
-        if (null === $component)
+        if (null === $component || $component->isHidden())
         {
-            throw $this->createNotFoundException(sprintf("No component found: '%s/%s'", $type, $key));
+            $message = null === $component
+                ? "No component found: '%s/%s'"
+                : "The component '%s/%s' has no single view.";
+
+            throw $this->createNotFoundException(sprintf($message, $type, $key));
         }
 
-        return [
+        return $this->render("@Gluggi/Gluggi/component.html.twig", [
             "component" => $component,
-            "type" => $type,
-        ];
+            "type" => $component->getType(),
+            "pageTitle" => $component->getType()->getName() . " // " . $component->getName(),
+        ]);
     }
 
 
@@ -82,16 +82,15 @@ class GluggiController extends Controller
     /**
      * Includes all layout-related CSS <link> tags
      *
-     * @Template("@Gluggi/Gluggi/_layoutCSSAssets.html.twig")
      * @return array
      */
     public function layoutCSSAssetsAction ()
     {
         $assets = $this->get("gluggi.assets");
 
-        return [
+        return $this->render("@Gluggi/Gluggi/_layoutCSSAssets.html.twig", [
             "urls" => $assets->getCssUrls(),
-        ];
+        ]);
     }
 
 
@@ -99,15 +98,14 @@ class GluggiController extends Controller
     /**
      * Includes all layout-related JavaScript <script> tags
      *
-     * @Template("@Gluggi/Gluggi/_layoutJavaScriptAssets.html.twig")
      * @return array
      */
     public function layoutJavaScriptAssetsAction ()
     {
         $assets = $this->get("gluggi.assets");
 
-        return [
+        return $this->render("@Gluggi/Gluggi/_layoutJavaScriptAssets.html.twig", [
             "urls" => $assets->getJavaScriptUrls(),
-        ];
+        ]);
     }
 }

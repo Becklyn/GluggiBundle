@@ -2,8 +2,8 @@
 
 namespace Becklyn\GluggiBundle\Twig;
 
+use Becklyn\GluggiBundle\Component\GluggiFinder;
 use Becklyn\GluggiBundle\Exception\UnknownComponentException;
-use Becklyn\GluggiBundle\Loader\ComponentFinder;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 
@@ -13,7 +13,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class GluggiTwigExtension extends \Twig_Extension
 {
     /**
-     * @var ComponentFinder
+     * @var GluggiFinder
      */
     private $finder;
 
@@ -26,10 +26,10 @@ class GluggiTwigExtension extends \Twig_Extension
 
 
     /**
-     * @param ComponentFinder    $finder
+     * @param GluggiFinder       $finder
      * @param ContainerInterface $container
      */
-    public function __construct (ComponentFinder $finder, ContainerInterface $container)
+    public function __construct (GluggiFinder $finder, ContainerInterface $container)
     {
         $this->finder = $finder;
         $this->container = $container;
@@ -41,7 +41,7 @@ class GluggiTwigExtension extends \Twig_Extension
      * Renders a gluggi component
      *
      * @param string $type
-     * @param string $component
+     * @param string $name
      * @param array  $context
      *
      * @return string
@@ -49,7 +49,7 @@ class GluggiTwigExtension extends \Twig_Extension
     public function renderGluggiComponent (string $type, string $name, array $context = [])
     {
         $twig = $this->container->get("twig");
-        $component = $this->finder->find($type, $name);
+        $component = $this->finder->findComponent($type, $name);
 
         if (null === $component)
         {

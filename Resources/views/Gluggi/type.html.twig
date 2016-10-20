@@ -2,7 +2,7 @@
 
 {% block content %}
     <main id="gluggi-content">
-    {%- for component in components -%}
+    {%- for component in type.standaloneComponents -%}
         {{ include("@Gluggi/Gluggi/_componentPreview.html.twig", {
             component: component,
         }) }}

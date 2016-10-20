@@ -24,21 +24,28 @@ class Component
 
 
     /**
-     * @var string
+     * @var bool
+     */
+    private $hidden;
+
+
+    /**
+     * @var ComponentType
      */
     private $type;
 
 
 
     /**
-     * @param \SplFileInfo $file
-     * @param string       $type
+     * @param \SplFileInfo  $file
+     * @param ComponentType $type
      */
-    public function __construct (\SplFileInfo $file, string $type)
+    public function __construct (\SplFileInfo $file, ComponentType $type)
     {
         $this->fileName = $file->getBasename();
         $this->key = $file->getBasename('.html.twig');
         $this->name = $this->generateName($this->key);
+        $this->hidden = "_" === substr($file->getBasename(), 0, 1);
         $this->type = $type;
     }
 
@@ -90,11 +97,21 @@ class Component
 
 
     /**
-     * @return string
+     * @return ComponentType
      */
-    public function getType () : string
+    public function getType () : ComponentType
     {
         return $this->type;
+    }
+
+
+
+    /**
+     * @return boolean
+     */
+    public function isHidden () : bool
+    {
+        return $this->hidden;
     }
 
 
@@ -106,7 +123,7 @@ class Component
      */
     public function getImportPath () : string
     {
-        return "@Layout/{$this->type}/{$this->fileName}";
+        return "@Layout/{$this->type->getDirectory()}/{$this->fileName}";
     }
 
 
@@ -116,6 +133,6 @@ class Component
      */
     public function getAnchor () : string
     {
-        return "{$this->getType()}--{$this->getKey()}";
+        return "{$this->type->getKey()}--{$this->getKey()}";
     }
 }

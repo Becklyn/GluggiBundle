@@ -6,12 +6,12 @@
 {% block content %}
 
     <div class="gluggi-index">
-        {%- for type, components in allTypes if components is not empty -%}
-            <h2>{{ type | title }} <a href="{{ path("gluggi.type", {type: type}) }}#gluggi-content">alle anzeigen</a></h2>
+        {%- for type in types if type.hasStandaloneComponents -%}
+            <h2>{{ type.name }} <a href="{{ path("gluggi.type", {type: type.key}) }}#gluggi-content">alle anzeigen</a></h2>
 
             <ul>
-            {%- for component in components -%}
-                <li><a href="{{ path("gluggi.type", {type: type}) }}#{{ component.anchor }}">{{ component.name }}</a> <a href="{{ path("gluggi.component", {type: type, key: component.key}) }}#gluggi-content" class="gluggi-link-single">Einzelansicht</a></li>
+            {%- for component in type.standaloneComponents -%}
+                <li><a href="{{ path("gluggi.type", {type: type.key}) }}#{{ component.anchor }}">{{ component.name }}</a> <a href="{{ path("gluggi.component", {type: type.key, key: component.key}) }}#gluggi-content" class="gluggi-link-single">Einzelansicht</a></li>
             {%- endfor -%}
             </ul>
         {%- endfor -%}
