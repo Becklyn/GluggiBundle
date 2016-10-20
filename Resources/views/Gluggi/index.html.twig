@@ -7,11 +7,21 @@
 
     <div class="gluggi-index">
         {%- for type in types if type.hasStandaloneComponents -%}
-            <h2>{{ type.name }} <a href="{{ path("gluggi.type", {type: type.key}) }}#gluggi-content">alle anzeigen</a></h2>
+            <h2>
+                {{- type.name -}}
+                {%- if not type.isolatedComponentViewMode %} <a href="{{ path("gluggi.type", {type: type.key}) }}#gluggi-content">alle anzeigen</a>{%- endif -%}
+            </h2>
 
             <ul>
             {%- for component in type.standaloneComponents -%}
-                <li><a href="{{ path("gluggi.type", {type: type.key}) }}#{{ component.anchor }}">{{ component.name }}</a> <a href="{{ path("gluggi.component", {type: type.key, key: component.key}) }}#gluggi-content" class="gluggi-link-single">Einzelansicht</a></li>
+                <li>
+                    {%- if not type.isolatedComponentViewMode -%}
+                        <a href="{{ path("gluggi.type", {type: type.key}) }}#{{ component.anchor }}">{{ component.name }}</a>
+                        <a href="{{ path("gluggi.component", {type: type.key, key: component.key}) }}#gluggi-content" class="gluggi-link-single">Einzelansicht</a>
+                    {%- else -%}
+                        <a href="{{ path("gluggi.component", {type: type.key, key: component.key}) }}">{{ component.name }}</a>
+                    {%- endif %}
+                </li>
             {%- endfor -%}
             </ul>
         {%- endfor -%}
