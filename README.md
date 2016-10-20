@@ -56,6 +56,71 @@ Create a `LayoutBundle` and load it in your `AppKernel`.
 You can add your views in `LayoutBundle/Resources/views/{atom,molecule,organism,template,page}`.
 
 
+
+### Template variables
+Components can use variables (just like any other Twig template).
+All templates need to work standalone, so the value of the variable must be defined in the template via `{% set variable = ... %}`.
+
+To allow overwriting certain values, the [`|default(...)` filter from Twig](http://twig.sensiolabs.org/doc/filters/default.html) can be used. If the component is included in another template, the variables can be changed.
+
+
+`atom/list.html.twig`:
+```jinja
+<ul>
+    {% for i in 1 .. entries|default(3) %}
+    <li>Entry #{{ i }}</li>
+    {% endfor %}
+</ul>
+```
+
+`molecule/long-list.html.twig`:
+```jinja
+<div class="long-list">
+    {{ gluggi("atom", "list", {entries: 10}) }
+</div>
+```
+
+
+### Predefined template variables
+
+This is list of predefined variables:
+
+| Name         | Type   | Description                                                                                                                                             |
+| ------------ | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `standalone` | `bool` | Defines, whether the component is previewed standalone or embedded in another component. Defaults to `false` in any `gluggi()` embed, `true` otherwise. |
+
+
+
+You can overwrite predefined values in included templates, by passing an explicit value as template parameter:
+```jinja
+{{ gluggi("atom", "example", {standalone: true}) }}
+```
+
+
+#### `standalone`
+The purpose of this variable is to provide an indicator whether the component is previewed in isolation or embedded in another template.
+This is for example important if a component receives its actual width from the parent.
+
+
+`atom/example.html.twig`:
+```jinja
+{% if standalone %}<div style="width: 800px;">{% endif %}
+
+    <div class="example">
+        {# ... #}
+    </div>
+    
+{% if standalone %}</div>{% endif %}
+```
+
+`molecule/product.html.twig`:
+```jinja
+{# here the width is defined on the product, so the helper <div> shouldn't be in the output #}
+<div class="product">
+    {{ gluggi("atom", "example") }} {# includes with standalone = false by default #}
+</div>
+```
+
 ### Using assets in views
 
 #### CSS assets
