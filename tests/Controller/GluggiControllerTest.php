@@ -36,11 +36,11 @@ class GluggiControllerTest extends WebTestCase
     public function testComponent ()
     {
         $client = static::createClient();
-        $client->request("GET", "/atom/correct/");
+        $client->request("GET", "/atom/example/");
         $content = $client->getResponse()->getContent();
 
         self::assertContains(
-            "<title>Gluggi // Atom // Correct</title>",
+            "<title>Gluggi // Atom // Example</title>",
             $content
         );
     }
@@ -50,7 +50,7 @@ class GluggiControllerTest extends WebTestCase
     public function testGluggiWrapperOnAtom ()
     {
         $client = static::createClient();
-        $crawler = $client->request("GET", "/atom/correct/");
+        $crawler = $client->request("GET", "/atom/example/");
 
         // the page should have a header & preview container
         self::assertSame(1, count($crawler->filter(".gluggi-header")));

@@ -32,7 +32,7 @@ class ComponentLoaderTest extends \PHPUnit_Framework_TestCase
         $components = $this->loadAtoms();
 
         self::assertArrayHasKey("_hidden", $components);
-        self::assertArrayHasKey("correct", $components);
+        self::assertArrayHasKey("example", $components);
         self::assertCount(2, $components);
     }
 }
