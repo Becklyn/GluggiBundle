@@ -175,3 +175,28 @@ It is recommended to separate the two images into two directories:
 
 * `Resources/public/img` for layout assets
 * `Resources/public/content` for content placeholder assets
+
+
+
+### Styling helpers
+There is a styling helper for usage in your layout views.
+It adds a top margin on every direct child element, except the first child. Use it like this:
+
+
+```html
+<div class="gluggi-variations">
+    <!-- First component -->
+    <!-- Second component -->
+    <!-- ... -->
+</div>
+```
+
+If the component itself should not get a top margin, wrap the components in a single div:
+
+```html
+<div class="gluggi-variations">
+    <div><!-- First component --></div>
+    <div><!-- Second component --></div>
+    <!-- ... -->
+</div>
+```
