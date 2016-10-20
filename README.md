@@ -56,6 +56,26 @@ Create a `LayoutBundle` and load it in your `AppKernel`.
 You can add your views in `LayoutBundle/Resources/views/{atom,molecule,organism,template,page}`.
 
 
+### Including views in other views
+Especially in views that include other subviews it is preferable to just import these subviews, instead of copy & pasting them through the layout project.
+
+Gluggi contains a simple twig function that includes a component:
+
+```jinja
+<div class="wrapper">
+    {{ gluggi("atom", "example")
+</div>
+```
+
+The function has three parameters: `gluggi(type, name [, templateContext])`
+
+| Argument          | Type               | Description                                                   |
+| ----------------- | ------------------ | ------------------------------------------------------------- |
+| `type`            | `string`           | the type of the component, like `"atom"`, `"molecule"`, etc.. |
+| `name`            | `string`           | the name of the component (the filename with extension)       |
+| `templateContext` | `array` (optional) | the variables that are available in the templates             |
+
+
 
 ### Template variables
 Components can use variables (just like any other Twig template).
