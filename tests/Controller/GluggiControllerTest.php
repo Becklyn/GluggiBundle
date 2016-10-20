@@ -102,4 +102,34 @@ class GluggiControllerTest extends WebTestCase
 
         self::assertSame($expectedStatusCode, $client->getResponse()->getStatusCode());
     }
+
+
+
+    public function testUnknownComponentType ()
+    {
+        $client = static::createClient();
+        $client->request("GET", "/unknown/");
+
+        self::assertSame(404, $client->getResponse()->getStatusCode());
+    }
+
+
+
+    public function testUnknownComponent ()
+    {
+        $client = static::createClient();
+        $client->request("GET", "/atom/unknown/");
+
+        self::assertSame(404, $client->getResponse()->getStatusCode());
+    }
+
+
+
+    public function testUnknownComponentWithUnknownComponentType ()
+    {
+        $client = static::createClient();
+        $client->request("GET", "/unknown/unknown/");
+
+        self::assertSame(404, $client->getResponse()->getStatusCode());
+    }
 }
