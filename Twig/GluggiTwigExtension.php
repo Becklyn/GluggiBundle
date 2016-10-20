@@ -57,7 +57,7 @@ class GluggiTwigExtension extends \Twig_Extension
         }
 
         $context = array_replace([
-            "raw" => true,
+            "standalone" => false,
         ], $context);
 
         return $twig->render($component->getImportPath(), $context);
