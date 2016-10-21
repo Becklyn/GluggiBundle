@@ -6,7 +6,9 @@
 
         <title>Gluggi // {{ pageTitle }}</title>
 
+        {% block gluggi_stylesheets %}
         <link rel="stylesheet" href="{{ asset("bundles/gluggi/css/gluggi.css") }}">
+        {% endblock %}
 
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
         <link rel="icon" sizes="16x16 32x32 48x48" href="{{ asset('favicon.ico') }}">

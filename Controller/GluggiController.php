@@ -2,6 +2,7 @@
 
 namespace Becklyn\GluggiBundle\Controller;
 
+use Becklyn\GluggiBundle\Exception\UnknownComponentTypeException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,17 +35,29 @@ class GluggiController extends Controller
      */
     public function typeAction (string $type)
     {
-        $componentType = $this->get("gluggi.finder")->findType($type);
-
-        if (!$componentType->hasStandaloneComponents())
+        try
         {
-            throw $this->createNotFoundException(sprintf("No components found in type '%s'.", $type));
-        }
+            $componentType = $this->get("gluggi.finder")->findType($type);
 
-        return $this->render("@Gluggi/Gluggi/type.html.twig", [
-            "type" => $componentType,
-            "pageTitle" => $componentType->getName(),
-        ]);
+            if (!$componentType->hasStandaloneComponents())
+            {
+                throw $this->createNotFoundException(sprintf("No components found in type '%s'.", $type));
+            }
+
+            if ($componentType->isIsolatedComponentViewMode())
+            {
+                throw $this->createNotFoundException(sprintf("The components of type '%s' are meant to be viewed in isolation, so there is no list view available.", $type));
+            }
+
+            return $this->render("@Gluggi/Gluggi/type.html.twig", [
+                "type" => $componentType,
+                "pageTitle" => $componentType->getName(),
+            ]);
+        }
+        catch (UnknownComponentTypeException $e)
+        {
+            throw $this->createNotFoundException($e->getMessage(), $e);
+        }
     }
 
 
@@ -59,22 +72,33 @@ class GluggiController extends Controller
      */
     public function componentAction (string $type, string $key)
     {
-        $component = $this->get("gluggi.finder")->findComponent($type, $key);
-
-        if (null === $component || $component->isHidden())
+        try
         {
-            $message = null === $component
-                ? "No component found: '%s/%s'"
-                : "The component '%s/%s' has no single view.";
+            $component = $this->get("gluggi.finder")->findComponent($type, $key);
 
-            throw $this->createNotFoundException(sprintf($message, $type, $key));
+            if (null === $component || $component->isHidden())
+            {
+                $message = null === $component
+                    ? "No component found: '%s/%s'"
+                    : "The component '%s/%s' has no single view.";
+
+                throw $this->createNotFoundException(sprintf($message, $type, $key));
+            }
+
+            $template = $component->getType()->isIsolatedComponentViewMode()
+                ? "isolatedComponent"
+                : "component";
+
+            return $this->render("@Gluggi/Gluggi/{$template}.html.twig", [
+                "component" => $component,
+                "type" => $component->getType(),
+                "pageTitle" => $component->getType()->getName() . " // " . $component->getName(),
+            ]);
         }
-
-        return $this->render("@Gluggi/Gluggi/component.html.twig", [
-            "component" => $component,
-            "type" => $component->getType(),
-            "pageTitle" => $component->getType()->getName() . " // " . $component->getName(),
-        ]);
+        catch (UnknownComponentTypeException $e)
+        {
+            throw $this->createNotFoundException($e->getMessage(), $e);
+        }
     }
 
 

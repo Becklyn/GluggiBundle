@@ -10,6 +10,11 @@ use Becklyn\GluggiBundle\Component\ComponentLoader;
  */
 class ComponentType
 {
+    // The component view should be in isolation, without any structures / assets from Gluggi
+    const ISOLATED_COMPONENT_VIEW = false;
+    // The component view should be embedded in the Gluggi stage, with the header and preview system
+    const STAGED_COMPONENT_VIEW = true;
+
     /**
      * @var string
      */
@@ -34,16 +39,24 @@ class ComponentType
     private $loader;
 
 
+    /**
+     * @var bool
+     */
+    private $componentViewMode;
+
+
 
     /**
      * @param string          $key
      * @param ComponentLoader $loader
+     * @param bool            $componentViewMode
      */
-    public function __construct (string $key, ComponentLoader $loader)
+    public function __construct (string $key, ComponentLoader $loader, bool $componentViewMode = self::STAGED_COMPONENT_VIEW)
     {
         $this->key = $key;
         $this->loader = $loader;
         $this->name = ucwords($key);
+        $this->componentViewMode = $componentViewMode;
     }
 
 
@@ -138,8 +151,18 @@ class ComponentType
      *
      * @return bool
      */
-    public function hasStandaloneComponents ()
+    public function hasStandaloneComponents () : bool
     {
         return !empty($this->getStandaloneComponents());
+    }
+
+
+
+    /**
+     * @return bool
+     */
+    public function isIsolatedComponentViewMode () : bool
+    {
+        return self::ISOLATED_COMPONENT_VIEW === $this->componentViewMode;
     }
 }

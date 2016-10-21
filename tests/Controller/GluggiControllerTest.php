@@ -36,36 +36,100 @@ class GluggiControllerTest extends WebTestCase
     public function testComponent ()
     {
         $client = static::createClient();
-        $client->request("GET", "/atom/correct/");
+        $client->request("GET", "/atom/example/");
         $content = $client->getResponse()->getContent();
 
         self::assertContains(
-            "<title>Gluggi // Atom // Correct</title>",
+            "<title>Gluggi // Atom // Example</title>",
             $content
         );
     }
 
 
 
-    public function testGluggiWrapperOnAtom ()
+    public function dataProviderComponentTypes ()
     {
-        $client = static::createClient();
-        $crawler = $client->request("GET", "/atom/correct/");
-
-        // the page should have a header & preview container
-        self::assertSame(1, count($crawler->filter(".gluggi-header")));
-        self::assertSame(1, count($crawler->filter(".gluggi-preview")));
+        // mapping component type on "should have staged view"
+        return [
+            ["atom", true],
+            ["molecule", true],
+            ["organism", true],
+            ["template", true],
+            ["page", false],
+        ];
     }
 
 
 
-    public function testNoGluggiWrapperOnPage ()
+    /**
+     * @dataProvider dataProviderComponentTypes
+     */
+    public function testGluggiWrapperOnTypeComponentView (string $type, bool $shouldHaveWrapper)
     {
         $client = static::createClient();
-        $crawler = $client->request("GET", "/page/example/");
+        $crawler = $client->request("GET", "/{$type}/example/");
 
-        // the page should have NO header & preview container
-        self::assertSame(0, count($crawler->filter(".gluggi-header")));
-        self::assertSame(0, count($crawler->filter(".gluggi-preview")));
+        // if the page should have a wrapper, it should exactly have one of each component
+        // otherwise 0
+        $count = $shouldHaveWrapper ? 1 : 0;
+        $message = "should " . ($shouldHaveWrapper ? "exist" : "not exist") . " for type {$type}";
+
+        // all elements that create the structural view of gluggi
+        $gluggiSelectors = [
+            "#gluggi-content",
+            ".gluggi-label",
+            ".gluggi-header",
+            ".gluggi-preview",
+            ".gluggi-component",
+        ];
+
+        foreach ($gluggiSelectors as $selector)
+        {
+            self::assertSame($count, count($crawler->filter($selector)), "{$selector} {$message}");
+        }
+    }
+
+
+    /**
+     * @dataProvider dataProviderComponentTypes
+     */
+    public function testDisabledListView (string $type, bool $listViewAvailable)
+    {
+        $client = static::createClient();
+        $client->request("GET", "/{$type}/");
+
+        $expectedStatusCode = $listViewAvailable ? 200 : 404;
+
+        self::assertSame($expectedStatusCode, $client->getResponse()->getStatusCode());
+    }
+
+
+
+    public function testUnknownComponentType ()
+    {
+        $client = static::createClient();
+        $client->request("GET", "/unknown/");
+
+        self::assertSame(404, $client->getResponse()->getStatusCode());
+    }
+
+
+
+    public function testUnknownComponent ()
+    {
+        $client = static::createClient();
+        $client->request("GET", "/atom/unknown/");
+
+        self::assertSame(404, $client->getResponse()->getStatusCode());
+    }
+
+
+
+    public function testUnknownComponentWithUnknownComponentType ()
+    {
+        $client = static::createClient();
+        $client->request("GET", "/unknown/unknown/");
+
+        self::assertSame(404, $client->getResponse()->getStatusCode());
     }
 }

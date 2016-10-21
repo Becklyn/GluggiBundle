@@ -32,7 +32,7 @@ class ComponentTypeRegistry
             new ComponentType("molecule", $loader),
             new ComponentType("organism", $loader),
             new ComponentType("template", $loader),
-            new ComponentType("page", $loader),
+            new ComponentType("page", $loader, ComponentType::ISOLATED_COMPONENT_VIEW),
         ]);
     }
 
