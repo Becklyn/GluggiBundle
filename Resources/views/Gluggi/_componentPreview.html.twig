@@ -2,6 +2,6 @@
 <section class="gluggi-preview" id="{{ component.anchor }}">
     <a href="#{{ component.anchor }}" class="gluggi-label">{{ component.name }}</a>
     <div class="gluggi-component">
-        {{ gluggi(component.type.key, component.key) }}
+        {{ gluggi(component.type.key, component.key, {standalone: true}) }}
     </div>
 </section>

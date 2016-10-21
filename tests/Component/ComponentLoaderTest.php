@@ -33,6 +33,7 @@ class ComponentLoaderTest extends \PHPUnit_Framework_TestCase
 
         self::assertArrayHasKey("_hidden", $components);
         self::assertArrayHasKey("example", $components);
-        self::assertCount(2, $components);
+        self::assertArrayHasKey("standalone_test", $components);
+        self::assertCount(3, $components);
     }
 }
