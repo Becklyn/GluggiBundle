@@ -81,7 +81,28 @@ The function has three parameters: `gluggi(type, name [, templateContext])`
 | `name`            | `string`           | the name of the component (the filename with extension)       |
 | `templateContext` | `array` (optional) | the variables that are available in the templates             |
 
+> To keep your templates as minimal and clean as possible, you should always use `{{ gluggi() }}` instead of the twig-own `{{ include () }}` and `{% include "..." %}`.
 
+
+#### Embedding other views
+
+You can also embed other components in the current component, to extend and change some block contents. Use the `gluggi_template(type, name)` in the `embed` tag.
+
+```jinja
+{% embed gluggi_template("atom", "example") with {a: 1, b: 2} %}
+    {% block some_block %}
+        More content.
+    {% endblock %}
+{% endembed %}
+```
+
+
+The function has two parameters: `gluggi_template(type, name)`
+
+| Argument | Type     | Description                                                   |
+| -------- | -------- | ------------------------------------------------------------- |
+| `type`   | `string` | the type of the component, like `"atom"`, `"molecule"`, etc.. |
+| `name`   | `string` | the name of the component (the filename with extension)       |
 
 ### Template variables
 Components can use variables (just like any other Twig template).

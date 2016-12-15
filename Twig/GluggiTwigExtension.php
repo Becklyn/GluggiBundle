@@ -46,7 +46,7 @@ class GluggiTwigExtension extends \Twig_Extension
      *
      * @return string
      */
-    public function renderGluggiComponent (string $type, string $name, array $context = [])
+    public function renderGluggiComponent (string $type, string $name, array $context = []) : string
     {
         $twig = $this->container->get("twig");
         $component = $this->finder->findComponent($type, $name);
@@ -66,11 +66,35 @@ class GluggiTwigExtension extends \Twig_Extension
 
 
     /**
+     * Returns the template name
+     *
+     * @param string $type
+     * @param string $name
+     *
+     * @return string
+     */
+    public function getTemplateName (string $type, string $name) : string
+    {
+        $twig = $this->container->get("twig");
+        $component = $this->finder->findComponent($type, $name);
+
+        if (null === $component)
+        {
+            throw new UnknownComponentException($name, $type);
+        }
+
+        return $component->getImportPath();
+    }
+
+
+
+    /**
      * @inheritdoc
      */
     public function getFunctions ()
     {
         return [
+            new \Twig_SimpleFunction("gluggi_template", [$this, "getTemplateName"]),
             new \Twig_SimpleFunction("gluggi", [$this, "renderGluggiComponent"], ["is_safe" => ["html"]]),
         ];
     }
