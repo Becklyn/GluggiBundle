@@ -221,3 +221,27 @@ If the component itself should not get a top margin, wrap the components in a si
     <!-- ... -->
 </div>
 ```
+
+
+### Template Configuration
+You can define configuration parameters in the template, for example setting the body class for a `page` component.
+
+Template configuration is defined with a twig comment as the first element in the template:
+
+```twig
+{#-
+    # the indention is automatically removed
+    some_configuration: test
+    another_value: a
+-#}
+```
+
+The configuration format is YML. All configuration parameters are optional.
+
+
+#### Defined configuration parameters
+
+
+| Parameter    | type     | in                    | description                       |
+| ------------ | -------- | --------------------- | --------------------------------- |
+| `body_class` | `string` | (*any isolated view*) | Sets the given class on the body. |

@@ -27,6 +27,10 @@ services:
             - '@gluggi.layout.bundle_paths'
         public: false
 
+    gluggi.component.configuration:
+        class: Becklyn\GluggiBundle\Component\ComponentConfiguration
+        arguments:
+            - '@twig'
 
     gluggi.twig.extension:
         class: Becklyn\GluggiBundle\Twig\GluggiTwigExtension

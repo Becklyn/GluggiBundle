@@ -85,14 +85,24 @@ class GluggiController extends Controller
                 throw $this->createNotFoundException(sprintf($message, $type, $key));
             }
 
-            $template = $component->getType()->isIsolatedComponentViewMode()
-                ? "isolatedComponent"
-                : "component";
+
+            if ($component->getType()->isIsolatedComponentViewMode())
+            {
+                $template = "isolatedComponent";
+                $templateConfiguration = $this->get("gluggi.component.configuration")->getConfiguration($component);
+            }
+            else
+            {
+                $template = "component";
+                $templateConfiguration = [];
+            }
+
 
             return $this->render("@Gluggi/Gluggi/{$template}.html.twig", [
                 "component" => $component,
                 "type" => $component->getType(),
                 "pageTitle" => $component->getType()->getName() . " // " . $component->getName(),
+                "templateConfiguration" => $templateConfiguration,
             ]);
         }
         catch (UnknownComponentTypeException $e)

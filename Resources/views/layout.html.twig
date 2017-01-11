@@ -20,7 +20,11 @@
             {{ render(controller("GluggiBundle:Gluggi:layoutCSSAssets")) }}
         {% endblock %}
     </head>
-    <body {% block body_attributes "" %} >
+    <body {% block body_attributes -%}
+        {%- if templateConfiguration is defined and templateConfiguration.body_class is defined -%}
+            class="{{ templateConfiguration.body_class }}"
+        {%- endif -%}
+    {%- endblock %}>
         {% block body %}
 
             {% block header %}
