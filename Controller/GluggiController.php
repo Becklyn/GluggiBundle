@@ -21,6 +21,7 @@ class GluggiController extends Controller
         return $this->render("@Gluggi/Gluggi/index.html.twig", [
             "types" => $this->get("gluggi.finder")->getAllTypes(),
             "pageTitle" => "Index",
+            "infoAction" => $this->get("gluggi.info")->getInfoAction(),
         ]);
     }
 

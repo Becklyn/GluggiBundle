@@ -19,6 +19,9 @@ class GluggiBundleConfiguration implements ConfigurationInterface
 
         $rootNode
             ->children()
+                ->scalarNode("info_action")
+                    ->defaultNull()
+                ->end()
                 ->arrayNode('css')
                     ->prototype('scalar')->end()
                     ->defaultValue(['app.css'])

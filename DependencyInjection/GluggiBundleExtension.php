@@ -27,6 +27,9 @@ class GluggiBundleExtension extends Extension
         $container->getDefinition('gluggi.assets')
             ->replaceArgument(0, $config['css'])
             ->replaceArgument(1, $config['js']);
+
+        $container->getDefinition("gluggi.info")
+            ->replaceArgument(0, $config["info_action"]);
     }
 
 
