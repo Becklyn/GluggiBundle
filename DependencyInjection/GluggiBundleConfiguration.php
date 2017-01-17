@@ -23,8 +23,6 @@ class GluggiBundleConfiguration implements ConfigurationInterface
                     ->prototype('scalar')->end()
                     ->defaultValue(['app.css'])
                 ->end()
-            ->end()
-            ->children()
                 ->arrayNode('js')
                     ->prototype('scalar')->end()
                     ->defaultValue(['app.js'])
