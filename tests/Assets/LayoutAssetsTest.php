@@ -3,6 +3,7 @@
 namespace Tests\Becklyn\GluggiBundle\Assets;
 
 use Becklyn\GluggiBundle\Assets\LayoutAssets;
+use Becklyn\GluggiBundle\Configuration\GluggiConfig;
 use Symfony\Component\Asset\Packages;
 
 
@@ -23,7 +24,19 @@ class LayoutAssetsTest extends \PHPUnit_Framework_TestCase
                 }
             );
 
-        return new LayoutAssets($cssFiles, $jsFiles, $packageAssets);
+        $config = self::getMockBuilder(GluggiConfig::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $config
+            ->method("getCssFiles")
+            ->willReturn($cssFiles);
+
+        $config
+            ->method("getJavaScriptFiles")
+            ->willReturn($jsFiles);
+
+        return new LayoutAssets($config, $packageAssets);
     }
 
 

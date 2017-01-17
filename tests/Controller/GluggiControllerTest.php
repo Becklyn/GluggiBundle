@@ -14,7 +14,7 @@ class GluggiControllerTest extends WebTestCase
         $content = $client->getResponse()->getContent();
 
         self::assertContains(
-            "<title>Gluggi // Index</title>",
+            "<title>Index // Gluggi</title>",
             $content
         );
     }
@@ -27,7 +27,7 @@ class GluggiControllerTest extends WebTestCase
         $content = $client->getResponse()->getContent();
 
         self::assertContains(
-            "<title>Gluggi // Atom</title>",
+            "<title>Atom // Gluggi</title>",
             $content
         );
     }
@@ -40,7 +40,7 @@ class GluggiControllerTest extends WebTestCase
         $content = $client->getResponse()->getContent();
 
         self::assertContains(
-            "<title>Gluggi // Atom // Example</title>",
+            "<title>Example // Atom // Gluggi</title>",
             $content
         );
     }
