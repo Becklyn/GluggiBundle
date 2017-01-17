@@ -21,7 +21,8 @@ class GluggiController extends Controller
         return $this->render("@Gluggi/Gluggi/index.html.twig", [
             "types" => $this->get("gluggi.finder")->getAllTypes(),
             "pageTitle" => "Index",
-            "infoAction" => $this->get("gluggi.info")->getInfoAction(),
+            "infoAction" => $this->get("gluggi.config")->getInfoAction(),
+            "customTitle" => $this->get("gluggi.config")->getTitle(),
         ]);
     }
 
@@ -102,7 +103,10 @@ class GluggiController extends Controller
             return $this->render("@Gluggi/Gluggi/{$template}.html.twig", [
                 "component" => $component,
                 "type" => $component->getType(),
-                "pageTitle" => $component->getType()->getName() . " // " . $component->getName(),
+                "pageTitle" => [
+                    $component->getName(),
+                    $component->getType()->getName(),
+                ],
                 "templateConfiguration" => $templateConfiguration,
             ]);
         }
@@ -142,5 +146,36 @@ class GluggiController extends Controller
         return $this->render("@Gluggi/Gluggi/_layoutJavaScriptAssets.html.twig", [
             "urls" => $assets->getJavaScriptUrls(),
         ]);
+    }
+
+
+
+    /**
+     * Renders the HTML title
+     *
+     * @param string|array $pageTitle
+     *
+     * @return Response
+     */
+    public function htmlTitleAction ($pageTitle)
+    {
+        $segments = !is_array($pageTitle)
+            ? [$pageTitle]
+            : $pageTitle;
+
+        $mainTitle = "Gluggi";
+
+        if (null !== $this->get("gluggi.config")->getTitle())
+        {
+            $mainTitle .= " ({$this->get("gluggi.config")->getTitle()})";
+        }
+
+        $segments[] = $mainTitle;
+
+        return new Response(
+            htmlspecialchars(
+                implode(" // ", $segments)
+            )
+        );
     }
 }

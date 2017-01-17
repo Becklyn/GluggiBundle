@@ -2,6 +2,7 @@
 
 namespace Becklyn\GluggiBundle\Assets;
 
+use Becklyn\GluggiBundle\Configuration\GluggiConfig;
 use Symfony\Component\Asset\Packages;
 
 
@@ -30,16 +31,15 @@ class LayoutAssets
 
 
     /**
-     * @param string[] $cssFiles
-     * @param string[] $javaScriptFiles
-     * @param Packages $assetsPackages
+     * @param GluggiConfig $configuration
+     * @param Packages     $assetsPackages
      */
-    public function __construct (array $cssFiles, array $javaScriptFiles, Packages $assetsPackages)
+    public function __construct (GluggiConfig $configuration, Packages $assetsPackages)
     {
         $this->assetsPackages = $assetsPackages;
 
-        $this->cssFiles = $this->transformToUrl($cssFiles, "css");
-        $this->javaScriptFiles = $this->transformToUrl($javaScriptFiles, "js");
+        $this->cssFiles = $this->transformToUrl($configuration->getCssFiles(), "css");
+        $this->javaScriptFiles = $this->transformToUrl($configuration->getJavaScriptFiles(), "js");
     }
 
 

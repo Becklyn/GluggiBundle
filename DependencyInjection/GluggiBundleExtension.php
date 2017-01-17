@@ -23,13 +23,12 @@ class GluggiBundleExtension extends Extension
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
-        // wire config to services
-        $container->getDefinition('gluggi.assets')
-            ->replaceArgument(0, $config['css'])
-            ->replaceArgument(1, $config['js']);
-
-        $container->getDefinition("gluggi.info")
-            ->replaceArgument(0, $config["info_action"]);
+        // wire provided config to config service
+        $container->getDefinition('gluggi.config')
+            ->replaceArgument(0, $config["info_action"])
+            ->replaceArgument(1, $config["title"])
+            ->replaceArgument(2, $config['css'])
+            ->replaceArgument(3, $config['js']);
     }
 
 
