@@ -75,7 +75,6 @@ class GluggiTwigExtension extends \Twig_Extension
      */
     public function getTemplateName (string $type, string $name) : string
     {
-        $twig = $this->container->get("twig");
         $component = $this->finder->findComponent($type, $name);
 
         if (null === $component)
