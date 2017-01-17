@@ -40,3 +40,8 @@ services:
         tags:
             - { name: twig.extension }
         public: false
+
+    gluggi.info:
+        class: Becklyn\GluggiBundle\Info\InfoAction
+        arguments:
+            - ~ # info action: set via configuration

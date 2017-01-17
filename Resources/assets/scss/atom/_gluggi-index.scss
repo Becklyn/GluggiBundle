@@ -2,8 +2,9 @@
 @import "../helpers/variables";
 
 .gluggi-index {
+    $section-margin: 60px;
     @include gluggi-font;
-    max-width: 1000px;
+    max-width: 1600px;
     margin: 50px 80px 100px;
 
     h2 {
@@ -16,7 +17,7 @@
     }
 
     * + h2 {
-        margin-top: 60px;
+        margin-top: $section-margin;
     }
 
     ul {
@@ -39,5 +40,35 @@
     .gluggi-link-single {
         margin-left: 20px;
         font-size: 12px;
+    }
+
+    .gluggi-index-column {
+        width: 100%;
+
+        + .gluggi-index-column {
+            margin-top: $section-margin;
+        }
+    }
+
+
+    @media screen and (min-width: 900px) {
+        display: flex;
+        align-items: stretch;
+
+        .gluggi-index-column {
+            &:nth-last-child(2):first-child,
+            + .gluggi-index-column {
+                width: calc(50% - 20px);
+                flex-shrink: 0;
+                flex-grow: 0;
+            }
+
+
+            + .gluggi-index-column {
+                margin-left: 40px;
+                margin-top: 0;
+            }
+        }
+
     }
 }

@@ -33,10 +33,12 @@ Configuration
 You can define several config values in your `app/config.yml`:
 
 
-| Key   | Type       | Required | Description |
-| ----- | ---------- | -------- | ----------- |
-| `css` | `string[]` | no       | The CSS files that will automatically be loaded. All paths are relative to `LayoutBundle/Resources/public/css`. |
-| `js`  | `string[]` | no       | The JavaScript files that will automatically be loaded. All paths are relative to `LayoutBundle/Resources/public/js`. |
+| Key            | Type          | Required | Description |
+| -------------- | ------------- | -------- | ----------- |
+| `css`          | `string[]`    | no       | The CSS files that will automatically be loaded. All paths are relative to `LayoutBundle/Resources/public/css`. |
+| `js`           | `string[]`    | no       | The JavaScript files that will automatically be loaded. All paths are relative to `LayoutBundle/Resources/public/js`. |
+| `info_action`  | `string|null` | no       | The action to render the info. See the section below for details. |
+
 
 
 
@@ -44,6 +46,7 @@ You can define several config values in your `app/config.yml`:
 
 ```yml
 gluggi:
+    info_action:  ~
     css:
         - "app.css"
     js: 
@@ -245,3 +248,16 @@ The configuration format is YML. All configuration parameters are optional.
 | Parameter    | type     | in                    | description                       |
 | ------------ | -------- | --------------------- | --------------------------------- |
 | `body_class` | `string` | (*any isolated view*) | Sets the given class on the body. |
+
+
+
+### Index Info
+
+The main app can embed arbitrary HTML into the index page. This will be added on the right side, next to the list of components. Just define a controller action in the configuration, and the returned HTML is embedded in the page. If the returned HTML is empty, the info container will be hidden.
+
+```yaml
+gluggi:
+    info_action: "SomeBundle:Test:gluggiInfo"
+```
+
+This will call `SomeBundle\Controller\TestController::gluggiInfo()`. This configuration option uses `{{ render(controller("...")) }}` internally, so every syntax that is accepted by this call, will be accepted by Gluggi as well.

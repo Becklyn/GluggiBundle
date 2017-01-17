@@ -14,13 +14,14 @@ use Symfony\Component\HttpFoundation\Response;
 class GluggiController extends Controller
 {
     /**
-     * @return array
+     * @return Response
      */
     public function indexAction ()
     {
         return $this->render("@Gluggi/Gluggi/index.html.twig", [
             "types" => $this->get("gluggi.finder")->getAllTypes(),
             "pageTitle" => "Index",
+            "infoAction" => $this->get("gluggi.info")->getInfoAction(),
         ]);
     }
 
@@ -31,7 +32,7 @@ class GluggiController extends Controller
      *
      * @param string $type
      *
-     * @return array
+     * @return Response
      */
     public function typeAction (string $type)
     {
@@ -68,7 +69,7 @@ class GluggiController extends Controller
      * @param string $type
      * @param string $key
      *
-     * @return array
+     * @return Response
      */
     public function componentAction (string $type, string $key)
     {
@@ -116,7 +117,7 @@ class GluggiController extends Controller
     /**
      * Includes all layout-related CSS <link> tags
      *
-     * @return array
+     * @return Response
      */
     public function layoutCSSAssetsAction ()
     {
@@ -132,7 +133,7 @@ class GluggiController extends Controller
     /**
      * Includes all layout-related JavaScript <script> tags
      *
-     * @return array
+     * @return Response
      */
     public function layoutJavaScriptAssetsAction ()
     {

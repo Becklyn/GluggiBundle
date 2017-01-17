@@ -2,46 +2,24 @@
 
 namespace Becklyn\GluggiBundle;
 
-use Becklyn\RadBundle\AppBundle\Bundle;
-use Symfony\Component\Config\Definition\Builder\NodeParentInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Becklyn\GluggiBundle\DependencyInjection\GluggiBundleExtension;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 
 class GluggiBundle extends Bundle
 {
-    /**
-     * @inheritdoc
-     */
-    public function buildConfiguration (NodeParentInterface $root)
-    {
-        parent::buildConfiguration($root);
-
-        $root
-            ->children()
-                ->arrayNode('css')
-                    ->prototype('scalar')->end()
-                    ->defaultValue(['app.css'])
-                ->end()
-            ->end()
-            ->children()
-                ->arrayNode('js')
-                    ->prototype('scalar')->end()
-                    ->defaultValue(['app.js'])
-                ->end()
-            ->end();
-    }
-
+    const BUNDLE_ALIAS = "gluggi";
 
 
     /**
      * @inheritdoc
      */
-    public function buildContainer (array $config, ContainerBuilder $container)
+    public function getContainerExtension ()
     {
-        parent::buildContainer($config, $container);
+        if (null === $this->extension) {
+            $this->extension = new GluggiBundleExtension();
+        }
 
-        $container->getDefinition('gluggi.assets')
-            ->replaceArgument(0, $config['css'])
-            ->replaceArgument(1, $config['js']);
+        return $this->extension;
     }
 }

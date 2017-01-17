@@ -6,6 +6,7 @@
 {% block content %}
 
     <div class="gluggi-index">
+        <div class="gluggi-index-column">
         {%- for type in types if type.hasStandaloneComponents -%}
             <h2>
                 {{- type.name -}}
@@ -25,6 +26,16 @@
             {%- endfor -%}
             </ul>
         {%- endfor -%}
+        </div>
+
+        {%- if infoAction is not empty -%}
+            {%- set infoHTML = render(controller(infoAction)) | trim -%}
+            {%- if infoHTML is not empty -%}
+                <div class="gluggi-index-column">
+                    {{- infoHTML | raw -}}
+                </div>
+            {%- endif -%}
+        {%- endif -%}
     </div>
 
 {% endblock %}
