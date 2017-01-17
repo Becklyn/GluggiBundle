@@ -33,12 +33,13 @@ Configuration
 You can define several config values in your `app/config.yml`:
 
 
-| Key            | Type          | Required | Description |
-| -------------- | ------------- | -------- | ----------- |
-| `css`          | `string[]`    | no       | The CSS files that will automatically be loaded. All paths are relative to `LayoutBundle/Resources/public/css`. |
-| `js`           | `string[]`    | no       | The JavaScript files that will automatically be loaded. All paths are relative to `LayoutBundle/Resources/public/js`. |
-| `info_action`  | `string|null` | no       | The action to render the info. See the section below for details. |
-| `title`        | `string|null` | no       | An optional title of the project, that is added in some places in the output (i.e. as suffix in the HTML title and on the index page). |
+| Key            | Type       | Required | Description |
+| -------------- | ---------- | -------- | ----------- |
+| `css`          | `string[]` | no       | The CSS files that will automatically be loaded. All paths are relative to `LayoutBundle/Resources/public/css`. |
+| `js`           | `string[]` | no       | The JavaScript files that will automatically be loaded. All paths are relative to `LayoutBundle/Resources/public/js`. |
+| `info_action`  | `string`   | no       | The action to render the info. See the section below for details. |
+| `title`        | `string`   | no       | An optional title of the project, that is added in some places in the output (i.e. as suffix in the HTML title and on the index page). |
+| `data`         | `array`    | no       | An array with arbitrary data. See below for details. |
 
 
 
@@ -49,6 +50,8 @@ You can define several config values in your `app/config.yml`:
 gluggi:
     info_action:  ~
     title: ~
+    data:
+        icons: ["user", "search", "add"]
     css:
         - "app.css"
     js: 
@@ -263,3 +266,35 @@ gluggi:
 ```
 
 This will call `SomeBundle\Controller\TestController::gluggiInfo()`. This configuration option uses `{{ render(controller("...")) }}` internally, so every syntax that is accepted by this call, will be accepted by Gluggi as well.
+
+
+
+
+### Template Data
+
+You can define global data, that is accessible in all component templates.
+
+```yaml
+gluggi:
+    data:
+        key1: abc
+        key2: 123
+        icons: 
+            - "add"
+            - "remove"
+            - "search"
+```
+
+This data can be accessed in the templates via `{{ gluggi_data(key) }}`.
+
+So for example:
+
+```twig
+{% for icon in gluggi_data("icons") %}
+    <i class="icon icon-{{ icon }}"></i>
+{% endfor %}
+
+```
+
+To ease fast debugging, the twig function will throw an exception, if the key is not defined in the data array.
+
