@@ -6,36 +6,43 @@
 {% block content %}
 
     <div class="gluggi-index">
-        <div class="gluggi-index-column">
-        {%- for type in types if type.hasStandaloneComponents -%}
-            <h2>
-                {{- type.name -}}
-                {%- if not type.isolatedComponentViewMode %} <a href="{{ path("gluggi.type", {type: type.key}) }}#gluggi-content">alle anzeigen</a>{%- endif -%}
-            </h2>
+        {% if customTitle is not empty %}
+            <h1>{{ customTitle }}</h1>
+        {% endif %}
 
-            <ul>
-            {%- for component in type.standaloneComponents -%}
-                <li>
-                    {%- if not type.isolatedComponentViewMode -%}
-                        <a href="{{ path("gluggi.type", {type: type.key}) }}#{{ component.anchor }}">{{ component.name }}</a>
-                        <a href="{{ path("gluggi.component", {type: type.key, key: component.key}) }}#gluggi-content" class="gluggi-link-single">Einzelansicht</a>
-                    {%- else -%}
-                        <a href="{{ path("gluggi.component", {type: type.key, key: component.key}) }}">{{ component.name }}</a>
-                    {%- endif %}
-                </li>
+        <div class="gluggi-index-columns">
+            <div class="gluggi-index-column">
+            {%- for type in types if type.hasStandaloneComponents -%}
+                <h2>
+                    {{- type.name -}}
+                    {%- if not type.isolatedComponentViewMode %} <a href="{{ path("gluggi.type", {type: type.key}) }}#gluggi-content">alle anzeigen</a>{%- endif -%}
+                </h2>
+
+                <ul>
+                {%- for component in type.standaloneComponents -%}
+                    <li>
+                        {%- if not type.isolatedComponentViewMode -%}
+                            <a href="{{ path("gluggi.type", {type: type.key}) }}#{{ component.anchor }}">{{ component.name }}</a>
+                            <a href="{{ path("gluggi.component", {type: type.key, key: component.key}) }}#gluggi-content" class="gluggi-link-single">Einzelansicht</a>
+                        {%- else -%}
+                            <a href="{{ path("gluggi.component", {type: type.key, key: component.key}) }}">{{ component.name }}</a>
+                        {%- endif %}
+                    </li>
+                {%- endfor -%}
+                </ul>
             {%- endfor -%}
-            </ul>
-        {%- endfor -%}
-        </div>
+            </div>
 
-        {%- if infoAction is not empty -%}
-            {%- set infoHTML = render(controller(infoAction)) | trim -%}
-            {%- if infoHTML is not empty -%}
-                <div class="gluggi-index-column">
-                    {{- infoHTML | raw -}}
-                </div>
+            {%- if infoAction is not empty -%}
+                {%- set infoHTML = render(controller(infoAction)) | trim -%}
+                {%- if infoHTML is not empty -%}
+                    <div class="gluggi-index-column">
+                        {{- infoHTML | raw -}}
+                    </div>
+                {%- endif -%}
             {%- endif -%}
-        {%- endif -%}
+        </div>
     </div>
+
 
 {% endblock %}

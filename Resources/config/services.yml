@@ -6,8 +6,7 @@ services:
     gluggi.assets:
         class: Becklyn\GluggiBundle\Assets\LayoutAssets
         arguments:
-            - ~ # CSS files: set via configuration
-            - ~ # JavaScript files: set via configuration
+            - '@gluggi.config'
             - '@assets.packages'
 
     gluggi.finder:
@@ -41,7 +40,10 @@ services:
             - { name: twig.extension }
         public: false
 
-    gluggi.info:
-        class: Becklyn\GluggiBundle\Info\InfoAction
+    gluggi.config:
+        class: Becklyn\GluggiBundle\Configuration\GluggiConfig
         arguments:
-            - ~ # info action: set via configuration
+            - ~ # all parameters set via the extension
+            - ~
+            - []
+            - []

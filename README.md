@@ -38,6 +38,7 @@ You can define several config values in your `app/config.yml`:
 | `css`          | `string[]`    | no       | The CSS files that will automatically be loaded. All paths are relative to `LayoutBundle/Resources/public/css`. |
 | `js`           | `string[]`    | no       | The JavaScript files that will automatically be loaded. All paths are relative to `LayoutBundle/Resources/public/js`. |
 | `info_action`  | `string|null` | no       | The action to render the info. See the section below for details. |
+| `title`        | `string|null` | no       | An optional title of the project, that is added in some places in the output (i.e. as suffix in the HTML title and on the index page). |
 
 
 
@@ -47,6 +48,7 @@ You can define several config values in your `app/config.yml`:
 ```yml
 gluggi:
     info_action:  ~
+    title: ~
     css:
         - "app.css"
     js: 

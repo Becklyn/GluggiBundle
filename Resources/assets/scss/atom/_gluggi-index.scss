@@ -7,6 +7,13 @@
     max-width: 1600px;
     margin: 50px 80px 100px;
 
+    h1 {
+        font-size: 45px;
+        margin: 0 0 40px;
+        padding-left: 20px;
+        border-left: 4px solid $gluggi-accent;
+    }
+
     h2 {
         font-size: 40px;
         margin: 0 0 20px;
@@ -52,8 +59,11 @@
 
 
     @media screen and (min-width: 900px) {
-        display: flex;
-        align-items: stretch;
+
+        .gluggi-index-columns {
+            display: flex;
+            align-items: stretch;
+        }
 
         .gluggi-index-column {
             &:nth-last-child(2):first-child,

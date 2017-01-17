@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Gluggi // {{ pageTitle }}</title>
+        <title>{{ render(controller("GluggiBundle:Gluggi:htmlTitle", {pageTitle: pageTitle})) }}</title>
 
         {% block gluggi_stylesheets %}
         <link rel="stylesheet" href="{{ asset("bundles/gluggi/css/gluggi.css") }}">
