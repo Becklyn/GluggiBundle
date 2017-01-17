@@ -28,7 +28,8 @@ class GluggiBundleExtension extends Extension
             ->replaceArgument(0, $config["info_action"])
             ->replaceArgument(1, $config["title"])
             ->replaceArgument(2, $config['css'])
-            ->replaceArgument(3, $config['js']);
+            ->replaceArgument(3, $config['js'])
+            ->replaceArgument(4, $config['data']);
     }
 
 

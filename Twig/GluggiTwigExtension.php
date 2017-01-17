@@ -3,6 +3,7 @@
 namespace Becklyn\GluggiBundle\Twig;
 
 use Becklyn\GluggiBundle\Component\GluggiFinder;
+use Becklyn\GluggiBundle\Configuration\GluggiConfig;
 use Becklyn\GluggiBundle\Exception\UnknownComponentException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -19,6 +20,12 @@ class GluggiTwigExtension extends \Twig_Extension
 
 
     /**
+     * @var GluggiConfig
+     */
+    private $config;
+
+
+    /**
      * @var ContainerInterface
      */
     private $container;
@@ -27,11 +34,13 @@ class GluggiTwigExtension extends \Twig_Extension
 
     /**
      * @param GluggiFinder       $finder
+     * @param GluggiConfig       $config
      * @param ContainerInterface $container
      */
-    public function __construct (GluggiFinder $finder, ContainerInterface $container)
+    public function __construct (GluggiFinder $finder, GluggiConfig $config, ContainerInterface $container)
     {
         $this->finder = $finder;
+        $this->config = $config;
         $this->container = $container;
     }
 
@@ -75,7 +84,6 @@ class GluggiTwigExtension extends \Twig_Extension
      */
     public function getTemplateName (string $type, string $name) : string
     {
-        $twig = $this->container->get("twig");
         $component = $this->finder->findComponent($type, $name);
 
         if (null === $component)
@@ -96,6 +104,7 @@ class GluggiTwigExtension extends \Twig_Extension
         return [
             new \Twig_SimpleFunction("gluggi_template", [$this, "getTemplateName"]),
             new \Twig_SimpleFunction("gluggi", [$this, "renderGluggiComponent"], ["is_safe" => ["html"]]),
+            new \Twig_SimpleFunction("gluggi_data", [$this->config, "getData"]),
         ];
     }
 }

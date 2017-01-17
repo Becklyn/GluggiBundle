@@ -35,6 +35,7 @@ services:
         class: Becklyn\GluggiBundle\Twig\GluggiTwigExtension
         arguments:
             - '@gluggi.finder'
+            - '@gluggi.config'
             - '@service_container'
         tags:
             - { name: twig.extension }
@@ -45,5 +46,6 @@ services:
         arguments:
             - ~ # all parameters set via the extension
             - ~
+            - []
             - []
             - []
