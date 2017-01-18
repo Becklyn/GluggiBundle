@@ -43,6 +43,13 @@ You can define several config values in your `app/config.yml`:
 
 
 
+The paths in `css` and `js` can have one of three formats:
+
+* **absolute:** `https://...` or `/abc/...` - will be included as-is
+* **relative:** `test.css` - will be included from `web/bundles/layout/css/test.css` (or `js` respectively)
+* **`@`-notation:** `@app/css/test.css` will include `web/bundles/app/css/test.css` (or `js` respectively)
+
+
 
 ### Default configuration
 

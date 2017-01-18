@@ -63,7 +63,13 @@ class LayoutAssets
                 }
                 else
                 {
-                    return $this->assetsPackages->getUrl("bundles/layout/{$directory}/{$path}");
+                    $includePath = ("@" === substr($path, 0, 1))
+                        // files with @abc/... are transformed to bundles/abc/...
+                        ? "bundles/" . substr($path, 1)
+                        // local files are from the layout directory
+                        : "bundles/layout/{$directory}/{$path}";
+
+                    return $this->assetsPackages->getUrl($includePath);
                 }
             },
             $assets
