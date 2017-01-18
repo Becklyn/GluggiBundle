@@ -180,7 +180,7 @@ This is for example important if a component receives its actual width from the 
 
 ### Using assets in views
 
-#### CSS assets
+#### Referenced assets
 Place your images under `Resources/public/img` (just as in any other Symfony bundle) and reference the image in your SCSS file via `url("../img/...")`.
 
 
