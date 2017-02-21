@@ -257,9 +257,10 @@ The configuration format is YML. All configuration parameters are optional.
 #### Defined configuration parameters
 
 
-| Parameter    | type     | in                    | description                       |
-| ------------ | -------- | --------------------- | --------------------------------- |
-| `body_class` | `string` | (*any isolated view*) | Sets the given class on the body. |
+| Parameter      | type     | in                    | description                                          |
+| -------------- | -------- | --------------------- | ---------------------------------------------------- |
+| `body_class`   | `string` | (*any isolated view*) | Sets the given class on the body.                    |
+| `prevent_zoom` | `bool`   | (*any isolated view*) | Sets the `viewport` meta tag to prevent mobile zoom. |
 
 
 
