@@ -48,7 +48,6 @@ class GluggiConfig
      */
     public function __construct (string $infoAction = null, string $title = null, array $cssFiles, array $javaScriptFiles, array $data)
     {
-
         $this->infoAction = $infoAction;
         $this->title = $title;
         $this->cssFiles = $cssFiles;
