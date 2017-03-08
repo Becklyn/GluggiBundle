@@ -151,7 +151,7 @@ class GluggiController extends Controller
         $assets = $this->get("gluggi.assets");
 
         return $this->render("@Gluggi/Gluggi/_layoutJavaScriptAssets.html.twig", [
-            "urls" => $assets->getJavaScriptUrls(),
+            "urls" => $assets->getJavaScriptHeadUrls(),
         ]);
     }
 
