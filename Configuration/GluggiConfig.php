@@ -35,6 +35,12 @@ class GluggiConfig
     /**
      * @var array
      */
+    private $javaScriptHeadFiles;
+
+
+    /**
+     * @var array
+     */
     private $data;
 
 
@@ -44,14 +50,16 @@ class GluggiConfig
      * @param string|null $title
      * @param array       $cssFiles
      * @param array       $javaScriptFiles
+     * @param array       $javaScriptHeadFiles
      * @param array       $data
      */
-    public function __construct (string $infoAction = null, string $title = null, array $cssFiles, array $javaScriptFiles, array $data)
+    public function __construct (string $infoAction = null, string $title = null, array $cssFiles, array $javaScriptFiles, array $javaScriptHeadFiles, array $data)
     {
         $this->infoAction = $infoAction;
         $this->title = $title;
         $this->cssFiles = $cssFiles;
         $this->javaScriptFiles = $javaScriptFiles;
+        $this->javaScriptHeadFiles = $javaScriptHeadFiles;
         $this->data = $data;
     }
 
@@ -93,6 +101,16 @@ class GluggiConfig
     public function getJavaScriptFiles () : array
     {
         return $this->javaScriptFiles;
+    }
+
+
+
+    /**
+     * @return array
+     */
+    public function getJavaScriptHeadFiles () : array
+    {
+        return $this->javaScriptHeadFiles;
     }
 
 

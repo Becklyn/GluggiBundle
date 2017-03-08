@@ -142,6 +142,22 @@ class GluggiController extends Controller
 
 
     /**
+     * Includes all layout-related JavaScript <script> tags
+     *
+     * @return Response
+     */
+    public function layoutJavaScriptHeadAssetsAction ()
+    {
+        $assets = $this->get("gluggi.assets");
+
+        return $this->render("@Gluggi/Gluggi/_layoutJavaScriptAssets.html.twig", [
+            "urls" => $assets->getJavaScriptUrls(),
+        ]);
+    }
+
+
+
+    /**
      * Renders the HTML title
      *
      * @param string|array $pageTitle

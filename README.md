@@ -37,6 +37,7 @@ You can define several config values in your `app/config.yml`:
 | -------------- | ---------- | -------- | ----------- |
 | `css`          | `string[]` | no       | The CSS files that will automatically be loaded. All paths are relative to `LayoutBundle/Resources/public/css`. |
 | `js`           | `string[]` | no       | The JavaScript files that will automatically be loaded. All paths are relative to `LayoutBundle/Resources/public/js`. |
+| `js_head`      | `string[]` | no       | Like `js`, but the files will be included in the head. |
 | `info_action`  | `string`   | no       | The action to render the info. See the section below for details. |
 | `title`        | `string`   | no       | An optional title of the project, that is added in some places in the output (i.e. as suffix in the HTML title and on the index page). |
 | `data`         | `array`    | no       | An array with arbitrary data. See below for details. |

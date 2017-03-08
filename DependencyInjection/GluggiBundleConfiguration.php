@@ -37,6 +37,10 @@ class GluggiBundleConfiguration implements ConfigurationInterface
                     ->prototype('scalar')->end()
                     ->defaultValue(['app.js'])
                 ->end()
+                ->arrayNode('js_head')
+                    ->prototype('scalar')->end()
+                    ->defaultValue([])
+                ->end()
             ->end();
 
         return $treeBuilder;

@@ -24,6 +24,12 @@ class LayoutAssets
 
 
     /**
+     * @var string[]
+     */
+    private $javaScriptHeadFiles;
+
+
+    /**
      * @var Packages
      */
     private $assetsPackages;
@@ -40,6 +46,7 @@ class LayoutAssets
 
         $this->cssFiles = $this->transformToUrl($configuration->getCssFiles(), "css");
         $this->javaScriptFiles = $this->transformToUrl($configuration->getJavaScriptFiles(), "js");
+        $this->javaScriptHeadFiles = $this->transformToUrl($configuration->getJavaScriptHeadFiles(), "js");
     }
 
 
@@ -94,5 +101,15 @@ class LayoutAssets
     public function getJavaScriptUrls () : array
     {
         return $this->javaScriptFiles;
+    }
+
+
+
+    /**
+     * @return string[]
+     */
+    public function getJavaScriptHeadUrls () : array
+    {
+        return $this->javaScriptHeadFiles;
     }
 }
