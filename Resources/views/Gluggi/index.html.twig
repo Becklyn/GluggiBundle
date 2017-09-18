@@ -12,25 +12,25 @@
 
         <div class="gluggi-index-columns">
             <div class="gluggi-index-column">
-            {%- for type in types if type.hasStandaloneComponents -%}
-                <h2>
-                    {{- type.name -}}
-                    {%- if not type.isolatedComponentViewMode %} <a href="{{ path("gluggi.type", {type: type.key}) }}#gluggi-content">alle anzeigen</a>{%- endif -%}
-                </h2>
+                {%- for type in types if type.hasStandaloneComponents -%}
+                    <h2>
+                        {{- type.name -}}
+                        {%- if not type.isolatedComponentViewMode %} <a href="{{ path("gluggi.type", {type: type.key}) }}#gluggi-content">{% trans %}gluggi.view_all{% endtrans%}</a>{%- endif -%}
+                    </h2>
 
-                <ul>
-                {%- for component in type.standaloneComponents -%}
-                    <li>
-                        {%- if not type.isolatedComponentViewMode -%}
-                            <a href="{{ path("gluggi.type", {type: type.key}) }}#{{ component.anchor }}">{{ component.name }}</a>
-                            <a href="{{ path("gluggi.component", {type: type.key, key: component.key}) }}#gluggi-content" class="gluggi-link-single">Einzelansicht</a>
-                        {%- else -%}
-                            <a href="{{ path("gluggi.component", {type: type.key, key: component.key}) }}">{{ component.name }}</a>
-                        {%- endif %}
-                    </li>
+                    <ul>
+                        {%- for component in type.standaloneComponents -%}
+                            <li>
+                                {%- if not type.isolatedComponentViewMode -%}
+                                    <a href="{{ path("gluggi.type", {type: type.key}) }}#{{ component.anchor }}">{{ component.name }}</a>
+                                    <a href="{{ path("gluggi.component", {type: type.key, key: component.key}) }}#gluggi-content" class="gluggi-link-single">{% trans %}gluggi.single_view{% endtrans%}</a>
+                                {%- else -%}
+                                    <a href="{{ path("gluggi.component", {type: type.key, key: component.key}) }}">{{ component.name }}</a>
+                                {%- endif %}
+                            </li>
+                        {%- endfor -%}
+                    </ul>
                 {%- endfor -%}
-                </ul>
-            {%- endfor -%}
             </div>
 
             {%- if infoAction is not empty -%}
