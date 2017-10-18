@@ -64,9 +64,13 @@ class LayoutAssets
         return array_map(
             function (string $path) use ($directory)
             {
-                if (1 === preg_match('~^(https?\\:\/)?\/~', $path))
+                if (1 === preg_match('~^https?\\:\/~', $path))
                 {
                     return $path;
+                }
+                elseif ("/" === $path[0])
+                {
+                    return $this->assetsPackages->getUrl(ltrim($path, "/"));
                 }
                 else
                 {

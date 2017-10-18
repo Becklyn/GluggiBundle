@@ -9,12 +9,12 @@ Modular layout system
 Installation
 ------------
 
-1. First install the bundle via composer: 
+1. First install the bundle via composer:
 
     ```bash
     composer require becklyn/gluggi-bundle
     ```
-    
+
 2. Load the bundle in your `AppKernel`
 3. Load the routing in your `routing.yml` or `routing_dev.yml`:
 
@@ -46,7 +46,8 @@ You can define several config values in your `app/config.yml`:
 
 The paths in `css` and `js` can have one of three formats:
 
-* **absolute:** `https://...` or `/abc/...` - will be included as-is
+* **URLS:** `http(s)://...` - will be included as-is
+* **absolute:** `/test/abc.js` - will be included from `web/test/abc.js`
 * **relative:** `test.css` - will be included from `web/bundles/layout/css/test.css` (or `js` respectively)
 * **`@`-notation:** `@app/css/test.css` will include `web/bundles/app/css/test.css` (or `js` respectively)
 
@@ -62,7 +63,7 @@ gluggi:
         icons: ["user", "search", "add"]
     css:
         - "app.css"
-    js: 
+    js:
         - "app.js"
 ```
 
@@ -172,7 +173,7 @@ This is for example important if a component receives its actual width from the 
     <div class="example">
         {# ... #}
     </div>
-    
+
 {% if standalone %}</div>{% endif %}
 ```
 
@@ -288,7 +289,7 @@ gluggi:
     data:
         key1: abc
         key2: 123
-        icons: 
+        icons:
             - "add"
             - "remove"
             - "search"
