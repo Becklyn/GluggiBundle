@@ -46,7 +46,7 @@ class LayoutAssetsTest extends TestCase
     {
         return [
             ["a.js", ":intern:/bundles/layout/js/a.js"],
-            ["/a/a.js", "/a/a.js"],
+            ["/a/a.js", ":intern:/a/a.js"],
             ["http://a/a.js", "http://a/a.js"],
             ["https://a/a.js", "https://a/a.js"],
             ["a/b.js", ":intern:/bundles/layout/js/a/b.js"],
@@ -60,7 +60,7 @@ class LayoutAssetsTest extends TestCase
     {
         return [
             ["a.css", ":intern:/bundles/layout/css/a.css"],
-            ["/a/a.css", "/a/a.css"],
+            ["/a/a.css", ":intern:/a/a.css"],
             ["http://a/a.css", "http://a/a.css"],
             ["https://a/a.css", "https://a/a.css"],
             ["a/b.css", ":intern:/bundles/layout/css/a/b.css"],
