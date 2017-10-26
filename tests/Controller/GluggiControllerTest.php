@@ -33,7 +33,6 @@ class GluggiControllerTest extends WebTestCase
     }
 
 
-
     public function dataProviderComponentTypes ()
     {
         // mapping component type on "should have staged view"
@@ -45,7 +44,6 @@ class GluggiControllerTest extends WebTestCase
             ["page", false],
         ];
     }
-
 
 
     /**
@@ -76,7 +74,6 @@ class GluggiControllerTest extends WebTestCase
     }
 
 
-
     public function testUnknownComponent ()
     {
         $client = static::createClient();
@@ -84,7 +81,6 @@ class GluggiControllerTest extends WebTestCase
 
         self::assertSame(404, $client->getResponse()->getStatusCode());
     }
-
 
 
     public function testUnknownComponentWithUnknownComponentType ()
