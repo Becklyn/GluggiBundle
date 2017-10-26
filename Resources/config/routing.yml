@@ -4,14 +4,6 @@ gluggi:
         _controller: GluggiBundle:Gluggi:index
 
 
-gluggi.type:
-    path: /{type}/
-    defaults:
-        _controller: GluggiBundle:Gluggi:type
-    requirements:
-        type: '%gluggi.routing.requirements.key%'
-
-
 gluggi.component:
     path: /{type}/{key}/
     defaults:

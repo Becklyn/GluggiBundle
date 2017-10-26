@@ -8,6 +8,7 @@
     background-color: $gluggi-accent;
     color: $gluggi-inverted-text;
     padding: 20px 80px;
+    line-height: 1.2;
 
     ul {
         list-style: none;
@@ -23,16 +24,18 @@
         display: inline-block;
         font-size: $font-size;
         opacity: .5;
-        font-weight: 700;
+        font-weight: 200;
 
-        + li {
-            &::before {
-                content: "/";
-                display: inline-block;
-                padding: 0 25px;
-                opacity: .5;
-                font-weight: 200;
-            }
+        + li::before {
+            content: "/";
+            display: inline-block;
+            padding: 0 25px;
+            opacity: .5;
+        }
+
+        &:last-child {
+            opacity: 1;
+            cursor: default;
         }
     }
 
@@ -40,11 +43,5 @@
         text-decoration: none;
         color: inherit;
         cursor: pointer;
-    }
-
-    :last-child {
-        opacity: 1;
-        cursor: default;
-        font-weight: 200;
     }
 }

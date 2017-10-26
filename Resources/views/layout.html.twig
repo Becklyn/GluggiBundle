@@ -40,7 +40,7 @@
                         <li><a href="{{ path("gluggi") }}">Gluggi</a></li>
 
                         {% if type is defined %}
-                            <li><a href="{{ path("gluggi.type", {type: type.key}) }}#gluggi-content">{{ type.name }}</a></li>
+                            <li><a href="{{ path("gluggi") }}">{{ type.name }}</a></li>
 
                             {% if component is defined %}
                                 <li>{{ component.name }}</li>

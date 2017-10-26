@@ -13,10 +13,7 @@
         <div class="gluggi-index-columns">
             <div class="gluggi-index-column">
                 {%- for type in types if type.hasStandaloneComponents -%}
-                    <h2>
-                        {{- type.name -}}
-                        {%- if not type.isolatedComponentViewMode %} <a href="{{ path("gluggi.type", {type: type.key}) }}#gluggi-content">{% trans %}gluggi.view_all{% endtrans%}</a>{%- endif -%}
-                    </h2>
+                    <h2>{{ type.name }}</h2>
 
                     <ul>
                         {%- for component in type.standaloneComponents -%}

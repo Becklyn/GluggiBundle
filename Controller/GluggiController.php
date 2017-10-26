@@ -29,42 +29,6 @@ class GluggiController extends Controller
 
 
     /**
-     * Renders a list of all components in the given type
-     *
-     * @param string $type
-     *
-     * @return Response
-     */
-    public function typeAction (string $type)
-    {
-        try
-        {
-            $componentType = $this->get("gluggi.finder")->findType($type);
-
-            if (!$componentType->hasStandaloneComponents())
-            {
-                throw $this->createNotFoundException(sprintf("No components found in type '%s'.", $type));
-            }
-
-            if ($componentType->isIsolatedComponentViewMode())
-            {
-                throw $this->createNotFoundException(sprintf("The components of type '%s' are meant to be viewed in isolation, so there is no list view available.", $type));
-            }
-
-            return $this->render("@Gluggi/Gluggi/type.html.twig", [
-                "type" => $componentType,
-                "pageTitle" => $componentType->getName(),
-            ]);
-        }
-        catch (UnknownComponentTypeException $e)
-        {
-            throw $this->createNotFoundException($e->getMessage(), $e);
-        }
-    }
-
-
-
-    /**
      * Renders a component in single view
      *
      * @param string $type
