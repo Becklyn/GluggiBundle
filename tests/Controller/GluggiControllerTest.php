@@ -20,19 +20,6 @@ class GluggiControllerTest extends WebTestCase
     }
 
 
-    public function testType ()
-    {
-        $client = static::createClient();
-        $client->request("GET", "/atom/");
-        $content = $client->getResponse()->getContent();
-
-        self::assertContains(
-            "<title>Atom // Gluggi</title>",
-            $content
-        );
-    }
-
-
     public function testComponent ()
     {
         $client = static::createClient();
@@ -77,7 +64,6 @@ class GluggiControllerTest extends WebTestCase
         // all elements that create the structural view of gluggi
         $gluggiSelectors = [
             "#gluggi-content",
-            ".gluggi-label",
             ".gluggi-header",
             ".gluggi-preview",
             ".gluggi-component",
@@ -87,30 +73,6 @@ class GluggiControllerTest extends WebTestCase
         {
             self::assertSame($count, count($crawler->filter($selector)), "{$selector} {$message}");
         }
-    }
-
-
-    /**
-     * @dataProvider dataProviderComponentTypes
-     */
-    public function testDisabledListView (string $type, bool $listViewAvailable)
-    {
-        $client = static::createClient();
-        $client->request("GET", "/{$type}/");
-
-        $expectedStatusCode = $listViewAvailable ? 200 : 404;
-
-        self::assertSame($expectedStatusCode, $client->getResponse()->getStatusCode());
-    }
-
-
-
-    public function testUnknownComponentType ()
-    {
-        $client = static::createClient();
-        $client->request("GET", "/unknown/");
-
-        self::assertSame(404, $client->getResponse()->getStatusCode());
     }
 
 
