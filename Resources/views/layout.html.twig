@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0{% if templateConfiguration.prevent_zoom is defined and templateConfiguration.prevent_zoom %}, maximum-scale=1.0, user-scalable=no{% endif %}">
 
-        <title>{{ render(controller("GluggiBundle:Gluggi:htmlTitle", {pageTitle: pageTitle})) }}</title>
+        <title>{{ render(controller("Becklyn\\GluggiBundle\\Controller\\GluggiController::htmlTitle", {pageTitle: pageTitle})) }}</title>
 
         {% block gluggi_stylesheets %}
         <link rel="stylesheet" href="{{ asset("bundles/gluggi/css/gluggi.css") }}">
@@ -18,11 +18,11 @@
         <meta name="msapplication-TileImage" content="{{ asset('metro-tile-icon.png') }}">
 
         {% block stylesheets %}
-            {{ render(controller("GluggiBundle:Gluggi:layoutCSSAssets")) }}
+            {{ render(controller('Becklyn\\GluggiBundle\\Controller\\GluggiController::layoutCSSAssets')) }}
         {% endblock %}
 
         {% block javascripts_head %}
-            {{ render(controller("GluggiBundle:Gluggi:layoutJavaScriptHeadAssets")) }}
+            {{ render(controller("Becklyn\\GluggiBundle\\Controller\\GluggiController::layoutJavaScriptHeadAssets")) }}
         {% endblock %}
     </head>
     <body {% block body_attributes -%}
@@ -54,7 +54,7 @@
 
         {% endblock %}
         {% block javascripts %}
-            {{ render(controller("GluggiBundle:Gluggi:layoutJavaScriptAssets")) }}
+            {{ render(controller("Becklyn\\GluggiBundle\\Controller\\GluggiController::layoutJavaScriptAssets")) }}
         {% endblock %}
     </body>
 </html>

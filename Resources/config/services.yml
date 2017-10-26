@@ -3,46 +3,41 @@ parameters:
 
 services:
 
-    gluggi.assets:
-        class: Becklyn\GluggiBundle\Assets\LayoutAssets
-        arguments:
-            - '@gluggi.config'
-            - '@assets.packages'
+    Becklyn\GluggiBundle\Controller\GluggiController:
+        tags: ['controller.service_arguments']
+        autoconfigure: true
 
-    gluggi.finder:
-        class: Becklyn\GluggiBundle\Component\GluggiFinder
-        arguments:
-            - '@gluggi.component_type_registry'
+    Becklyn\GluggiBundle\Assets\LayoutAssets:
+        - '@Becklyn\GluggiBundle\Configuration\GluggiConfig'
+        - '@assets.packages'
 
-    gluggi.layout.bundle_paths:
-        class: Becklyn\GluggiBundle\LayoutBundleIntegration\BundlePaths
+    Becklyn\GluggiBundle\Component\GluggiFinder:
+        - '@Becklyn\GluggiBundle\ComponentType\ComponentTypeRegistry'
+
+    Becklyn\GluggiBundle\LayoutBundleIntegration\BundlePaths:
         arguments:
             - '@kernel'
         public: false
 
-    gluggi.component_type_registry:
-        class: Becklyn\GluggiBundle\ComponentType\ComponentTypeRegistry
+    Becklyn\GluggiBundle\ComponentType\ComponentTypeRegistry:
         arguments:
-            - '@gluggi.layout.bundle_paths'
+            - '@Becklyn\GluggiBundle\LayoutBundleIntegration\BundlePaths'
         public: false
 
-    gluggi.component.configuration:
-        class: Becklyn\GluggiBundle\Component\ComponentConfiguration
+    Becklyn\GluggiBundle\Component\ComponentConfiguration:
         arguments:
             - '@twig'
 
-    gluggi.twig.extension:
-        class: Becklyn\GluggiBundle\Twig\GluggiTwigExtension
+    Becklyn\GluggiBundle\Twig\GluggiTwigExtension:
         arguments:
-            - '@gluggi.finder'
-            - '@gluggi.config'
+            - '@Becklyn\GluggiBundle\Component\GluggiFinder'
+            - '@Becklyn\GluggiBundle\Configuration\GluggiConfig'
             - '@service_container'
         tags:
             - { name: twig.extension }
         public: false
 
-    gluggi.config:
-        class: Becklyn\GluggiBundle\Configuration\GluggiConfig
+    Becklyn\GluggiBundle\Configuration\GluggiConfig:
         arguments:
             - ~ # all parameters set via the extension
             - ~

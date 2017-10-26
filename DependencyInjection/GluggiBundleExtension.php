@@ -2,6 +2,7 @@
 
 namespace Becklyn\GluggiBundle\DependencyInjection;
 
+use Becklyn\GluggiBundle\Configuration\GluggiConfig;
 use Becklyn\GluggiBundle\GluggiBundle;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -24,7 +25,7 @@ class GluggiBundleExtension extends Extension
         $loader->load('services.yml');
 
         // wire provided config to config service
-        $container->getDefinition('gluggi.config')
+        $container->getDefinition(GluggiConfig::class)
             ->replaceArgument(0, $config["info_action"])
             ->replaceArgument(1, $config["title"])
             ->replaceArgument(2, $config['css'])

@@ -1,10 +1,13 @@
 <?php
 
+namespace Tests\Becklyn\GluggiBundle\App;
+
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel;
+use Tests\Becklyn\GluggiBundle\LayoutBundle\LayoutBundle;
 
 
-class AppKernel extends Kernel
+class TestKernel extends Kernel
 {
     public function registerBundles ()
     {
@@ -12,7 +15,7 @@ class AppKernel extends Kernel
             new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new \Symfony\Bundle\TwigBundle\TwigBundle(),
             new \Becklyn\GluggiBundle\GluggiBundle(),
-            new Tests\LayoutBundle\LayoutBundle(),
+            new LayoutBundle(),
         ];
     }
 

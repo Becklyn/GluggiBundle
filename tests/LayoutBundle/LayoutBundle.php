@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\LayoutBundle;
+namespace Tests\Becklyn\GluggiBundle\LayoutBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
