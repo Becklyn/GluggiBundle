@@ -4,9 +4,10 @@ namespace Tests\Becklyn\GluggiBundle\Data;
 
 use Becklyn\GluggiBundle\Data\Component;
 use Becklyn\GluggiBundle\Data\ComponentType;
+use PHPUnit\Framework\TestCase;
 
 
-class ComponentTest extends \PHPUnit_Framework_TestCase
+class ComponentTest extends TestCase
 {
     private function getInstance (string $fileName)
     {

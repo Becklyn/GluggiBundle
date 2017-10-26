@@ -4,10 +4,11 @@ namespace Tests\Becklyn\GluggiBundle\Assets;
 
 use Becklyn\GluggiBundle\Assets\LayoutAssets;
 use Becklyn\GluggiBundle\Configuration\GluggiConfig;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Asset\Packages;
 
 
-class LayoutAssetsTest extends \PHPUnit_Framework_TestCase
+class LayoutAssetsTest extends TestCase
 {
     public function buildInstance (array $cssFiles = [], array $jsFiles = [])
     {

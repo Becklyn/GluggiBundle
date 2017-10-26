@@ -4,12 +4,13 @@ namespace Tests\Becklyn\GluggiBundle\Component;
 
 use Becklyn\GluggiBundle\Component\ComponentLoader;
 use Becklyn\GluggiBundle\Data\ComponentType;
+use PHPUnit\Framework\TestCase;
 
 
 /**
  *
  */
-class ComponentLoaderTest extends \PHPUnit_Framework_TestCase
+class ComponentLoaderTest extends TestCase
 {
     private function loadAtoms ()
     {

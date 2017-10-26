@@ -3,11 +3,12 @@
 namespace Tests\Becklyn\GluggiBundle\LayoutBundleIntegration;
 
 use Becklyn\GluggiBundle\LayoutBundleIntegration\BundlePaths;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 
-class BundlePathsTest extends \PHPUnit_Framework_TestCase
+class BundlePathsTest extends TestCase
 {
     public function testWithLayoutBundle ()
     {
