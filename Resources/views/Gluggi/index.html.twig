@@ -21,12 +21,7 @@
                     <ul>
                         {%- for component in type.standaloneComponents -%}
                             <li>
-                                {%- if not type.isolatedComponentViewMode -%}
-                                    <a href="{{ path("gluggi.type", {type: type.key}) }}#{{ component.anchor }}">{{ component.name }}</a>
-                                    <a href="{{ path("gluggi.component", {type: type.key, key: component.key}) }}#gluggi-content" class="gluggi-link-single">{% trans %}gluggi.single_view{% endtrans%}</a>
-                                {%- else -%}
-                                    <a href="{{ path("gluggi.component", {type: type.key, key: component.key}) }}">{{ component.name }}</a>
-                                {%- endif %}
+                                <a href="{{ path("gluggi.component", {type: type.key, key: component.key}) }}">{{ component.name }}</a>
                             </li>
                         {%- endfor -%}
                     </ul>
