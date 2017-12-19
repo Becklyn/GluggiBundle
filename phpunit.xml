@@ -10,7 +10,7 @@
     <php>
         <ini name="error_reporting" value="-1" />
         <server name="KERNEL_DIR" value="tests/app" />
-        <server name="KERNEL_CLASS" value="Tests\Becklyn\GluggiBundle\App\TestKernel"></server>
+        <server name="KERNEL_CLASS" value="Tests\Becklyn\GluggiBundle\App\TestKernel" />
     </php>
 
     <testsuites>
@@ -20,4 +20,14 @@
             <exclude>tests/fixtures</exclude>
         </testsuite>
     </testsuites>
+
+    <filter>
+        <whitelist>
+            <directory suffix=".php">.</directory>
+            <exclude>
+                <directory>tests/</directory>
+                <directory>vendor/</directory>
+            </exclude>
+        </whitelist>
+    </filter>
 </phpunit>
