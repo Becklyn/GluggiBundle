@@ -35,21 +35,12 @@ You can define several config values in your `app/config.yml`:
 
 | Key            | Type       | Required | Description |
 | -------------- | ---------- | -------- | ----------- |
-| `css`          | `string[]` | no       | The CSS files that will automatically be loaded. All paths are relative to `LayoutBundle/Resources/public/css`. |
-| `js`           | `string[]` | no       | The JavaScript files that will automatically be loaded. All paths are relative to `LayoutBundle/Resources/public/js`. |
+| `css`          | `string[]` | no       | The CSS files that will automatically be loaded. All paths are namespaced (see `becklyn/assets-bundle`). |
+| `js`           | `string[]` | no       | The JavaScript files that will automatically be loaded. All paths are namespaced (see `becklyn/assets-bundle`). |
 | `js_head`      | `string[]` | no       | Like `js`, but the files will be included in the head. |
 | `info_action`  | `string`   | no       | The action to render the info. See the section below for details. |
 | `title`        | `string`   | no       | An optional title of the project, that is added in some places in the output (i.e. as suffix in the HTML title and on the index page). |
 | `data`         | `array`    | no       | An array with arbitrary data. See below for details. |
-
-
-
-The paths in `css` and `js` can have one of three formats:
-
-* **URLS:** `http(s)://...` - will be included as-is
-* **absolute:** `/test/abc.js` - will be included from `web/test/abc.js`
-* **relative:** `test.css` - will be included from `web/bundles/layout/css/test.css` (or `js` respectively)
-* **`@`-notation:** `@app/css/test.css` will include `web/bundles/app/css/test.css` (or `js` respectively)
 
 
 
@@ -59,12 +50,10 @@ The paths in `css` and `js` can have one of three formats:
 gluggi:
     info_action:  ~
     title: ~
-    data:
-        icons: ["user", "search", "add"]
-    css:
-        - "app.css"
-    js:
-        - "app.js"
+    data: []
+    css: []
+    js: []
+    js_head: []
 ```
 
 
@@ -194,13 +183,13 @@ Place your images under `Resources/public/img` (just as in any other Symfony bun
 
 
 #### Inline assets
-Load the assets directly from the bundle via Symfony's own `asset()` function:
+Load the assets directly from the bundle via `becklyn/asset-bundle`'s `asset()` function:
 
 ```jinja
 <!-- Resources/views/atom/example.html.twig -->
 
 <div class="example">
-    <img src="{{ asset("bundles/layout/img/example.jpg") }}" alt="Example Image">
+    <img src="{{ asset("@app/img/example.jpg") }}" alt="Example Image">
 </div>
 ```
 
