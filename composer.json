@@ -3,7 +3,7 @@
     "description":  "Modular layout preview system, to be used within a symfony app.",
     "type":         "symfony-bundle",
     "homepage":     "https://github.com/Becklyn/GluggiBundle",
-    "license":      "Apache-2.0",
+    "license":      "BSD-3-Clause",
     "authors": [{
         "name":     "Becklyn Studios",
         "homepage": "http://becklyn.com/"
