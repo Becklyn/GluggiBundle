@@ -62,7 +62,10 @@ class LayoutAssets
         return \array_map(
             function (string $assetPath)
             {
-                return $this->assetHtmlGenerator->getAssetUrlPath($assetPath);
+                // pass HTTP URLs untouched through
+                return (1 === \preg_match('~^https?:\\/\\/~', $assetPath))
+                    ? $assetPath
+                    : $this->assetHtmlGenerator->getAssetUrlPath($assetPath);
             },
             $assetPaths
         );
