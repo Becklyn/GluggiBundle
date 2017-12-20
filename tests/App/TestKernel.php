@@ -38,7 +38,8 @@ class TestKernel extends Kernel
      */
     protected function configureRoutes (RouteCollectionBuilder $routes)
     {
-        $routes->import(__DIR__ . "/../../Resources/config/routing.yaml");
+        $routes->import(__DIR__  ."/../../Resources/config/routes.yaml");
+        $routes->import(__DIR__  ."/../../vendor/becklyn/assets-bundle/Resources/config/routes.yaml");
     }
 
 
