@@ -6,19 +6,11 @@ services:
         autoconfigure: true
         autowire: true
 
-    Becklyn\GluggiBundle\Controller\GluggiController: ~
     Becklyn\GluggiBundle\Assets\LayoutAssets: ~
-    Becklyn\GluggiBundle\Component\GluggiFinder: ~
-    Becklyn\GluggiBundle\LayoutBundleIntegration\BundlePaths: ~
-    Becklyn\GluggiBundle\ComponentType\ComponentTypeRegistry: ~
     Becklyn\GluggiBundle\Component\ComponentConfiguration: ~
-
-    Becklyn\GluggiBundle\Twig\GluggiTwigExtension:
-        $locator: '@Becklyn\GluggiBundle\Twig\GluggiTwigExtension_locator'
-
-    Becklyn\GluggiBundle\Twig\GluggiTwigExtension_locator:
-        class: Symfony\Component\DependencyInjection\ServiceLocator
-        arguments:
-            -   twig: '@twig'
-
+    Becklyn\GluggiBundle\Component\GluggiFinder: ~
+    Becklyn\GluggiBundle\ComponentType\ComponentTypeRegistry: ~
     Becklyn\GluggiBundle\Configuration\GluggiConfig: ~
+    Becklyn\GluggiBundle\Controller\GluggiController: ~
+    Becklyn\GluggiBundle\LayoutBundleIntegration\BundlePaths: ~
+    Becklyn\GluggiBundle\Twig\GluggiTwigExtension: ~

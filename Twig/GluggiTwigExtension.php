@@ -5,13 +5,14 @@ namespace Becklyn\GluggiBundle\Twig;
 use Becklyn\GluggiBundle\Component\GluggiFinder;
 use Becklyn\GluggiBundle\Configuration\GluggiConfig;
 use Becklyn\GluggiBundle\Exception\UnknownComponentException;
-use Symfony\Component\DependencyInjection\ServiceLocator;
+use Psr\Container\ContainerInterface;
+use Symfony\Component\DependencyInjection\ServiceSubscriberInterface;
 
 
 /**
  * Exposes all gluggi-related twig functions
  */
-class GluggiTwigExtension extends \Twig_Extension
+class GluggiTwigExtension extends \Twig_Extension implements ServiceSubscriberInterface
 {
     /**
      * @var GluggiFinder
@@ -26,21 +27,21 @@ class GluggiTwigExtension extends \Twig_Extension
 
 
     /**
-     * @var ServiceLocator
+     * @var ContainerInterface
      */
-    private $locator;
+    private $container;
 
 
     /**
-     * @param GluggiFinder   $finder
-     * @param GluggiConfig   $config
-     * @param ServiceLocator $locator
+     * @param GluggiFinder       $finder
+     * @param GluggiConfig       $config
+     * @param ContainerInterface $container
      */
-    public function __construct (GluggiFinder $finder, GluggiConfig $config, ServiceLocator $locator)
+    public function __construct (GluggiFinder $finder, GluggiConfig $config, ContainerInterface $container)
     {
         $this->finder = $finder;
         $this->config = $config;
-        $this->locator = $locator;
+        $this->container = $container;
     }
 
 
@@ -67,7 +68,7 @@ class GluggiTwigExtension extends \Twig_Extension
             "standalone" => false,
         ], $context);
 
-        return $this->locator->get("twig")->render($component->getImportPath(), $context);
+        return $this->container->get("twig")->render($component->getImportPath(), $context);
     }
 
 
@@ -103,6 +104,17 @@ class GluggiTwigExtension extends \Twig_Extension
             new \Twig_Function("gluggi_template", [$this, "getTemplateName"]),
             new \Twig_Function("gluggi", [$this, "renderGluggiComponent"], ["is_safe" => ["html"]]),
             new \Twig_Function("gluggi_data", [$this->config, "getData"]),
+        ];
+    }
+
+
+    /**
+     * @inheritdoc
+     */
+    public static function getSubscribedServices ()
+    {
+        return [
+            "twig" => \Twig_Environment::class,
         ];
     }
 }
