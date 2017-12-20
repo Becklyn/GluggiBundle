@@ -20,7 +20,7 @@ Installation
 
     ```yaml
     layout:
-        resource: "@GluggiBundle/Resources/config/routing.yaml"
+        resource: "@GluggiBundle/Resources/config/routes.yaml"
         prefix: /_layout/
     ```
 
