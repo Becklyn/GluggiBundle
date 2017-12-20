@@ -8,7 +8,7 @@
         <title>{{ render(controller("Becklyn\\GluggiBundle\\Controller\\GluggiController::htmlTitle", {pageTitle: pageTitle})) }}</title>
 
         {% block gluggi_stylesheets %}
-        <link rel="stylesheet" href="{{ asset("bundles/gluggi/css/gluggi.css") }}">
+            <link rel="stylesheet" href="{{ asset("@gluggi_core/css/gluggi.css") }}">
         {% endblock %}
 
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">

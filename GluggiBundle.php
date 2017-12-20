@@ -2,13 +2,28 @@
 
 namespace Becklyn\GluggiBundle;
 
+use Becklyn\AssetsBundle\Entry\RegisterEntryNamespacesCompilerPass;
 use Becklyn\GluggiBundle\DependencyInjection\GluggiBundleExtension;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 
 class GluggiBundle extends Bundle
 {
     const BUNDLE_ALIAS = "gluggi";
+
+
+    /**
+     * @inheritdoc
+     */
+    public function build (ContainerBuilder $container)
+    {
+        parent::build($container);
+
+        $container->addCompilerPass(new RegisterEntryNamespacesCompilerPass([
+            "gluggi_core" => __DIR__ . "/Resources/public/",
+        ]));
+    }
 
 
     /**
