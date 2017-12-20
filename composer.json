@@ -19,7 +19,6 @@
     "minimum-stability": "beta",
     "require": {
         "php": "^7.0",
-        "symfony/asset": "^3.3|^4.0",
         "symfony/dependency-injection": "^3.3|^4.0",
         "symfony/finder": "^3.3|^4.0",
         "symfony/framework-bundle": "^3.3|^4.0",
@@ -32,5 +31,9 @@
         "symfony/css-selector": "^3.3|^4.0",
         "symfony/phpunit-bridge": "^3.3|^4.0",
         "symfony/twig-bundle": "^3.3|^4.0"
+    },
+    "suggest": {
+        "becklyn/assets-bundle": "for using the asset() twig-function",
+        "symfony/asset": "for using the asset() twig-function"
     }
 }
