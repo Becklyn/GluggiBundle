@@ -16,11 +16,11 @@ Installation
     ```
 
 2. Load the bundle in your `AppKernel`
-3. Load the routing in your `routing.yml` or `routing_dev.yml`:
+3. Load the routing in your `routing.yaml` or `routing_dev.yaml`:
 
-    ```yml
+    ```yaml
     layout:
-        resource: "@GluggiBundle/Resources/config/routing.yml"
+        resource: "@GluggiBundle/Resources/config/routing.yaml"
         prefix: /_layout/
     ```
 
@@ -30,7 +30,7 @@ Installation
 Configuration
 -------------
 
-You can define several config values in your `app/config.yml`:
+You can define several config values in your `app/config.yaml`:
 
 
 | Key            | Type       | Required | Description |
@@ -46,7 +46,7 @@ You can define several config values in your `app/config.yml`:
 
 ### Default configuration
 
-```yml
+```yaml
 gluggi:
     info_action:  ~
     title: ~
@@ -242,7 +242,7 @@ Template configuration is defined with a twig comment as the first element in th
 -#}
 ```
 
-The configuration format is YML. All configuration parameters are optional.
+The configuration format is YAML. All configuration parameters are optional.
 
 
 #### Defined configuration parameters

@@ -22,7 +22,7 @@ class GluggiBundleExtension extends Extension
 
         // load main services.yml
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('services.yml');
+        $loader->load('services.yaml');
 
         // wire provided config to config service
         $container->getDefinition(GluggiConfig::class)

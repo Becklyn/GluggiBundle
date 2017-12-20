@@ -2,27 +2,51 @@
 
 namespace Tests\Becklyn\GluggiBundle\App;
 
+use Becklyn\AssetsBundle\BecklynAssetsBundle;
+use Becklyn\GluggiBundle\GluggiBundle;
+use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
+use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
+use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel;
+use Symfony\Component\Routing\RouteCollectionBuilder;
 use Tests\Becklyn\GluggiBundle\LayoutBundle\LayoutBundle;
 
 
 class TestKernel extends Kernel
 {
+    use MicroKernelTrait;
+
+    /**
+     * @inheritdoc
+     */
     public function registerBundles ()
     {
         return [
-            new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
-            new \Symfony\Bundle\TwigBundle\TwigBundle(),
-            new \Becklyn\GluggiBundle\GluggiBundle(),
+            new FrameworkBundle(),
+            new TwigBundle(),
+            new GluggiBundle(),
+            new BecklynAssetsBundle(),
             new LayoutBundle(),
         ];
     }
 
 
-
-    public function registerContainerConfiguration (LoaderInterface $loader)
+    /**
+     * @inheritdoc
+     */
+    protected function configureRoutes (RouteCollectionBuilder $routes)
     {
-        $loader->load(__DIR__ . "/config.yml");
+        $routes->import(__DIR__ . "/../../Resources/config/routing.yaml");
+    }
+
+
+    /**
+     * @inheritdoc
+     */
+    protected function configureContainer (ContainerBuilder $c, LoaderInterface $loader)
+    {
+        $loader->load(__DIR__ . "/config.yaml");
     }
 }
