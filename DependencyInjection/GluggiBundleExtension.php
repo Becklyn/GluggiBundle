@@ -26,12 +26,14 @@ class GluggiBundleExtension extends Extension
 
         // wire provided config to config service
         $container->getDefinition(GluggiConfig::class)
-            ->replaceArgument(0, $config["info_action"])
-            ->replaceArgument(1, $config["title"])
-            ->replaceArgument(2, $config['css'])
-            ->replaceArgument(3, $config['js'])
-            ->replaceArgument(4, $config['js_head'])
-            ->replaceArgument(5, $config['data']);
+            ->setArguments([
+                $config["info_action"],
+                $config["title"],
+                $config['css'],
+                $config['js'],
+                $config['js_head'],
+                $config['data']
+            ]);
     }
 
 
