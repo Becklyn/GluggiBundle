@@ -2,46 +2,23 @@ parameters:
     gluggi.routing.requirements.key: '[a-z0-9-_]+'
 
 services:
-
-    Becklyn\GluggiBundle\Controller\GluggiController:
-        tags: ['controller.service_arguments']
+    _defaults:
         autoconfigure: true
+        autowire: true
 
-    Becklyn\GluggiBundle\Assets\LayoutAssets:
-        - '@Becklyn\GluggiBundle\Configuration\GluggiConfig'
-        - '@assets.packages'
-
-    Becklyn\GluggiBundle\Component\GluggiFinder:
-        - '@Becklyn\GluggiBundle\ComponentType\ComponentTypeRegistry'
-
-    Becklyn\GluggiBundle\LayoutBundleIntegration\BundlePaths:
-        arguments:
-            - '@kernel'
-        public: false
-
-    Becklyn\GluggiBundle\ComponentType\ComponentTypeRegistry:
-        arguments:
-            - '@Becklyn\GluggiBundle\LayoutBundleIntegration\BundlePaths'
-        public: false
-
-    Becklyn\GluggiBundle\Component\ComponentConfiguration:
-        arguments:
-            - '@twig'
+    Becklyn\GluggiBundle\Controller\GluggiController: ~
+    Becklyn\GluggiBundle\Assets\LayoutAssets: ~
+    Becklyn\GluggiBundle\Component\GluggiFinder: ~
+    Becklyn\GluggiBundle\LayoutBundleIntegration\BundlePaths: ~
+    Becklyn\GluggiBundle\ComponentType\ComponentTypeRegistry: ~
+    Becklyn\GluggiBundle\Component\ComponentConfiguration: ~
 
     Becklyn\GluggiBundle\Twig\GluggiTwigExtension:
-        arguments:
-            - '@Becklyn\GluggiBundle\Component\GluggiFinder'
-            - '@Becklyn\GluggiBundle\Configuration\GluggiConfig'
-            - '@service_container'
-        tags:
-            - { name: twig.extension }
-        public: false
+        $locator: '@Becklyn\GluggiBundle\Twig\GluggiTwigExtension_locator'
 
-    Becklyn\GluggiBundle\Configuration\GluggiConfig:
+    Becklyn\GluggiBundle\Twig\GluggiTwigExtension_locator:
+        class: Symfony\Component\DependencyInjection\ServiceLocator
         arguments:
-            - ~ # all parameters set via the extension
-            - ~
-            - []
-            - []
-            - []
-            - []
+            -   twig: '@twig'
+
+    Becklyn\GluggiBundle\Configuration\GluggiConfig: ~

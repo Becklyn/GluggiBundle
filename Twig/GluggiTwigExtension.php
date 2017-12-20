@@ -5,7 +5,7 @@ namespace Becklyn\GluggiBundle\Twig;
 use Becklyn\GluggiBundle\Component\GluggiFinder;
 use Becklyn\GluggiBundle\Configuration\GluggiConfig;
 use Becklyn\GluggiBundle\Exception\UnknownComponentException;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\ServiceLocator;
 
 
 /**
@@ -26,22 +26,21 @@ class GluggiTwigExtension extends \Twig_Extension
 
 
     /**
-     * @var ContainerInterface
+     * @var ServiceLocator
      */
-    private $container;
-
+    private $locator;
 
 
     /**
-     * @param GluggiFinder       $finder
-     * @param GluggiConfig       $config
-     * @param ContainerInterface $container
+     * @param GluggiFinder   $finder
+     * @param GluggiConfig   $config
+     * @param ServiceLocator $locator
      */
-    public function __construct (GluggiFinder $finder, GluggiConfig $config, ContainerInterface $container)
+    public function __construct (GluggiFinder $finder, GluggiConfig $config, ServiceLocator $locator)
     {
         $this->finder = $finder;
         $this->config = $config;
-        $this->container = $container;
+        $this->locator = $locator;
     }
 
 
@@ -57,7 +56,6 @@ class GluggiTwigExtension extends \Twig_Extension
      */
     public function renderGluggiComponent (string $type, string $name, array $context = []) : string
     {
-        $twig = $this->container->get("twig");
         $component = $this->finder->findComponent($type, $name);
 
         if (null === $component)
@@ -69,7 +67,7 @@ class GluggiTwigExtension extends \Twig_Extension
             "standalone" => false,
         ], $context);
 
-        return $twig->render($component->getImportPath(), $context);
+        return $this->locator->get("twig")->render($component->getImportPath(), $context);
     }
 
 
@@ -102,9 +100,9 @@ class GluggiTwigExtension extends \Twig_Extension
     public function getFunctions ()
     {
         return [
-            new \Twig_SimpleFunction("gluggi_template", [$this, "getTemplateName"]),
-            new \Twig_SimpleFunction("gluggi", [$this, "renderGluggiComponent"], ["is_safe" => ["html"]]),
-            new \Twig_SimpleFunction("gluggi_data", [$this->config, "getData"]),
+            new \Twig_Function("gluggi_template", [$this, "getTemplateName"]),
+            new \Twig_Function("gluggi", [$this, "renderGluggiComponent"], ["is_safe" => ["html"]]),
+            new \Twig_Function("gluggi_data", [$this->config, "getData"]),
         ];
     }
 }

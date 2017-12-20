@@ -53,7 +53,7 @@ class GluggiConfig
      * @param array       $javaScriptHeadFiles
      * @param array       $data
      */
-    public function __construct (string $infoAction = null, string $title = null, array $cssFiles, array $javaScriptFiles, array $javaScriptHeadFiles, array $data)
+    public function __construct (string $infoAction = null, string $title = null, array $cssFiles = [], array $javaScriptFiles = [], array $javaScriptHeadFiles = [], array $data = [])
     {
         $this->infoAction = $infoAction;
         $this->title = $title;
