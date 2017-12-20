@@ -2,8 +2,8 @@
 
 namespace Becklyn\GluggiBundle\Assets;
 
+use Becklyn\AssetsBundle\Html\AssetHtmlGenerator;
 use Becklyn\GluggiBundle\Configuration\GluggiConfig;
-use Symfony\Component\Asset\Packages;
 
 
 /**
@@ -30,23 +30,22 @@ class LayoutAssets
 
 
     /**
-     * @var Packages
+     * @var AssetHtmlGenerator|null
      */
-    private $assetsPackages;
-
+    private $assetHtmlGenerator;
 
 
     /**
-     * @param GluggiConfig $configuration
-     * @param Packages     $assetsPackages
+     * @param GluggiConfig       $configuration
+     * @param AssetHtmlGenerator $assetHtmlGenerator
      */
-    public function __construct (GluggiConfig $configuration, Packages $assetsPackages)
+    public function __construct (GluggiConfig $configuration, AssetHtmlGenerator $assetHtmlGenerator)
     {
-        $this->assetsPackages = $assetsPackages;
+        $this->assetHtmlGenerator = $assetHtmlGenerator;
 
-        $this->cssFiles = $this->transformToUrl($configuration->getCssFiles(), "css");
-        $this->javaScriptFiles = $this->transformToUrl($configuration->getJavaScriptFiles(), "js");
-        $this->javaScriptHeadFiles = $this->transformToUrl($configuration->getJavaScriptHeadFiles(), "js");
+        $this->cssFiles = $this->transformToUrl($configuration->getCssFiles());
+        $this->javaScriptFiles = $this->transformToUrl($configuration->getJavaScriptFiles());
+        $this->javaScriptHeadFiles = $this->transformToUrl($configuration->getJavaScriptHeadFiles());
     }
 
 
@@ -54,36 +53,18 @@ class LayoutAssets
     /**
      * Transforms the paths in the config to full URLs
      *
-     * @param string[] $assets
-     * @param string   $directory
+     * @param string[] $assetPaths
      *
      * @return string[]
      */
-    private function transformToUrl (array $assets, string $directory) : array
+    private function transformToUrl (array $assetPaths) : array
     {
-        return array_map(
-            function (string $path) use ($directory)
+        return \array_map(
+            function (string $assetPath)
             {
-                if (1 === preg_match('~^https?\\:\/\/~', $path))
-                {
-                    return $path;
-                }
-                elseif ("/" === $path[0])
-                {
-                    return $this->assetsPackages->getUrl(ltrim($path, "/"));
-                }
-                else
-                {
-                    $includePath = ("@" === substr($path, 0, 1))
-                        // files with @abc/... are transformed to bundles/abc/...
-                        ? "bundles/" . substr($path, 1)
-                        // local files are from the layout directory
-                        : "bundles/layout/{$directory}/{$path}";
-
-                    return $this->assetsPackages->getUrl($includePath);
-                }
+                return $this->assetHtmlGenerator->getAssetUrlPath($assetPath);
             },
-            $assets
+            $assetPaths
         );
     }
 
