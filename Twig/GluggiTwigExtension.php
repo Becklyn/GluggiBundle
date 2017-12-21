@@ -101,9 +101,9 @@ class GluggiTwigExtension extends \Twig_Extension implements ServiceSubscriberIn
     public function getFunctions ()
     {
         return [
-            new \Twig_Function("gluggi_template", [$this, "getTemplateName"]),
-            new \Twig_Function("gluggi", [$this, "renderGluggiComponent"], ["is_safe" => ["html"]]),
-            new \Twig_Function("gluggi_data", [$this->config, "getData"]),
+            new \Twig_SimpleFunction("gluggi_template", [$this, "getTemplateName"]),
+            new \Twig_SimpleFunction("gluggi", [$this, "renderGluggiComponent"], ["is_safe" => ["html"]]),
+            new \Twig_SimpleFunction("gluggi_data", [$this->config, "getData"]),
         ];
     }
 
