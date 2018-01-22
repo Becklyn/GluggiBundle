@@ -12,11 +12,11 @@ class LayoutAssetsTest extends TestCase
 {
     public function buildInstance (array $cssFiles = [], array $jsFiles = [])
     {
-        $packageAssets = self::getMockBuilder(AssetHtmlGenerator::class)
+        $htmlGenerator = self::getMockBuilder(AssetHtmlGenerator::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $packageAssets
+        $htmlGenerator
             ->method("getAssetUrlPath")
             ->willReturnCallback(
                 function ($param)
@@ -37,7 +37,7 @@ class LayoutAssetsTest extends TestCase
             ->method("getJavaScriptFiles")
             ->willReturn($jsFiles);
 
-        return new LayoutAssets($config, $packageAssets);
+        return new LayoutAssets($config, $htmlGenerator);
     }
 
 
