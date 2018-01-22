@@ -35,6 +35,7 @@ You can define several config values in your `app/config.yaml`:
 
 | Key            | Type       | Required | Description |
 | -------------- | ---------- | -------- | ----------- |
+| `layout_dir`   | `string`   | no       | The layout directory, relative to your `%twig.default_path%`. |
 | `css`          | `string[]` | no       | The CSS files that will automatically be loaded. All paths are namespaced (see `becklyn/assets-bundle`). |
 | `js`           | `string[]` | no       | The JavaScript files that will automatically be loaded. All paths are namespaced (see `becklyn/assets-bundle`). |
 | `js_head`      | `string[]` | no       | Like `js`, but the files will be included in the head. |
@@ -48,6 +49,7 @@ You can define several config values in your `app/config.yaml`:
 
 ```yaml
 gluggi:
+    layout_dir: layout
     info_action:  ~
     title: ~
     data: []
