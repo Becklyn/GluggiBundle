@@ -11,7 +11,6 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Routing\RouteCollectionBuilder;
-use Tests\Becklyn\GluggiBundle\LayoutBundle\LayoutBundle;
 
 
 class TestKernel extends Kernel
@@ -28,7 +27,6 @@ class TestKernel extends Kernel
             new TwigBundle(),
             new GluggiBundle(),
             new BecklynAssetsBundle(),
-            new LayoutBundle(),
         ];
     }
 

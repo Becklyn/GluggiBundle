@@ -35,18 +35,24 @@ class Component
     private $type;
 
 
+    /**
+     * @var string
+     */
+    private $importPath;
+
 
     /**
      * @param \SplFileInfo  $file
      * @param ComponentType $type
      */
-    public function __construct (\SplFileInfo $file, ComponentType $type)
+    public function __construct (\SplFileInfo $file, string $layoutDir, ComponentType $type)
     {
         $this->fileName = $file->getBasename();
         $this->key = $file->getBasename('.html.twig');
         $this->name = $this->generateName($this->key);
         $this->hidden = "_" === substr($file->getBasename(), 0, 1);
         $this->type = $type;
+        $this->importPath = "{$layoutDir}/{$this->type->getDirectory()}/{$this->fileName}";
     }
 
 
@@ -123,7 +129,7 @@ class Component
      */
     public function getImportPath () : string
     {
-        return "@Layout/{$this->type->getDirectory()}/{$this->fileName}";
+        return $this->importPath;
     }
 
 

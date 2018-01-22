@@ -12,16 +12,23 @@ class ComponentLoader
     /**
      * @var string
      */
-    private $viewsDir;
-
+    private $templatesDir;
 
 
     /**
-     * @param string $viewsDir
+     * @var string
      */
-    public function __construct (string $viewsDir)
+    private $layoutDir;
+
+
+    /**
+     * @param string $templatesDir
+     * @param string $layoutDir
+     */
+    public function __construct (string $templatesDir, string $layoutDir)
     {
-        $this->viewsDir = rtrim($viewsDir, "/");
+        $this->templatesDir = rtrim($templatesDir, "/");
+        $this->layoutDir = trim($layoutDir, "/");
     }
 
 
@@ -35,7 +42,7 @@ class ComponentLoader
      */
     public function loadComponents (ComponentType $type) : array
     {
-        $path = "{$this->viewsDir}/{$type->getDirectory()}";
+        $path = "{$this->templatesDir}/{$this->layoutDir}/{$type->getDirectory()}";
 
         if (!is_dir($path) || !is_readable($path))
         {
@@ -54,7 +61,7 @@ class ComponentLoader
 
         foreach ($files as $file)
         {
-            $component = new Component($file, $type);
+            $component = new Component($file, $this->layoutDir, $type);
             $result[$component->getKey()] = $component;
         }
 

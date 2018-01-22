@@ -9,6 +9,12 @@ namespace Becklyn\GluggiBundle\Configuration;
 class GluggiConfig
 {
     /**
+     * @var string
+     */
+    private $layoutDir;
+
+
+    /**
      * @var null|string
      */
     private $infoAction;
@@ -44,8 +50,8 @@ class GluggiConfig
     private $data;
 
 
-
     /**
+     * @param string      $layoutDir
      * @param string|null $infoAction
      * @param string|null $title
      * @param array       $cssFiles
@@ -53,14 +59,24 @@ class GluggiConfig
      * @param array       $javaScriptHeadFiles
      * @param array       $data
      */
-    public function __construct (string $infoAction = null, string $title = null, array $cssFiles = [], array $javaScriptFiles = [], array $javaScriptHeadFiles = [], array $data = [])
+    public function __construct (string $layoutDir, string $infoAction = null, string $title = null, array $cssFiles = [], array $javaScriptFiles = [], array $javaScriptHeadFiles = [], array $data = [])
     {
+        $this->layoutDir = $layoutDir;
         $this->infoAction = $infoAction;
         $this->title = $title;
         $this->cssFiles = $cssFiles;
         $this->javaScriptFiles = $javaScriptFiles;
         $this->javaScriptHeadFiles = $javaScriptHeadFiles;
         $this->data = $data;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getLayoutDir () : string
+    {
+        return $this->layoutDir;
     }
 
 

@@ -27,6 +27,7 @@ class GluggiBundleExtension extends Extension
         // wire provided config to config service
         $container->getDefinition(GluggiConfig::class)
             ->setArguments([
+                $config["layout_dir"],
                 $config["info_action"],
                 $config["title"],
                 $config['css'],

@@ -4,3 +4,9 @@ framework:
     router: ~
     profiler:
         collect: false
+
+twig:
+    default_path: '%kernel.project_dir%/tests/templates'
+
+gluggi:
+    layout_dir: 'layout'
