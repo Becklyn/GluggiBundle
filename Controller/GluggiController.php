@@ -130,18 +130,43 @@ class GluggiController extends AbstractController
         switch ($type)
         {
             case "js_head":
-                $assets = $htmlGenerator->linkAssets(AssetHtmlGenerator::TYPE_JAVASCRIPT, $config->getJavaScriptHeadFiles());
+                $assets = $this->transformAssetUrls($htmlGenerator, AssetHtmlGenerator::TYPE_JAVASCRIPT, $config->getJavaScriptHeadFiles());
                 break;
 
             case "js":
-                $assets = $htmlGenerator->linkAssets(AssetHtmlGenerator::TYPE_JAVASCRIPT, $config->getJavaScriptFiles());
+                $assets = $this->transformAssetUrls($htmlGenerator,AssetHtmlGenerator::TYPE_JAVASCRIPT, $config->getJavaScriptFiles());
                 break;
 
             case "css":
-                $assets = $htmlGenerator->linkAssets(AssetHtmlGenerator::TYPE_CSS, $config->getCssFiles());
+                $assets = $this->transformAssetUrls($htmlGenerator,AssetHtmlGenerator::TYPE_CSS, $config->getCssFiles());
                 break;
         }
 
         return new Response($assets);
+    }
+
+
+    /**
+     * Transforms the asset urls about
+     *
+     * @param AssetHtmlGenerator $htmlGenerator
+     * @param string             $type
+     * @param array              $assetPaths
+     * @return string
+     */
+    private function transformAssetUrls (AssetHtmlGenerator $htmlGenerator, string $type, array $assetPaths) : string
+    {
+        $assets = \array_map(
+            function (string $assetPath) use ($type, $htmlGenerator)
+            {
+                // pass HTTP URLs untouched through
+                return (1 === \preg_match('~^https?:\\/\\/~', $assetPath))
+                    ? $assetPath
+                    : $htmlGenerator->linkAssets($type, [$assetPath]);
+            },
+            $assetPaths
+        );
+
+        return \implode("", $assets);
     }
 }
