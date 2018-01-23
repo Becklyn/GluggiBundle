@@ -49,7 +49,7 @@ You can define several config values in your `app/config.yaml`:
 
 ```yaml
 gluggi:
-    layout_dir: layout
+    layout_dir: _layout
     info_action:  ~
     title: ~
     data: []

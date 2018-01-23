@@ -20,7 +20,7 @@ class GluggiBundleConfiguration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode("layout_dir")
-                    ->defaultValue('%kernel.project_dir%/templates/layout')
+                    ->defaultValue('_layout')
                 ->end()
                 ->scalarNode("info_action")
                     ->defaultNull()
