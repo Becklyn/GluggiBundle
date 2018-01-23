@@ -2,7 +2,7 @@
 
 namespace Becklyn\GluggiBundle\Controller;
 
-use Becklyn\GluggiBundle\Assets\LayoutAssets;
+use Becklyn\AssetsBundle\Html\AssetHtmlGenerator;
 use Becklyn\GluggiBundle\Component\ComponentConfiguration;
 use Becklyn\GluggiBundle\Component\GluggiFinder;
 use Becklyn\GluggiBundle\Configuration\GluggiConfig;
@@ -47,7 +47,7 @@ class GluggiController extends AbstractController
      *
      * @return Response
      */
-    public function component (GluggiFinder $finder, ComponentConfiguration $componentConfiguration,  string $type, string $key)
+    public function component (GluggiFinder $finder, ComponentConfiguration $componentConfiguration, string $type, string $key)
     {
         try
         {
@@ -85,54 +85,6 @@ class GluggiController extends AbstractController
 
 
     /**
-     * Includes all layout-related CSS <link> tags
-     *
-     * @param LayoutAssets $assets
-     *
-     * @return Response
-     */
-    public function layoutCSSAssets (LayoutAssets $assets)
-    {
-        return $this->render("@Gluggi/Gluggi/_layoutCSSAssets.html.twig", [
-            "urls" => $assets->getCssUrls(),
-        ]);
-    }
-
-
-
-    /**
-     * Includes all layout-related JavaScript <script> tags
-     *
-     * @param LayoutAssets $assets
-     *
-     * @return Response
-     */
-    public function layoutJavaScriptAssets (LayoutAssets $assets)
-    {
-        return $this->render("@Gluggi/Gluggi/_layoutJavaScriptAssets.html.twig", [
-            "urls" => $assets->getJavaScriptUrls(),
-        ]);
-    }
-
-
-
-    /**
-     * Includes all layout-related JavaScript <script> tags
-     *
-     * @param LayoutAssets $assets
-     *
-     * @return Response
-     */
-    public function layoutJavaScriptHeadAssets (LayoutAssets $assets)
-    {
-        return $this->render("@Gluggi/Gluggi/_layoutJavaScriptAssets.html.twig", [
-            "urls" => $assets->getJavaScriptHeadUrls(),
-        ]);
-    }
-
-
-
-    /**
      * Renders the HTML title
      *
      * @param GluggiConfig $config
@@ -160,5 +112,36 @@ class GluggiController extends AbstractController
                 implode(" // ", $segments)
             )
         );
+    }
+
+
+    /**
+     * Renders the layout assets
+     *
+     * @param GluggiConfig       $config
+     * @param AssetHtmlGenerator $htmlGenerator
+     * @return Response
+     * @throws \Becklyn\AssetsBundle\Exception\AssetsException
+     */
+    public function layoutAssets (GluggiConfig $config, AssetHtmlGenerator $htmlGenerator, string $type) : Response
+    {
+        $assets = "";
+
+        switch ($type)
+        {
+            case "js_head":
+                $assets = $htmlGenerator->linkAssets(AssetHtmlGenerator::TYPE_JAVASCRIPT, $config->getJavaScriptHeadFiles());
+                break;
+
+            case "js":
+                $assets = $htmlGenerator->linkAssets(AssetHtmlGenerator::TYPE_JAVASCRIPT, $config->getJavaScriptFiles());
+                break;
+
+            case "css":
+                $assets = $htmlGenerator->linkAssets(AssetHtmlGenerator::TYPE_CSS, $config->getCssFiles());
+                break;
+        }
+
+        return new Response($assets);
     }
 }

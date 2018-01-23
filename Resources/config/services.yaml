@@ -6,7 +6,6 @@ services:
         autoconfigure: true
         autowire: true
 
-    Becklyn\GluggiBundle\Assets\LayoutAssets: ~
     Becklyn\GluggiBundle\Component\ComponentConfiguration: ~
     Becklyn\GluggiBundle\Component\GluggiFinder: ~
 
