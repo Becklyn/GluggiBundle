@@ -156,12 +156,27 @@ class GluggiController extends AbstractController
      */
     private function transformAssetUrls (AssetHtmlGenerator $htmlGenerator, string $type, array $assetPaths) : string
     {
+        switch ($type)
+        {
+            case AssetHtmlGenerator::TYPE_CSS:
+                $htmlSnippet = '<link rel="stylesheet" href="%s">';
+                break;
+
+            case AssetHtmlGenerator::TYPE_JAVASCRIPT:
+                $htmlSnippet = '<script defer src="%s"></script>';
+                break;
+
+            default:
+                $htmlSnippet = "<!-- Can't embed element of type '{$type}' with path '%s' -->";
+                break;
+        }
+
         $assets = \array_map(
-            function (string $assetPath) use ($type, $htmlGenerator)
+            function (string $assetPath) use ($type, $htmlGenerator, $htmlSnippet)
             {
                 // pass HTTP URLs untouched through
                 return (1 === \preg_match('~^https?:\\/\\/~', $assetPath))
-                    ? $assetPath
+                    ? sprintf($htmlSnippet, $assetPath)
                     : $htmlGenerator->linkAssets($type, [$assetPath]);
             },
             $assetPaths
