@@ -6,6 +6,7 @@ use Becklyn\GluggiBundle\Component\ComponentLoader;
 use Becklyn\GluggiBundle\Configuration\GluggiConfig;
 use Becklyn\GluggiBundle\Data\ComponentType;
 use Becklyn\GluggiBundle\Exception\UnknownComponentTypeException;
+use Becklyn\GluggiBundle\Paths\LayoutDirectory;
 
 
 /**
@@ -20,12 +21,12 @@ class ComponentTypeRegistry
 
 
     /**
-     * @param string       $templatesDefaultPath
-     * @param GluggiConfig $config
+     * @param LayoutDirectory $layoutDirectory
+     * @param GluggiConfig    $config
      */
-    public function __construct (string $templatesDefaultPath, GluggiConfig $config)
+    public function __construct (LayoutDirectory $layoutDirectory, GluggiConfig $config)
     {
-        $loader = new ComponentLoader($templatesDefaultPath, $config->getLayoutDir());
+        $loader = new ComponentLoader($layoutDirectory->resolve($config->getLayoutDir()), $config->getLayoutDir());
 
         $this->prepareComponentList([
             new ComponentType("atom", $loader),

@@ -14,7 +14,7 @@ class ComponentLoaderTest extends TestCase
 {
     private function loadAtoms ()
     {
-        $loader = new ComponentLoader(__DIR__ . "/../templates", "layout");
+        $loader = new ComponentLoader(__DIR__ . "/../templates/layout", "layout");
         $type = self::getMockBuilder(ComponentType::class)
             ->disableOriginalConstructor()
             ->getMock();

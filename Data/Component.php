@@ -43,16 +43,17 @@ class Component
 
     /**
      * @param \SplFileInfo  $file
+     * @param string        $templatePathPrefix
      * @param ComponentType $type
      */
-    public function __construct (\SplFileInfo $file, string $layoutDir, ComponentType $type)
+    public function __construct (\SplFileInfo $file, string $templatePathPrefix, ComponentType $type)
     {
         $this->fileName = $file->getBasename();
         $this->key = $file->getBasename('.html.twig');
         $this->name = $this->generateName($this->key);
         $this->hidden = "_" === substr($file->getBasename(), 0, 1);
         $this->type = $type;
-        $this->importPath = "{$layoutDir}/{$this->type->getDirectory()}/{$this->fileName}";
+        $this->importPath = "{$templatePathPrefix}/{$this->type->getDirectory()}/{$this->fileName}";
     }
 
 

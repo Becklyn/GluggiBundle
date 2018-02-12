@@ -8,11 +8,12 @@ services:
 
     Becklyn\GluggiBundle\Component\ComponentConfiguration: ~
     Becklyn\GluggiBundle\Component\GluggiFinder: ~
-
-    Becklyn\GluggiBundle\ComponentType\ComponentTypeRegistry:
-        arguments:
-            $templatesDefaultPath: '%twig.default_path%'
-
+    Becklyn\GluggiBundle\ComponentType\ComponentTypeRegistry: ~
     Becklyn\GluggiBundle\Configuration\GluggiConfig: ~
     Becklyn\GluggiBundle\Controller\GluggiController: ~
+
+    Becklyn\GluggiBundle\Paths\LayoutDirectory:
+        arguments:
+            $twigDefaultPath: '%twig.default_path%'
+
     Becklyn\GluggiBundle\Twig\GluggiTwigExtension: ~
