@@ -37,9 +37,9 @@ class LayoutDirectoryTest extends TestCase
         return [
             ["test", "/twig/test"],
             ["/a/b/c/", "/twig/a/b/c"],
-            ["@Layout", "/bundle/LayoutBundle"],
-            ["@Layout/", "/bundle/LayoutBundle"],
-            ["@Layout/abc", "/bundle/LayoutBundle/abc"],
+            ["@Layout", "/bundle/LayoutBundle/Resources/views"],
+            ["@Layout/", "/bundle/LayoutBundle/Resources/views"],
+            ["@Layout/abc", "/bundle/LayoutBundle/Resources/views/abc"],
         ];
     }
 

@@ -37,8 +37,12 @@ class LayoutDirectory
     {
         if (1 === \preg_match('~^@(?<bundle>[^/]+)(?<rest>.*?)$~i', $path, $matches))
         {
+            // We get a twig import path like `@Layout/test` and need to transform it to a symfony resource
+            // location like `@LayoutBundle/Resources/views/test`.
+            $rest = ltrim($matches["rest"], "/");
+
             return $this->kernel->locateResource(
-                "@{$matches['bundle']}Bundle{$matches['rest']}"
+                "@{$matches['bundle']}Bundle/Resources/views/{$rest}"
             );
         }
 
