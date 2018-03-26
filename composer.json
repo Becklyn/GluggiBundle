@@ -18,7 +18,7 @@
     },
     "require": {
         "php": "^7.0",
-        "becklyn/assets-bundle": "^2.0.0-beta.2",
+        "becklyn/assets-bundle": "dev-master#796501e7c0a8668b8ec7312a00a9083c606e5267",
         "symfony/dependency-injection": "^3.3|^4.0",
         "symfony/finder": "^3.3|^4.0",
         "symfony/framework-bundle": "^3.3|^4.0",
