@@ -120,6 +120,7 @@ class GluggiController extends AbstractController
      *
      * @param GluggiConfig       $config
      * @param AssetHtmlGenerator $htmlGenerator
+     * @param string             $type
      * @return Response
      * @throws \Becklyn\AssetsBundle\Exception\AssetsException
      */
