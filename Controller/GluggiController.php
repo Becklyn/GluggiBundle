@@ -125,63 +125,27 @@ class GluggiController extends AbstractController
      */
     public function layoutAssets (GluggiConfig $config, AssetHtmlGenerator $htmlGenerator, string $type) : Response
     {
-        $assets = "";
-
         switch ($type)
         {
             case "js_head":
-                $assets = $this->transformAssetUrls($htmlGenerator, AssetHtmlGenerator::TYPE_JAVASCRIPT, $config->getJavaScriptHeadFiles());
+                $assetPaths = $config->getJavaScriptHeadFiles();
                 break;
 
             case "js":
-                $assets = $this->transformAssetUrls($htmlGenerator,AssetHtmlGenerator::TYPE_JAVASCRIPT, $config->getJavaScriptFiles());
+                $assetPaths = $config->getJavaScriptFiles();
                 break;
 
             case "css":
-                $assets = $this->transformAssetUrls($htmlGenerator,AssetHtmlGenerator::TYPE_CSS, $config->getCssFiles());
-                break;
-        }
-
-        return new Response($assets);
-    }
-
-
-    /**
-     * Transforms the asset urls about
-     *
-     * @param AssetHtmlGenerator $htmlGenerator
-     * @param string             $type
-     * @param array              $assetPaths
-     * @return string
-     */
-    private function transformAssetUrls (AssetHtmlGenerator $htmlGenerator, string $type, array $assetPaths) : string
-    {
-        switch ($type)
-        {
-            case AssetHtmlGenerator::TYPE_CSS:
-                $htmlSnippet = '<link rel="stylesheet" href="%s">';
-                break;
-
-            case AssetHtmlGenerator::TYPE_JAVASCRIPT:
-                $htmlSnippet = '<script defer src="%s"></script>';
+                $assetPaths = $config->getCssFiles();
                 break;
 
             default:
-                $htmlSnippet = "<!-- Can't embed element of type '{$type}' with path '%s' -->";
+                $assetPaths = [];
                 break;
         }
 
-        $assets = \array_map(
-            function (string $assetPath) use ($type, $htmlGenerator, $htmlSnippet)
-            {
-                // pass HTTP URLs untouched through
-                return (1 === \preg_match('~^https?:\\/\\/~', $assetPath))
-                    ? sprintf($htmlSnippet, $assetPath)
-                    : $htmlGenerator->linkAssets($type, [$assetPath]);
-            },
-            $assetPaths
+        return new Response(
+            $htmlGenerator->linkAssets($assetPaths)
         );
-
-        return \implode("", $assets);
     }
 }
