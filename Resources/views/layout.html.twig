@@ -12,11 +12,51 @@
         {% endblock %}
 
         {% block stylesheets %}
-            {{ render(controller('Becklyn\\GluggiBundle\\Controller\\GluggiController::layoutAssets', {type: "css"})) }}
+            {%- if templateConfiguration.override_assets.css is defined -%}
+                {%- if templateConfiguration.override_assets.css is iterable -%}
+                    {% for css_file in templateConfiguration.override_assets.css %}
+                        <link rel="stylesheet" href="{{ asset(css_file) }}">
+                    {% endfor %}
+                {% else %}
+                    <link rel="stylesheet" href="{{ asset(templateConfiguration.override_assets.css) }}">
+                {%- endif -%}
+            {%- else -%}
+                {{ render(controller('Becklyn\\GluggiBundle\\Controller\\GluggiController::layoutAssets', {type: "css"})) }}
+
+                {%- if templateConfiguration.add_assets.css is defined -%}
+                    {%- if templateConfiguration.add_assets.css is iterable -%}
+                        {% for css_file in templateConfiguration.add_assets.css %}
+                            <link rel="stylesheet" href="{{ asset(css_file) }}">
+                        {% endfor %}
+                    {% else %}
+                        <link rel="stylesheet" href="{{ asset(templateConfiguration.add_assets.css) }}">
+                    {%- endif -%}
+                {%- endif -%}
+            {%- endif -%}
         {% endblock %}
 
         {% block javascripts_head %}
-            {{ render(controller("Becklyn\\GluggiBundle\\Controller\\GluggiController::layoutAssets", {type: "js_head"})) }}
+            {%- if templateConfiguration.override_assets.js_head is defined -%}
+                {%- if templateConfiguration.override_assets.js_head is iterable -%}
+                    {% for js_head_file in templateConfiguration.override_assets.js_head %}
+                        <script type="text/javascript" src="{{ asset(js_head_file) }}"></script>
+                    {% endfor %}
+                {% else %}
+                    <script type="text/javascript" src="{{ asset(templateConfiguration.override_assets.js_head) }}"></script>
+                {%- endif -%}
+            {%- else -%}
+                {{ render(controller("Becklyn\\GluggiBundle\\Controller\\GluggiController::layoutAssets", {type: "js_head_head"})) }}
+
+                {%- if templateConfiguration.add_assets.js_head is defined -%}
+                    {%- if templateConfiguration.add_assets.js_head is iterable -%}
+                        {% for js_head_file in templateConfiguration.add_assets.js_head %}
+                            <script type="text/javascript" src="{{ asset(js_head_file) }}"></script>
+                        {% endfor %}
+                    {% else %}
+                        <script type="text/javascript" src="{{ asset(templateConfiguration.add_assets.js_head) }}"></script>
+                    {%- endif -%}
+                {%- endif -%}
+            {%- endif -%}
         {% endblock %}
     </head>
     <body {% block body_attributes -%}
@@ -48,7 +88,27 @@
 
         {% endblock %}
         {% block javascripts %}
-            {{ render(controller("Becklyn\\GluggiBundle\\Controller\\GluggiController::layoutAssets", {type: "js"})) }}
+            {%- if templateConfiguration.override_assets.js is defined -%}
+                {%- if templateConfiguration.override_assets.js is iterable -%}
+                    {% for js_file in templateConfiguration.override_assets.js %}
+                        <script type="text/javascript" src="{{ asset(js_file) }}"></script>
+                    {% endfor %}
+                {% else %}
+                    <script type="text/javascript" src="{{ asset(templateConfiguration.override_assets.js) }}"></script>
+                {%- endif -%}
+            {%- else -%}
+                {{ render(controller("Becklyn\\GluggiBundle\\Controller\\GluggiController::layoutAssets", {type: "js"})) }}
+
+                {%- if templateConfiguration.add_assets.js is defined -%}
+                    {%- if templateConfiguration.add_assets.js is iterable -%}
+                        {% for js_file in templateConfiguration.add_assets.js %}
+                        <script type="text/javascript" src="{{ asset(js_file) }}"></script>
+                        {% endfor %}
+                    {% else %}
+                        <script type="text/javascript" src="{{ asset(templateConfiguration.add_assets.js) }}"></script>
+                    {%- endif -%}
+                {%- endif -%}
+            {%- endif -%}
         {% endblock %}
     </body>
 </html>
