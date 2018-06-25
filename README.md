@@ -250,12 +250,26 @@ The configuration format is YAML. All configuration parameters are optional.
 #### Defined configuration parameters
 
 
-| Parameter      | type     | in                    | description                                          |
-| -------------- | -------- | --------------------- | ---------------------------------------------------- |
-| `body_class`   | `string` | (*any isolated view*) | Sets the given class on the body.                    |
-| `prevent_zoom` | `bool`   | (*any isolated view*) | Sets the `viewport` meta tag to prevent mobile zoom. |
+| Parameter         | type     | in                    | description                                          |
+| ----------------- | -------- | --------------------- | ---------------------------------------------------- |
+| `body_class`      | `string` | (*any isolated view*) | Sets the given class on the body.                    |
+| `prevent_zoom`    | `bool`   | (*any isolated view*) | Sets the `viewport` meta tag to prevent mobile zoom. |
+| `add_assets`      | `array`  | (*any isolated view*) | Adds given assets to a component.                    |
+| `override_assets` | `array`  | (*any isolated view*) | Overrides the given assets on a component.           |
 
-
+##### Define configuration parameters "add_assets" and "override_assets"
+The configuration parameters `add_assets` and `override_assets` are defined similar to the default configuration.
+```yaml
+override_assets:
+    css: []
+    js: []
+    js_head: []
+    
+add_assets:
+    css: []
+    js: []
+    js_head: []
+```
 
 ### Index Info
 
