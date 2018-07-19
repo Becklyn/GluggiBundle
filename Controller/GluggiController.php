@@ -127,7 +127,7 @@ class GluggiController extends AbstractController
      * @return Response
      * @throws \Becklyn\AssetsBundle\Exception\AssetsException
      */
-    public function layoutAssets (GluggiConfig $config, AssetHtmlGenerator $htmlGenerator, string $type, array $addAssets, array $overrideAssets) : Response
+    public function layoutAssets (GluggiConfig $config, AssetHtmlGenerator $htmlGenerator, string $type, array $addAssets = [], array $overrideAssets = []) : Response
     {
         $overrideAssets = $overrideAssets[$type] ?? [];
 
