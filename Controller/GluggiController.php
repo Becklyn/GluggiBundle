@@ -121,28 +121,42 @@ class GluggiController extends AbstractController
      * @param GluggiConfig       $config
      * @param AssetHtmlGenerator $htmlGenerator
      * @param string             $type
+     * @param array              $addAssets
+     * @param array              $overrideAssets
+     *
      * @return Response
      * @throws \Becklyn\AssetsBundle\Exception\AssetsException
      */
-    public function layoutAssets (GluggiConfig $config, AssetHtmlGenerator $htmlGenerator, string $type) : Response
+    public function layoutAssets (GluggiConfig $config, AssetHtmlGenerator $htmlGenerator, string $type, array $addAssets = [], array $overrideAssets = []) : Response
     {
-        switch ($type)
+        $overrideAssets = $overrideAssets[$type] ?? [];
+
+        if (!empty($overrideAssets))
         {
-            case "js_head":
-                $assetPaths = $config->getJavaScriptHeadFiles();
-                break;
+            $assetPaths = $overrideAssets;
+        }
+        else
+        {
+            switch ($type)
+            {
+                case "js_head":
+                    $assetPaths = $config->getJavaScriptHeadFiles();
+                    break;
 
-            case "js":
-                $assetPaths = $config->getJavaScriptFiles();
-                break;
+                case "js":
+                    $assetPaths = $config->getJavaScriptFiles();
+                    break;
 
-            case "css":
-                $assetPaths = $config->getCssFiles();
-                break;
+                case "css":
+                    $assetPaths = $config->getCssFiles();
+                    break;
 
-            default:
-                $assetPaths = [];
-                break;
+                default:
+                    $assetPaths = [];
+                    break;
+            }
+
+            $assetPaths = \array_merge($assetPaths, $addAssets[$type] ?? []);
         }
 
         return new Response(

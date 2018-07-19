@@ -12,11 +12,19 @@
         {% endblock %}
 
         {% block stylesheets %}
-            {{ render(controller('Becklyn\\GluggiBundle\\Controller\\GluggiController::layoutAssets', {type: "css"})) }}
+            {{ render(controller('Becklyn\\GluggiBundle\\Controller\\GluggiController::layoutAssets', {
+                type: "css",
+                addAssets: templateConfiguration.add_assets ?? [],
+                overrideAssets: templateConfiguration.override_assets ?? [],
+            })) }}
         {% endblock %}
 
         {% block javascripts_head %}
-            {{ render(controller("Becklyn\\GluggiBundle\\Controller\\GluggiController::layoutAssets", {type: "js_head"})) }}
+            {{ render(controller("Becklyn\\GluggiBundle\\Controller\\GluggiController::layoutAssets", {
+                type: "js_head",
+                addAssets: templateConfiguration.add_assets ?? [],
+                overrideAssets: templateConfiguration.override_assets ?? [],
+            })) }}
         {% endblock %}
     </head>
     <body {% block body_attributes -%}
@@ -47,8 +55,13 @@
             {% block content "" %}
 
         {% endblock %}
+
         {% block javascripts %}
-            {{ render(controller("Becklyn\\GluggiBundle\\Controller\\GluggiController::layoutAssets", {type: "js"})) }}
+            {{ render(controller("Becklyn\\GluggiBundle\\Controller\\GluggiController::layoutAssets", {
+                type: "js",
+                addAssets: templateConfiguration.add_assets ?? [],
+                overrideAssets: templateConfiguration.override_assets ?? [],
+            })) }}
         {% endblock %}
     </body>
 </html>
