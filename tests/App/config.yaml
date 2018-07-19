@@ -6,6 +6,7 @@ framework:
         collect: false
 
 twig:
+    strict_variables: true
     default_path: '%kernel.project_dir%/tests/templates'
 
 gluggi:
