@@ -121,10 +121,13 @@ class GluggiController extends AbstractController
      * @param GluggiConfig       $config
      * @param AssetHtmlGenerator $htmlGenerator
      * @param string             $type
+     * @param array              $addAssets
+     * @param array              $overrideAssets
+     *
      * @return Response
      * @throws \Becklyn\AssetsBundle\Exception\AssetsException
      */
-    public function layoutAssets (GluggiConfig $config, AssetHtmlGenerator $htmlGenerator, string $type) : Response
+    public function layoutAssets (GluggiConfig $config, AssetHtmlGenerator $htmlGenerator, string $type, array $addAssets, array $overrideAssets) : Response
     {
         switch ($type)
         {
@@ -143,6 +146,13 @@ class GluggiController extends AbstractController
             default:
                 $assetPaths = [];
                 break;
+        }
+
+        $assetPaths = \array_merge($assetPaths, $addAssets);
+
+        if (!empty($overrideAssets))
+        {
+            $assetPaths = $overrideAssets;
         }
 
         return new Response(
