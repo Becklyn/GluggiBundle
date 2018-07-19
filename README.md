@@ -257,8 +257,11 @@ The configuration format is YAML. All configuration parameters are optional.
 | `add_assets`      | `array`  | (*any isolated view*) | Adds given assets to a component.                    |
 | `override_assets` | `array`  | (*any isolated view*) | Overrides the given assets on a component.           |
 
+
 ##### Define configuration parameters "add_assets" and "override_assets"
+
 The configuration parameters `add_assets` and `override_assets` are defined similar to the default configuration.
+
 ```yaml
 override_assets:
     css: []
