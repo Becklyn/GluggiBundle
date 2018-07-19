@@ -129,30 +129,34 @@ class GluggiController extends AbstractController
      */
     public function layoutAssets (GluggiConfig $config, AssetHtmlGenerator $htmlGenerator, string $type, array $addAssets, array $overrideAssets) : Response
     {
-        switch ($type)
-        {
-            case "js_head":
-                $assetPaths = $config->getJavaScriptHeadFiles();
-                break;
-
-            case "js":
-                $assetPaths = $config->getJavaScriptFiles();
-                break;
-
-            case "css":
-                $assetPaths = $config->getCssFiles();
-                break;
-
-            default:
-                $assetPaths = [];
-                break;
-        }
-
-        $assetPaths = \array_merge($assetPaths, $addAssets);
+        $overrideAssets = $overrideAssets[$type] ?? [];
 
         if (!empty($overrideAssets))
         {
             $assetPaths = $overrideAssets;
+        }
+        else
+        {
+            switch ($type)
+            {
+                case "js_head":
+                    $assetPaths = $config->getJavaScriptHeadFiles();
+                    break;
+
+                case "js":
+                    $assetPaths = $config->getJavaScriptFiles();
+                    break;
+
+                case "css":
+                    $assetPaths = $config->getCssFiles();
+                    break;
+
+                default:
+                    $assetPaths = [];
+                    break;
+            }
+
+            $assetPaths = \array_merge($assetPaths, $addAssets[$type] ?? null);
         }
 
         return new Response(
