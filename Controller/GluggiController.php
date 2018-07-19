@@ -156,7 +156,7 @@ class GluggiController extends AbstractController
                     break;
             }
 
-            $assetPaths = \array_merge($assetPaths, $addAssets[$type] ?? null);
+            $assetPaths = \array_merge($assetPaths, $addAssets[$type] ?? []);
         }
 
         return new Response(
