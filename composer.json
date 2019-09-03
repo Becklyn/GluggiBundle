@@ -23,7 +23,7 @@
         "symfony/finder": "^3.3|^4.0",
         "symfony/framework-bundle": "^3.3|^4.0",
         "symfony/http-kernel": "^3.3|^4.0",
-        "symfony/twig-bundle": "^3.3|4.0",
+        "symfony/twig-bundle": "^3.3|^4.0",
         "symfony/yaml": "^3.3|^4.0",
         "twig/twig": "^1.27|^2.0"
     },
