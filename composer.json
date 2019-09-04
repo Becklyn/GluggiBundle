@@ -34,7 +34,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Becklyn\\GluggiBundle\\": ""
+            "Becklyn\\GluggiBundle\\": "src/"
         }
     },
     "autoload-dev": {
