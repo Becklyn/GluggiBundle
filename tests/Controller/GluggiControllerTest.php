@@ -74,6 +74,9 @@ class GluggiControllerTest extends WebTestCase
     }
 
 
+    /**
+     *
+     */
     public function testUnknownComponent ()
     {
         $client = static::createClient();
