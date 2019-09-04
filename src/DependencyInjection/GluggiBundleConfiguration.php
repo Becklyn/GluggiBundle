@@ -14,10 +14,9 @@ class GluggiBundleConfiguration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder ()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root(GluggiBundle::BUNDLE_ALIAS);
+        $treeBuilder = new TreeBuilder(GluggiBundle::BUNDLE_ALIAS);
 
-        $rootNode
+        $treeBuilder->getRootNode()
             ->children()
                 ->scalarNode("layout_dir")
                     ->defaultValue('_layout')
