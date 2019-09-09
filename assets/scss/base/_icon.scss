@@ -1,0 +1,14 @@
+@import "../helper/mixins";
+@import "../helper/variables";
+
+.gluggi-icon {
+    @include fixed-flex-width($icon-size);
+    display: inline-block;
+    height: $icon-size;
+
+    svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+}

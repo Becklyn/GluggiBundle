@@ -1,11 +1,22 @@
 // Base
 @import "base/globals";
+@import "base/fonts";
+@import "base/icon";
 
 // Atoms
-@import "atom/gluggi-header";
-@import "atom/gluggi-index";
-@import "atom/gluggi-preview";
-@import "atom/gluggi-varations";
+@import "atom/components";
+@import "atom/content-view";
+@import "atom/empty";
+@import "atom/search";
+@import "atom/sidebar-content-data";
+@import "atom/title";
+@import "atom/variations";
+
+// Molecules
+@import "molecule/sidebar";
+
+// Organisms
+@import "organism/container";
 
 // Templates
-@import "templates/default";
+@import "templates/_default";

@@ -1,0 +1,41 @@
+@import "../helper/mixins";
+@import "../helper/variables";
+
+.gluggi-sidebar {
+    @include gluggi-font;
+    box-sizing: border-box;
+    background-color: $sidebar-bg;
+    width: 200px;
+    height: 100%;
+    box-shadow: 0 5px 12px 0 $shadow-color;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-top: $sidebar-padding;
+
+    .gluggi-title {
+        padding: 0 $sidebar-padding;
+    }
+
+    .gluggi-search {
+        margin-top: 30px;
+    }
+
+    .gluggi-component {
+        padding-bottom: 30px;
+    }
+
+    .gluggi-sidebar-close {
+        @include center-children;
+        @include invisible-button($bg);
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        height: 32px;
+        width: 32px;
+    }
+
+    &.is-hidden {
+        display: none;
+    }
+}

@@ -1,0 +1,9 @@
+{% trans_default_domain "gluggi" %}
+{# @var types \Becklyn\GluggiBundle\Data\ComponentType[] #}
+
+<div class="gluggi-sidebar">
+    {{- data_container({
+        types: types,
+        title: customTitle ?? "Gluggi",
+    }, "gluggi-sidebar-content-data") -}}
+</div>

@@ -17,3 +17,5 @@ services:
             $twigDefaultPath: '%twig.default_path%'
 
     Becklyn\GluggiBundle\Twig\GluggiTwigExtension: ~
+
+    Becklyn\GluggiBundle\Serializer\TypesSerializer: ~

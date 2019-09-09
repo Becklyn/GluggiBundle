@@ -6,9 +6,13 @@ use Becklyn\AssetsBundle\Html\AssetHtmlGenerator;
 use Becklyn\GluggiBundle\Component\ComponentConfiguration;
 use Becklyn\GluggiBundle\Component\GluggiFinder;
 use Becklyn\GluggiBundle\Configuration\GluggiConfig;
+use Becklyn\GluggiBundle\Data\Component;
+use Becklyn\GluggiBundle\Data\ComponentType;
 use Becklyn\GluggiBundle\Exception\UnknownComponentTypeException;
+use Becklyn\GluggiBundle\Serializer\TypesSerializer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use function foo\func;
 
 
 /**
@@ -162,5 +166,21 @@ class GluggiController extends AbstractController
         return new Response(
             $htmlGenerator->linkAssets($assetPaths)
         );
+    }
+
+
+    /**
+     * @param GluggiFinder $finder
+     * @param GluggiConfig $config
+     *
+     * @return Response
+     */
+    public function sidebar (TypesSerializer $serializer, GluggiConfig $config, ?Component $activeComponent = null)
+    {
+        return $this->render("@Gluggi/Gluggi/sidebar.html.twig", [
+            "types" => $serializer->serialize($activeComponent),
+            "customTitle" => $config->getTitle(),
+            "active" => $activeComponent,
+        ]);
     }
 }

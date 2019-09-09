@@ -1,0 +1,29 @@
+@import "../helper/mixins";
+@import "../helper/variables";
+
+.gluggi-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    .gluggi-sidebar {
+        @include fixed-flex-width(300px);
+    }
+
+    .gluggi-content-view {
+        @include flex-fill-width;
+    }
+
+    .gluggi-sidebar-open {
+        @include center-children;
+        @include invisible-button;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 60px;
+        width: 60px;
+        background-color: $content-bg;
+        box-shadow: 0 5px 12px 0 $shadow-color;
+    }
+}

@@ -1,0 +1,23 @@
+@import "../helper/mixins";
+@import "../helper/variables";
+
+.gluggi-search {
+    border: solid $border-color;
+    border-width: 1px 0;
+
+    .gluggi-search-widget {
+        @include center-children;
+        height: 65px;
+    }
+
+    .gluggi-search-input {
+        font-size: 14px;
+        display: block;
+        box-sizing: border-box;
+        border: 0;
+        background-color: transparent;
+        outline: 0;
+        width: calc(100% - #{2 * $sidebar-padding + $icon-size + 10px});
+        margin-right: 10px;
+    }
+}

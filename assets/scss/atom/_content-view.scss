@@ -1,0 +1,11 @@
+@import "../helper/variables";
+
+.gluggi-content-view {
+    padding: 100px;
+
+    .gluggi-content {
+        background-color: $content-bg;
+        border-radius: 10px;
+        padding: 50px;
+    }
+}

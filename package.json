@@ -3,5 +3,11 @@
     "devDependencies": {
         "kaba": "^9.0.0-0",
         "kaba-scss": "^3.0.1"
+    },
+    "dependencies": {
+        "match-sorter": "^4.0.1",
+        "mojave": "^4.6.0",
+        "preact": "^10.0.0-rc.1",
+        "samos": "^2.1.0"
     }
 }
