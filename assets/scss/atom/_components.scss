@@ -28,44 +28,4 @@
         color: $section;
         margin: 16px 0;
     }
-
-    .component-link {
-        color: $text;
-        display: flex;
-        text-decoration: none;
-        padding: 3px 10px;
-        margin: 0 -10px;
-        align-items: flex-start;
-
-        .gluggi-icon {
-            height: 16px;
-            width: 16px;
-            margin-right: 8px;
-            padding-top: 2px;
-        }
-
-        &.is-active,
-        &:focus,
-        &:hover {
-            background-color: $link-focus-bg;
-        }
-    }
-
-    .component-name {
-        .gluggi-icon {
-            vertical-align: middle;
-            height: 16px;
-            width: 16px;
-            padding-top: 0;
-            margin-left: 2px;
-        }
-    }
-
-    .component-type {
-        color: $section;
-
-        &::after {
-            content: " / ";
-        }
-    }
 }

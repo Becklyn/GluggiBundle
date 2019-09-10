@@ -28,6 +28,50 @@ html {
   height: 100%;
 }
 
+/* line 1, assets/scss/atom/_component-link.scss */
+.gluggi-component-link {
+  box-sizing: border-box;
+  width: 100%;
+  color: #000;
+  display: flex;
+  text-decoration: none;
+  padding: 3px 10px;
+  margin: 0 -10px;
+  align-items: flex-start;
+}
+
+/* line 11, assets/scss/atom/_component-link.scss */
+.gluggi-component-link .gluggi-icon {
+  height: 16px;
+  width: 16px;
+  margin-right: 8px;
+  padding-top: 2px;
+}
+
+/* line 18, assets/scss/atom/_component-link.scss */
+.gluggi-component-link.gluggi-active, .gluggi-component-link:focus, .gluggi-component-link:hover {
+  background-color: #f2f2f2;
+}
+
+/* line 25, assets/scss/atom/_component-link.scss */
+.gluggi-component-link .gluggi-component-name .gluggi-icon {
+  vertical-align: middle;
+  height: 16px;
+  width: 16px;
+  padding-top: 0;
+  margin-left: 2px;
+}
+
+/* line 34, assets/scss/atom/_component-link.scss */
+.gluggi-component-link .gluggi-component-type {
+  color: #b5b5b5;
+}
+
+/* line 37, assets/scss/atom/_component-link.scss */
+.gluggi-component-link .gluggi-component-type::after {
+  content: " / ";
+}
+
 /* line 3, assets/scss/atom/_components.scss */
 .gluggi-components {
   overflow-y: auto;
@@ -64,58 +108,131 @@ html {
   margin: 16px 0;
 }
 
-/* line 32, assets/scss/atom/_components.scss */
-.gluggi-components .component-link {
-  color: #000;
-  display: flex;
-  text-decoration: none;
-  padding: 3px 10px;
-  margin: 0 -10px;
-  align-items: flex-start;
-}
-
-/* line 40, assets/scss/atom/_components.scss */
-.gluggi-components .component-link .gluggi-icon {
-  height: 16px;
-  width: 16px;
-  margin-right: 8px;
-  padding-top: 2px;
-}
-
-/* line 47, assets/scss/atom/_components.scss */
-.gluggi-components .component-link.is-active, .gluggi-components .component-link:focus, .gluggi-components .component-link:hover {
-  background-color: #f2f2f2;
-}
-
-/* line 55, assets/scss/atom/_components.scss */
-.gluggi-components .component-name .gluggi-icon {
-  vertical-align: middle;
-  height: 16px;
-  width: 16px;
-  padding-top: 0;
-  margin-left: 2px;
-}
-
-/* line 64, assets/scss/atom/_components.scss */
-.gluggi-components .component-type {
-  color: #b5b5b5;
-}
-
-/* line 67, assets/scss/atom/_components.scss */
-.gluggi-components .component-type::after {
-  content: " / ";
-}
-
 /* line 3, assets/scss/atom/_content-view.scss */
 .gluggi-content-view {
   padding: 100px;
+  position: relative;
 }
 
-/* line 6, assets/scss/atom/_content-view.scss */
+/* line 7, assets/scss/atom/_content-view.scss */
 .gluggi-content-view .gluggi-content {
   background-color: #fff;
   border-radius: 10px;
   padding: 50px;
+}
+
+/* line 13, assets/scss/atom/_content-view.scss */
+.gluggi-content-view.is-fullscreen {
+  padding: 0;
+  background-color: #fff;
+}
+
+/* line 17, assets/scss/atom/_content-view.scss */
+.gluggi-content-view.is-fullscreen .gluggi-content {
+  padding: 0;
+  border-radius: 0;
+  background-color: transparent;
+}
+
+/* line 24, assets/scss/atom/_content-view.scss */
+.gluggi-content-view .gluggi-content-actions {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+}
+
+/* line 31, assets/scss/atom/_content-view.scss */
+.gluggi-content-view .gluggi-content-actions > * + * {
+  margin-left: 10px;
+}
+
+/* line 36, assets/scss/atom/_content-view.scss */
+.gluggi-content-view .gluggi-action {
+  background-color: #fff;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.07);
+  height: 56px;
+  line-height: 56px;
+  padding: 0 16px;
+  vertical-align: middle;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+}
+
+/* line 49, assets/scss/atom/_content-view.scss */
+.gluggi-content-view .gluggi-action:hover, .gluggi-content-view .gluggi-action:focus {
+  background-color: #000;
+  color: #fff;
+}
+
+/* line 56, assets/scss/atom/_content-view.scss */
+.gluggi-content-view .gluggi-action-usages {
+  position: relative;
+}
+
+/* line 60, assets/scss/atom/_content-view.scss */
+.gluggi-content-view .gluggi-action-usages .gluggi-action .gluggi-icon {
+  margin-right: 5px;
+}
+
+/* line 63, assets/scss/atom/_content-view.scss */
+.gluggi-content-view .gluggi-action-usages .gluggi-action .gluggi-icon svg {
+  will-change: transform;
+  transition: 0.15s ease-in-out transform;
+}
+
+/* line 69, assets/scss/atom/_content-view.scss */
+.gluggi-content-view .gluggi-action-usages .gluggi-usages-overview {
+  display: none;
+  box-sizing: border-box;
+  position: absolute;
+  bottom: 100%;
+  margin-bottom: 10px;
+  right: 0;
+  background-color: #fff;
+  border-radius: 10px;
+  width: 640px;
+  padding: 50px;
+}
+
+/* line 82, assets/scss/atom/_content-view.scss */
+.gluggi-content-view .gluggi-action-usages .gluggi-usages-list {
+  flex-grow: 0;
+  flex-shrink: 0;
+  min-width: 0;
+  width: 50%;
+}
+
+/* line 85, assets/scss/atom/_content-view.scss */
+.gluggi-content-view .gluggi-action-usages .gluggi-usages-list h3 {
+  color: #b5b5b5;
+  margin: 0 0 20px;
+  font-size: 20px;
+}
+
+/* line 91, assets/scss/atom/_content-view.scss */
+.gluggi-content-view .gluggi-action-usages .gluggi-usages-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* line 99, assets/scss/atom/_content-view.scss */
+.gluggi-content-view .gluggi-action-usages.is-open .gluggi-action svg {
+  transform: rotateZ(180deg);
+}
+
+/* line 103, assets/scss/atom/_content-view.scss */
+.gluggi-content-view .gluggi-action-usages.is-open .gluggi-usages-overview {
+  display: flex;
 }
 
 /* line 3, assets/scss/atom/_empty.scss */
@@ -132,6 +249,12 @@ html {
 }
 
 /* line 8, assets/scss/atom/_search.scss */
+.gluggi-search:focus-within {
+  background-color: #000;
+  color: #fff;
+}
+
+/* line 13, assets/scss/atom/_search.scss */
 .gluggi-search .gluggi-search-widget {
   display: flex;
   align-items: center;
@@ -139,7 +262,7 @@ html {
   height: 65px;
 }
 
-/* line 13, assets/scss/atom/_search.scss */
+/* line 18, assets/scss/atom/_search.scss */
 .gluggi-search .gluggi-search-input {
   font-size: 14px;
   display: block;
@@ -149,6 +272,7 @@ html {
   outline: 0;
   width: calc(100% - 138px);
   margin-right: 10px;
+  color: inherit;
 }
 
 /* line 1, assets/scss/atom/_sidebar-content-data.scss */
@@ -161,6 +285,28 @@ html {
   font-size: 20px;
   font-weight: 600;
   word-break: break-word;
+}
+
+/* line 3, assets/scss/atom/_toggle-fullscreen.scss */
+.gluggi-toggle-fullscreen .gluggi-icon {
+  height: 24px;
+  width: 24px;
+  margin: 0;
+}
+
+/* line 9, assets/scss/atom/_toggle-fullscreen.scss */
+.gluggi-toggle-fullscreen .gluggi-icon-active {
+  display: none;
+}
+
+/* line 14, assets/scss/atom/_toggle-fullscreen.scss */
+.gluggi-toggle-fullscreen.gluggi-is-active .gluggi-icon-active {
+  display: block;
+}
+
+/* line 18, assets/scss/atom/_toggle-fullscreen.scss */
+.gluggi-toggle-fullscreen.gluggi-is-active .gluggi-icon-inactive {
+  display: none;
 }
 
 /* line 2, assets/scss/atom/_variations.scss */
@@ -214,7 +360,13 @@ html {
   width: 32px;
 }
 
-/* line 38, assets/scss/molecule/_sidebar.scss */
+/* line 37, assets/scss/molecule/_sidebar.scss */
+.gluggi-sidebar .gluggi-sidebar-close:hover, .gluggi-sidebar .gluggi-sidebar-close:focus {
+  background-color: #000;
+  color: #fff;
+}
+
+/* line 44, assets/scss/molecule/_sidebar.scss */
 .gluggi-sidebar.is-hidden {
   display: none;
 }
@@ -233,16 +385,18 @@ html {
   flex-shrink: 0;
   min-width: 0;
   width: 300px;
+  z-index: 1;
 }
 
-/* line 14, assets/scss/organism/_container.scss */
+/* line 15, assets/scss/organism/_container.scss */
 .gluggi-container .gluggi-content-view {
   flex-grow: 1;
   flex-shrink: 1;
   min-width: 0;
+  z-index: 1;
 }
 
-/* line 18, assets/scss/organism/_container.scss */
+/* line 20, assets/scss/organism/_container.scss */
 .gluggi-container .gluggi-sidebar-open {
   display: flex;
   align-items: center;
@@ -252,12 +406,25 @@ html {
   outline: 0;
   cursor: pointer;
   position: absolute;
-  top: 0;
-  left: 0;
-  height: 60px;
-  width: 60px;
+  z-index: 3;
+  top: 20px;
+  right: 20px;
+  height: 32px;
+  width: 32px;
   background-color: #fff;
   box-shadow: 0 5px 12px 0 rgba(0, 0, 0, 0.07);
+  display: none;
+}
+
+/* line 33, assets/scss/organism/_container.scss */
+.gluggi-container .gluggi-sidebar-open:hover, .gluggi-container .gluggi-sidebar-open:focus {
+  background-color: #000;
+  color: #fff;
+}
+
+/* line 39, assets/scss/organism/_container.scss */
+.gluggi-container .gluggi-sidebar-open.is-visible {
+  display: flex;
 }
 
 /* line 3, assets/scss/templates/__default.scss */

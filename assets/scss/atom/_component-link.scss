@@ -1,0 +1,41 @@
+.gluggi-component-link {
+    box-sizing: border-box;
+    width: 100%;
+    color: $text;
+    display: flex;
+    text-decoration: none;
+    padding: 3px 10px;
+    margin: 0 -10px;
+    align-items: flex-start;
+
+    .gluggi-icon {
+        height: 16px;
+        width: 16px;
+        margin-right: 8px;
+        padding-top: 2px;
+    }
+
+    &.gluggi-active,
+    &:focus,
+    &:hover {
+        background-color: $link-focus-bg;
+    }
+
+    .gluggi-component-name {
+        .gluggi-icon {
+            vertical-align: middle;
+            height: 16px;
+            width: 16px;
+            padding-top: 0;
+            margin-left: 2px;
+        }
+    }
+
+    .gluggi-component-type {
+        color: $section;
+
+        &::after {
+            content: " / ";
+        }
+    }
+}

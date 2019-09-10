@@ -5,6 +5,11 @@
     border: solid $border-color;
     border-width: 1px 0;
 
+    &:focus-within {
+        background-color: $bg-dark;
+        color: $inverted;
+    }
+
     .gluggi-search-widget {
         @include center-children;
         height: 65px;
@@ -19,5 +24,6 @@
         outline: 0;
         width: calc(100% - #{2 * $sidebar-padding + $icon-size + 10px});
         margin-right: 10px;
+        color: inherit;
     }
 }

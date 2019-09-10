@@ -2,10 +2,107 @@
 
 .gluggi-content-view {
     padding: 100px;
+    position: relative;
 
     .gluggi-content {
         background-color: $content-bg;
         border-radius: 10px;
         padding: 50px;
+    }
+
+    &.is-fullscreen {
+        padding: 0;
+        background-color: $content-bg;
+
+        .gluggi-content {
+            padding: 0;
+            border-radius: 0;
+            background-color: transparent;
+        }
+    }
+
+    .gluggi-content-actions {
+        @include gluggi-font;
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        display: flex;
+
+        > * + * {
+            margin-left: 10px;
+        }
+    }
+
+    .gluggi-action {
+        @include invisible-button($content-bg);
+        box-shadow: 0 2px 12px 0 $shadow-color;
+        height: 56px;
+        line-height: 56px;
+        padding: 0 16px;
+        vertical-align: middle;
+        border-radius: 10px;
+        font-family: inherit;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+
+        &:hover,
+        &:focus {
+            background-color: $bg-dark;
+            color: $inverted;
+        }
+    }
+
+    .gluggi-action-usages {
+        position: relative;
+
+        .gluggi-action {
+            .gluggi-icon {
+                margin-right: 5px;
+
+                svg {
+                    @include transition(transform);
+                }
+            }
+        }
+
+        .gluggi-usages-overview {
+            display: none;
+            box-sizing: border-box;
+            position: absolute;
+            bottom: 100%;
+            margin-bottom: 10px;
+            right: 0;
+            background-color: $content-bg;
+            border-radius: 10px;
+            width: 640px;
+            padding: 50px;
+        }
+
+        .gluggi-usages-list {
+            @include fixed-flex-width(50%);
+
+            h3 {
+                color: $section;
+                margin: 0 0 20px;
+                font-size: 20px;
+            }
+
+            ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+        }
+
+        &.is-open {
+            .gluggi-action svg {
+                transform: rotateZ(180deg);
+            }
+
+            .gluggi-usages-overview {
+                display: flex;
+            }
+        }
     }
 }

@@ -1,5 +1,5 @@
 import {on} from "mojave/dom/events";
-import {createUnstyledElement, prepend, toggleClass} from "mojave/dom/manipulate";
+import {createUnstyledElement, prepend} from "mojave/dom/manipulate";
 // @ts-ignore
 import closeIcon from "../../icon/close.svg";
 // @ts-ignore

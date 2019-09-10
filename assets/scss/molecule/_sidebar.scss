@@ -33,6 +33,12 @@
         right: 20px;
         height: 32px;
         width: 32px;
+
+        &:hover,
+        &:focus {
+            background-color: $bg-dark;
+            color: $inverted;
+        }
     }
 
     &.is-hidden {

@@ -9,21 +9,35 @@
 
     .gluggi-sidebar {
         @include fixed-flex-width(300px);
+        z-index: 1;
     }
 
     .gluggi-content-view {
         @include flex-fill-width;
+        z-index: 1;
     }
 
     .gluggi-sidebar-open {
         @include center-children;
         @include invisible-button;
         position: absolute;
-        top: 0;
-        left: 0;
-        height: 60px;
-        width: 60px;
+        z-index: 3;
+        top: 20px;
+        right: 20px;
+        height: 32px;
+        width: 32px;
         background-color: $content-bg;
         box-shadow: 0 5px 12px 0 $shadow-color;
+        display: none;
+
+        &:hover,
+        &:focus {
+            background-color: $bg-dark;
+            color: $inverted;
+        }
+
+        &.is-visible {
+            display: flex;
+        }
     }
 }

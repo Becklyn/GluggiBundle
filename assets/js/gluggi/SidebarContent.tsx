@@ -36,13 +36,13 @@ function renderComponent (component: GluggiComponent, showFullName: boolean = fa
 {
     return (
         <li>
-            <a class={`component-link ${component.active ? " is-active" : ""}`} href={component.url}>
+            <a class={`gluggi-component-link ${component.active ? " gluggi-active" : ""}`} href={component.url}>
                 {component.active && (
                     icon(arrowIcon)
                 )}
-                <span class="component-name">
+                <span class="gluggi-component-name">
                     {showFullName && (
-                        <span class="component-type">{component.type}</span>
+                        <span class="gluggi-component-type">{component.type}</span>
                     )}
                     {` ${component.name}`}
                     {"page" === component.type ? icon(externalIcon) : ""}
