@@ -6,16 +6,10 @@ services:
         autoconfigure: true
         autowire: true
 
-    Becklyn\GluggiBundle\Component\ComponentConfiguration: ~
-    Becklyn\GluggiBundle\Component\GluggiFinder: ~
-    Becklyn\GluggiBundle\ComponentType\ComponentTypeRegistry: ~
-    Becklyn\GluggiBundle\Configuration\GluggiConfig: ~
-    Becklyn\GluggiBundle\Controller\GluggiController: ~
+    Becklyn\GluggiBundle\:
+        resource: '../../*'
+        exclude: '../../{Data,Exception,Resources,GluggiBundle.php}'
 
     Becklyn\GluggiBundle\Paths\LayoutDirectory:
         arguments:
             $twigDefaultPath: '%twig.default_path%'
-
-    Becklyn\GluggiBundle\Twig\GluggiTwigExtension: ~
-
-    Becklyn\GluggiBundle\Serializer\TypesSerializer: ~

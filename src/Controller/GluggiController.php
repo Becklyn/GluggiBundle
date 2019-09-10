@@ -10,9 +10,9 @@ use Becklyn\GluggiBundle\Data\Component;
 use Becklyn\GluggiBundle\Data\ComponentType;
 use Becklyn\GluggiBundle\Exception\UnknownComponentTypeException;
 use Becklyn\GluggiBundle\Serializer\TypesSerializer;
+use Becklyn\GluggiBundle\Usages\UsagesMap;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use function foo\func;
 
 
 /**
@@ -51,7 +51,13 @@ class GluggiController extends AbstractController
      *
      * @return Response
      */
-    public function component (GluggiFinder $finder, ComponentConfiguration $componentConfiguration, string $type, string $key)
+    public function component (
+        GluggiFinder $finder,
+        ComponentConfiguration $componentConfiguration,
+        UsagesMap $usagesMap,
+        string $type,
+        string $key
+    )
     {
         try
         {
@@ -78,6 +84,8 @@ class GluggiController extends AbstractController
                     $component->getType()->getName(),
                 ],
                 "templateConfiguration" => $componentConfiguration->getConfiguration($component),
+                "uses" => $usagesMap->getUses($component),
+                "usedIn" => $usagesMap->getUsedIn($component),
             ]);
         }
         catch (UnknownComponentTypeException $e)

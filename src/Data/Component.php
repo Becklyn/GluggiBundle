@@ -134,12 +134,11 @@ class Component
     }
 
 
-
     /**
      * @return string
      */
-    public function getAnchor () : string
+    public function getFullKey ()
     {
-        return "{$this->type->getKey()}--{$this->getKey()}";
+        return "{$this->type->getKey()}/{$this->getKey()}";
     }
 }
