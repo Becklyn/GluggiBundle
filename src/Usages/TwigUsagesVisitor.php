@@ -8,7 +8,7 @@ use Twig\Node\Expression\FunctionExpression;
 use Twig\Node\Node;
 use Twig\NodeVisitor\NodeVisitorInterface;
 
-class UsagesVisitor implements NodeVisitorInterface
+class TwigUsagesVisitor implements NodeVisitorInterface
 {
     /**
      * @var string[]

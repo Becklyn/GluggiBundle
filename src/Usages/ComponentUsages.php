@@ -8,7 +8,7 @@ use Twig\Environment;
 use Twig\Error\Error;
 use Twig\NodeTraverser;
 
-class UsagesMap
+class ComponentUsages
 {
     /**
      * @var Component[]|null
@@ -34,7 +34,7 @@ class UsagesMap
 
 
     /**
-     * @var UsagesVisitor
+     * @var TwigUsagesVisitor
      */
     private $visitor;
 
@@ -53,7 +53,7 @@ class UsagesMap
     {
         $this->finder = $finder;
         $this->twig = $twig;
-        $this->visitor = new UsagesVisitor();
+        $this->visitor = new TwigUsagesVisitor();
         $this->traverser = new NodeTraverser($this->twig, [$this->visitor]);
     }
 
@@ -61,24 +61,26 @@ class UsagesMap
     /**
      * @param Component $component
      *
-     * @return Component[]
+     * @return ResolvedDependencies
      */
-    public function getUses (Component $component) : array
+    public function getUses (Component $component) : ResolvedDependencies
     {
         $this->ensureCacheIsFresh();
-        return $this->uses[$component->getFullKey()] ?? [];
+        $finder = new DependenciesResolver();
+        return $finder->resolveDependencies($this->uses, $component);
     }
 
 
     /**
      * @param Component $component
      *
-     * @return Component[]
+     * @return ResolvedDependencies
      */
-    public function getUsedIn (Component $component) : array
+    public function getUsedBy (Component $component) : ResolvedDependencies
     {
         $this->ensureCacheIsFresh();
-        return $this->usedIn[$component->getFullKey()] ?? [];
+        $finder = new DependenciesResolver();
+        return $finder->resolveDependencies($this->usedIn, $component);
     }
 
 
@@ -120,7 +122,8 @@ class UsagesMap
      */
     private function findUsagesInComponent (string $template) : array
     {
-        try {
+        try
+        {
             $uses = [];
 
             $source = $this->twig->getLoader()->getSourceContext($template);

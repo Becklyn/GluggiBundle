@@ -1,13 +1,15 @@
 import {h, JSX, Fragment} from "preact";
 import {useState} from "preact/hooks";
+import matchSorter from 'match-sorter'
+import {GluggiRouter} from "./GluggiRouter";
+import {icon} from "./icon";
+
 // @ts-ignore
 import arrowIcon from "../../icon/active.svg";
 // @ts-ignore
 import searchIcon from "../../icon/search.svg";
 // @ts-ignore
 import externalIcon from "../../icon/external.svg";
-import matchSorter from 'match-sorter'
-import {GluggiRouter} from "./GluggiRouter";
 
 interface GluggiComponent
 {
@@ -54,14 +56,6 @@ function renderComponent (component: GluggiComponent, showFullName: boolean = fa
     )
 }
 
-
-/**
- * Renders an icon
- */
-function icon (iconSvg : string) : JSX.Element
-{
-    return <span class="gluggi-icon" dangerouslySetInnerHTML={{__html: iconSvg}} />;
-}
 
 
 interface GluggiTypeProps

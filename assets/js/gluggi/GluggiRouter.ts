@@ -1,6 +1,9 @@
 /**
  * A very simple router that mimics the URL structure of the main app
  */
+import {Gluggi} from "../@types/gluggi";
+
+
 export class GluggiRouter
 {
     private prefix: string;
@@ -26,8 +29,8 @@ export class GluggiRouter
     /**
      *
      */
-    public component (type: string, key: string) : string
+    public component (component: Gluggi.Component) : string
     {
-        return `${this.prefix}${type}/${key}`;
+        return `${this.prefix}${component.type}/${component.key}`;
     }
 }

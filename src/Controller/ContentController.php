@@ -3,23 +3,33 @@
 namespace Becklyn\GluggiBundle\Controller;
 
 use Becklyn\GluggiBundle\Data\Component;
-use Becklyn\GluggiBundle\Usages\UsagesMap;
+use Becklyn\GluggiBundle\Normalizer\GluggiDataNormalizer;
+use Becklyn\GluggiBundle\Usages\ComponentUsages;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
 class ContentController extends AbstractController
 {
     /**
-     * @param UsagesMap $usagesMap
-     * @param Component $component
+     * @param GluggiDataNormalizer $normalizer
+     * @param ComponentUsages      $usagesMap
+     * @param Component            $component
      *
      * @return Response
      */
-    public function contentActions (UsagesMap $usagesMap, Component $component) : Response
+    public function contentActions (
+        GluggiDataNormalizer $normalizer,
+        ComponentUsages $usagesMap,
+        Component $component
+    ) : Response
     {
+
+        dump($normalizer->normalizeDependencies($usagesMap->getUsedBy($component)));
         return $this->render("@Gluggi/content/content-actions.html.twig", [
-            "uses" => $usagesMap->getUses($component),
-            "usedIn" => $usagesMap->getUsedIn($component),
+            "usages" => [
+                "uses" => $normalizer->normalizeDependencies($usagesMap->getUses($component)),
+                "usedBy" => $normalizer->normalizeDependencies($usagesMap->getUsedBy($component)),
+            ],
         ]);
     }
 }

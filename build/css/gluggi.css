@@ -59,15 +59,16 @@ html {
   height: 16px;
   width: 16px;
   padding-top: 0;
-  margin-left: 2px;
+  margin-left: 4px;
+  margin-right: 0;
 }
 
-/* line 34, assets/scss/atom/_component-link.scss */
+/* line 35, assets/scss/atom/_component-link.scss */
 .gluggi-component-link .gluggi-component-type {
   color: #b5b5b5;
 }
 
-/* line 37, assets/scss/atom/_component-link.scss */
+/* line 38, assets/scss/atom/_component-link.scss */
 .gluggi-component-link .gluggi-component-type::after {
   content: " / ";
 }
@@ -211,6 +212,34 @@ html {
 }
 
 /* line 86, assets/scss/atom/_content-view.scss */
+.gluggi-content-view .gluggi-action-usages .gluggi-usages-transitive-toggle {
+  background-color: #f2f2f2;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+/* line 96, assets/scss/atom/_content-view.scss */
+.gluggi-content-view .gluggi-action-usages .gluggi-usages-transitive-toggle .gluggi-icon {
+  width: 12px;
+  height: 12px;
+  margin-right: 3px;
+}
+
+/* line 102, assets/scss/atom/_content-view.scss */
+.gluggi-content-view .gluggi-action-usages .gluggi-usages-transitive-toggle:hover, .gluggi-content-view .gluggi-action-usages .gluggi-usages-transitive-toggle:focus {
+  background-color: #000;
+  color: #fff;
+}
+
+/* line 109, assets/scss/atom/_content-view.scss */
 .gluggi-content-view .gluggi-action-usages .gluggi-usages-list {
   flex-grow: 0;
   flex-shrink: 0;
@@ -218,26 +247,26 @@ html {
   width: 50%;
 }
 
-/* line 89, assets/scss/atom/_content-view.scss */
+/* line 112, assets/scss/atom/_content-view.scss */
 .gluggi-content-view .gluggi-action-usages .gluggi-usages-list h3 {
   color: #b5b5b5;
   margin: 0 0 20px;
   font-size: 20px;
 }
 
-/* line 95, assets/scss/atom/_content-view.scss */
+/* line 118, assets/scss/atom/_content-view.scss */
 .gluggi-content-view .gluggi-action-usages .gluggi-usages-list ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-/* line 103, assets/scss/atom/_content-view.scss */
+/* line 126, assets/scss/atom/_content-view.scss */
 .gluggi-content-view .gluggi-action-usages.is-open .gluggi-action svg {
   transform: rotateZ(180deg);
 }
 
-/* line 107, assets/scss/atom/_content-view.scss */
+/* line 130, assets/scss/atom/_content-view.scss */
 .gluggi-content-view .gluggi-action-usages.is-open .gluggi-usages-overview {
   display: flex;
 }
