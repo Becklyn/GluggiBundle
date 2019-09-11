@@ -7,10 +7,8 @@ use Becklyn\GluggiBundle\Component\ComponentConfiguration;
 use Becklyn\GluggiBundle\Component\GluggiFinder;
 use Becklyn\GluggiBundle\Configuration\GluggiConfig;
 use Becklyn\GluggiBundle\Data\Component;
-use Becklyn\GluggiBundle\Data\ComponentType;
 use Becklyn\GluggiBundle\Exception\UnknownComponentTypeException;
 use Becklyn\GluggiBundle\Serializer\TypesSerializer;
-use Becklyn\GluggiBundle\Usages\UsagesMap;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -20,7 +18,6 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class GluggiController extends AbstractController
 {
-
     /**
      * Renders the index page
      *
@@ -54,7 +51,6 @@ class GluggiController extends AbstractController
     public function component (
         GluggiFinder $finder,
         ComponentConfiguration $componentConfiguration,
-        UsagesMap $usagesMap,
         string $type,
         string $key
     )
@@ -69,7 +65,7 @@ class GluggiController extends AbstractController
                     ? "No component found: '%s/%s'"
                     : "The component '%s/%s' has no single view.";
 
-                throw $this->createNotFoundException(sprintf($message, $type, $key));
+                throw $this->createNotFoundException(\sprintf($message, $type, $key));
             }
 
             $template = $component->getType()->isIsolatedComponentViewMode()
@@ -84,8 +80,6 @@ class GluggiController extends AbstractController
                     $component->getType()->getName(),
                 ],
                 "templateConfiguration" => $componentConfiguration->getConfiguration($component),
-                "uses" => $usagesMap->getUses($component),
-                "usedIn" => $usagesMap->getUsedIn($component),
             ]);
         }
         catch (UnknownComponentTypeException $e)
@@ -100,16 +94,13 @@ class GluggiController extends AbstractController
      * Renders the HTML title
      *
      * @param GluggiConfig $config
-     * @param string|array $pageTitle
+     * @param string|string[] $pageTitle
      *
      * @return Response
      */
     public function htmlTitle (GluggiConfig $config, $pageTitle)
     {
-        $segments = !is_array($pageTitle)
-            ? [$pageTitle]
-            : $pageTitle;
-
+        $segments = (array) $pageTitle;
         $mainTitle = "Gluggi";
 
         if (null !== $config->getTitle())
@@ -120,8 +111,8 @@ class GluggiController extends AbstractController
         $segments[] = $mainTitle;
 
         return new Response(
-            htmlspecialchars(
-                implode(" // ", $segments)
+            \htmlspecialchars(
+                \implode(" // ", $segments)
             )
         );
     }
@@ -142,6 +133,10 @@ class GluggiController extends AbstractController
     public function layoutAssets (GluggiConfig $config, AssetHtmlGenerator $htmlGenerator, string $type, array $addAssets = [], array $overrideAssets = []) : Response
     {
         $overrideAssets = $overrideAssets[$type] ?? [];
+        $coreAssets = [
+            "css" => "@gluggi_core/css/gluggi.css",
+            "js" => "@gluggi_core/js/gluggi.js",
+        ];
 
         if (!empty($overrideAssets))
         {
@@ -171,24 +166,13 @@ class GluggiController extends AbstractController
             $assetPaths = \array_merge($assetPaths, $addAssets[$type] ?? []);
         }
 
+        if (\array_key_exists($type, $coreAssets))
+        {
+            \array_unshift($assetPaths, $coreAssets[$type]);
+        }
+
         return new Response(
             $htmlGenerator->linkAssets($assetPaths)
         );
-    }
-
-
-    /**
-     * @param GluggiFinder $finder
-     * @param GluggiConfig $config
-     *
-     * @return Response
-     */
-    public function sidebar (TypesSerializer $serializer, GluggiConfig $config, ?Component $activeComponent = null)
-    {
-        return $this->render("@Gluggi/Gluggi/sidebar.html.twig", [
-            "types" => $serializer->serialize($activeComponent),
-            "customTitle" => $config->getTitle(),
-            "active" => $activeComponent,
-        ]);
     }
 }

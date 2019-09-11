@@ -1,5 +1,10 @@
+@import "../helper/variables";
+
 .gluggi-title {
+    color: $text;
+    display: block;
     font-size: 20px;
     font-weight: 600;
     word-break: break-word;
+    text-decoration: none;
 }

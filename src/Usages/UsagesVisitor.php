@@ -10,19 +10,28 @@ use Twig\NodeVisitor\NodeVisitorInterface;
 
 class UsagesVisitor implements NodeVisitorInterface
 {
+    /**
+     * @var string[]
+     */
     private $usages = [];
 
-
+    /**
+     *
+     */
     public function reset ()
     {
         $this->usages = [];
     }
 
 
+    /**
+     * @return array
+     */
     public function getUsages () : array
     {
         return $this->usages;
     }
+
 
     /**
      * @inheritDoc

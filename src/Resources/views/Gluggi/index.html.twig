@@ -1,1 +1,11 @@
 {% extends "@Gluggi/layout.html.twig" %}
+
+{%- block content_view -%}
+<div class="gluggi-content-view gluggi-contains-welcome">
+    <div class="gluggi-welcome">
+        <div class="gluggi-welcome-message">What are you looking for?</div>
+
+        <div class="gluggi-icon">{{ include('@Gluggi/icon/arrow-right.svg') }}</div>
+    </div>
+</div>
+{%- endblock -%}

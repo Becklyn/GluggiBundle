@@ -67,8 +67,8 @@ class Component
      */
     private function generateName ($key)
     {
-        $parts = preg_split("~[-_]~", $key, -1, PREG_SPLIT_NO_EMPTY);
-        return ucwords(implode(" ", $parts));
+        $parts = \preg_split("~[-_]~", $key, -1, PREG_SPLIT_NO_EMPTY);
+        return \ucwords(\implode(" ", $parts));
     }
 
 

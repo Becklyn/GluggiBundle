@@ -5,7 +5,7 @@ gluggi:
 
 
 gluggi.component:
-    path: /{type}/{key}/
+    path: /{type}/{key}
     defaults:
         _controller: Becklyn\GluggiBundle\Controller\GluggiController::component
     requirements:

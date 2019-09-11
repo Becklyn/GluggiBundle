@@ -21,6 +21,10 @@
         }
     }
 
+    &.gluggi-contains-welcome {
+        @include center-children;
+    }
+
     .gluggi-content-actions {
         @include gluggi-font;
         position: absolute;

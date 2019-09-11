@@ -7,6 +7,7 @@ import searchIcon from "../../icon/search.svg";
 // @ts-ignore
 import externalIcon from "../../icon/external.svg";
 import matchSorter from 'match-sorter'
+import {GluggiRouter} from "./GluggiRouter";
 
 interface GluggiComponent
 {
@@ -25,6 +26,7 @@ interface GluggiType
 export interface ComponentListProps
 {
     title: string;
+    router: GluggiRouter;
     types: GluggiType[];
 }
 
@@ -142,7 +144,7 @@ export function SidebarContent (props: ComponentListProps): JSX.Element
 
     return (
         <Fragment>
-            <h1 class="gluggi-title">{props.title}</h1>
+            <a href={props.router.home()} class="gluggi-title">{props.title}</a>
             {content}
         </Fragment>
     );

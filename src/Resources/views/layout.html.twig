@@ -6,10 +6,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0{% if templateConfiguration.prevent_zoom is defined and templateConfiguration.prevent_zoom %}, maximum-scale=1.0, user-scalable=no{% endif %}">
         <title>{{ render(controller("Becklyn\\GluggiBundle\\Controller\\GluggiController::htmlTitle", {pageTitle: pageTitle})) }}</title>
 
-        {%- block gluggi_stylesheets -%}
-            {{- assets_link(["@gluggi_core/css/gluggi.css"]) -}}
-        {%- endblock -%}
-
         {%- block stylesheets -%}
             {{- render(controller('Becklyn\\GluggiBundle\\Controller\\GluggiController::layoutAssets', {
                 type: "css",
@@ -27,8 +23,14 @@
         {%- endblock -%}
     </head>
     <body class="gluggi {{ templateConfiguration.body_class ?? "" }}">
+
+        {{- data_container({
+            url: path("gluggi"),
+        }, "gluggi-global-data") -}}
+
         <div class="gluggi-container">
         {%- block body -%}
+            {%- block content_view -%}
             <div class="gluggi-content-view">
                 {%- block content_container -%}
                     <div class="gluggi-content">
@@ -36,57 +38,21 @@
                     </div>
                 {%- endblock -%}
 
-                <div class="gluggi-content-actions">
-                    <button type="button" class="gluggi-action gluggi-toggle-fullscreen">
-                        <span class="gluggi-icon gluggi-icon-active">{{ include("@Gluggi/icon/minimize.svg") }}</span>
-                        <span class="gluggi-icon gluggi-icon-inactive">{{ include("@Gluggi/icon/maximize.svg") }}</span>
-                    </button>
-
-                    <div class="gluggi-action-usages">
-                        <button type="button" class="gluggi-action">
-                            <span class="gluggi-icon">{{- include("@Gluggi/icon/chevron.svg") -}}</span> Usages
-                        </button>
-                        <div class="gluggi-usages-overview">
-                            <div class="gluggi-usages-list">
-                                <h3>Uses</h3>
-                                <ul>
-                                    {%- for usage in uses -%}
-                                    <li>
-                                        <a href="{{ path("gluggi.component", {type: usage.type.key, key: usage.key}) }}" class="gluggi-component-link">
-                                            <span class="gluggi-component-name"><span class="gluggi-component-type">{{ usage.type.key }}</span> {{ usage.name }}</span>
-                                        </a>
-                                    </li>
-                                    {%- endfor -%}
-                                </ul>
-                            </div>
-                            <div class="gluggi-usages-list">
-                                <h3>Used in</h3>
-                                <ul>
-                                    {%- for usage in usedIn -%}
-                                        <li>
-                                            <a href="{{ path("gluggi.component", {type: usage.type.key, key: usage.key}) }}" class="gluggi-component-link">
-                                                <span class="gluggi-component-name"><span class="gluggi-component-type">{{ usage.type.key }}</span> {{ usage.name }}</span>
-                                            </a>
-                                        </li>
-                                    {%- endfor -%}
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {%- if component is defined -%}
+                    {{- render(controller("Becklyn\\GluggiBundle\\Controller\\ContentController::contentActions", {component: component})) -}}
+                {%- endif -%}
             </div>
+            {%- endblock -%}
 
             {%- block sidebar -%}
-                {{- render(controller("Becklyn\\GluggiBundle\\Controller\\GluggiController::sidebar", {
+                {{- render(controller("Becklyn\\GluggiBundle\\Controller\\SidebarController::sidebar", {
                     activeComponent: component ?? null,
                 })) -}}
             {%- endblock -%}
-
         {%- endblock -%}
         </div>
 
         {%- block javascripts -%}
-            {{- assets_link(["@gluggi_core/js/gluggi.js"]) -}}
             {{- render(controller("Becklyn\\GluggiBundle\\Controller\\GluggiController::layoutAssets", {
                 type: "js",
                 addAssets: templateConfiguration.add_assets ?? [],

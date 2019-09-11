@@ -1,0 +1,38 @@
+<div class="gluggi-content-actions">
+    <button type="button" class="gluggi-action gluggi-toggle-fullscreen">
+        <span class="gluggi-icon gluggi-icon-active">{{ include("@Gluggi/icon/minimize.svg") }}</span>
+        <span class="gluggi-icon gluggi-icon-inactive">{{ include("@Gluggi/icon/maximize.svg") }}</span>
+    </button>
+
+    <div class="gluggi-action-usages">
+        <button type="button" class="gluggi-action">
+            <span class="gluggi-icon">{{- include("@Gluggi/icon/chevron.svg") -}}</span> Usages
+        </button>
+        <div class="gluggi-usages-overview">
+            <div class="gluggi-usages-list">
+                <h3>Uses</h3>
+                <ul>
+                    {%- for usage in uses -%}
+                        <li>
+                            <a href="{{ path("gluggi.component", {type: usage.type.key, key: usage.key}) }}" class="gluggi-component-link">
+                                <span class="gluggi-component-name"><span class="gluggi-component-type">{{ usage.type.key }}</span> {{ usage.name }}</span>
+                            </a>
+                        </li>
+                    {%- endfor -%}
+                </ul>
+            </div>
+            <div class="gluggi-usages-list">
+                <h3>Used in</h3>
+                <ul>
+                    {%- for usage in usedIn -%}
+                        <li>
+                            <a href="{{ path("gluggi.component", {type: usage.type.key, key: usage.key}) }}" class="gluggi-component-link">
+                                <span class="gluggi-component-name"><span class="gluggi-component-type">{{ usage.type.key }}</span> {{ usage.name }}</span>
+                            </a>
+                        </li>
+                    {%- endfor -%}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
