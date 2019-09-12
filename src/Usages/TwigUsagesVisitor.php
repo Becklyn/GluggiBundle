@@ -11,7 +11,7 @@ use Twig\NodeVisitor\NodeVisitorInterface;
 class TwigUsagesVisitor implements NodeVisitorInterface
 {
     /**
-     * @var string[]
+     * @var string[][]
      */
     private $usages = [];
 
