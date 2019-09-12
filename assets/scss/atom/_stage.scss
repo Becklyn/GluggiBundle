@@ -1,12 +1,12 @@
 @import "../helper/mixins";
 @import "../helper/variables";
 
-.gluggi-content-view {
+.gluggi-stage {
     padding: 0;
     background-color: $content-bg;
     position: relative;
 
-    &.gluggi-contains-welcome {
+    &.gluggi-stage-welcome {
         @include center-children;
     }
 

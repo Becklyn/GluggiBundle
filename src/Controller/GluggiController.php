@@ -28,9 +28,8 @@ class GluggiController extends AbstractController
      */
     public function index (GluggiFinder $finder, GluggiConfig $config)
     {
-        return $this->render("@Gluggi/Gluggi/index.html.twig", [
+        return $this->render("@Gluggi/index/index.html.twig", [
             "types" => $finder->getAllTypes(),
-            "pageTitle" => "Index",
             "infoAction" => $config->getInfoAction(),
             "customTitle" => $config->getTitle(),
         ]);
@@ -68,13 +67,12 @@ class GluggiController extends AbstractController
                 throw $this->createNotFoundException(\sprintf($message, $type, $key));
             }
 
-            $template = $component->getType()->isIsolatedComponentViewMode()
-                ? "isolatedComponent"
-                : "component";
+            $template = "page" === $component->getType()->getKey()
+                ? "@Gluggi/component/page.html.twig"
+                : "@Gluggi/component/component.html.twig";
 
-            return $this->render("@Gluggi/Gluggi/{$template}.html.twig", [
+            return $this->render($template, [
                 "component" => $component,
-                "type" => $component->getType(),
                 "pageTitle" => [
                     $component->getName(),
                     $component->getType()->getName(),

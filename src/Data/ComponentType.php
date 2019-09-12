@@ -101,15 +101,6 @@ class ComponentType
 
 
     /**
-     * @return bool
-     */
-    public function isIsolatedComponentViewMode () : bool
-    {
-        return "page" === $this->key;
-    }
-
-
-    /**
      * @param Component $component
      */
     public function addComponent (Component $component) : void

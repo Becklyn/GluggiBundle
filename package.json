@@ -1,7 +1,7 @@
 {
     "private": true,
     "devDependencies": {
-        "kaba": "^9.0.0-0",
+        "kaba": "^8.1.0",
         "kaba-scss": "^3.0.1"
     },
     "dependencies": {

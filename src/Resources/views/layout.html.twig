@@ -4,23 +4,19 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0{% if (templateConfiguration.prevent_zoom ?? false) %}, maximum-scale=1.0, user-scalable=no{% endif %}">
-        <title>{{ render(controller("Becklyn\\GluggiBundle\\Controller\\GluggiController::htmlTitle", {pageTitle: pageTitle})) }}</title>
+        <title>{%- if component is defined %}{{ component.name }} // {{ component.type.name}} // {% endif -%}Gluggi</title>
 
-        {%- block stylesheets -%}
-            {{- render(controller('Becklyn\\GluggiBundle\\Controller\\GluggiController::layoutAssets', {
-                type: "css",
-                addAssets: templateConfiguration.add_assets ?? [],
-                overrideAssets: templateConfiguration.override_assets ?? [],
-            })) -}}
-        {%- endblock -%}
+        {{- render(controller('Becklyn\\GluggiBundle\\Controller\\GluggiController::layoutAssets', {
+            type: "css",
+            addAssets: templateConfiguration.add_assets ?? [],
+            overrideAssets: templateConfiguration.override_assets ?? [],
+        })) -}}
 
-        {%- block javascripts_head -%}
-            {{ render(controller("Becklyn\\GluggiBundle\\Controller\\GluggiController::layoutAssets", {
-                type: "js_head",
-                addAssets: templateConfiguration.add_assets ?? [],
-                overrideAssets: templateConfiguration.override_assets ?? [],
-            })) }}
-        {%- endblock -%}
+        {{ render(controller("Becklyn\\GluggiBundle\\Controller\\GluggiController::layoutAssets", {
+            type: "js_head",
+            addAssets: templateConfiguration.add_assets ?? [],
+            overrideAssets: templateConfiguration.override_assets ?? [],
+        })) }}
     </head>
     <body class="gluggi {{ templateConfiguration.body_class ?? "" }}">
 
@@ -30,9 +26,8 @@
 
         <div class="gluggi-container">
         {%- block body -%}
-            {%- block content_view -%}
-            <div class="gluggi-content-view">
-                {%- block content_container -%}
+            <div class="gluggi-stage {% block stage_class "" %}">
+                {%- block stage -%}
                     <div class="gluggi-content">
                         {%- block content "" -%}
                     </div>
@@ -42,22 +37,17 @@
                     {{- render(controller("Becklyn\\GluggiBundle\\Controller\\ContentController::contentActions", {component: component})) -}}
                 {%- endif -%}
             </div>
-            {%- endblock -%}
 
-            {%- block sidebar -%}
-                {{- render(controller("Becklyn\\GluggiBundle\\Controller\\SidebarController::sidebar", {
-                    activeComponent: component ?? null,
-                })) -}}
-            {%- endblock -%}
+            {{- render(controller("Becklyn\\GluggiBundle\\Controller\\SidebarController::sidebar", {
+                activeComponent: component ?? null,
+            })) -}}
         {%- endblock -%}
         </div>
 
-        {%- block javascripts -%}
-            {{- render(controller("Becklyn\\GluggiBundle\\Controller\\GluggiController::layoutAssets", {
-                type: "js",
-                addAssets: templateConfiguration.add_assets ?? [],
-                overrideAssets: templateConfiguration.override_assets ?? [],
-            })) -}}
-        {%- endblock -%}
+        {{- render(controller("Becklyn\\GluggiBundle\\Controller\\GluggiController::layoutAssets", {
+            type: "js",
+            addAssets: templateConfiguration.add_assets ?? [],
+            overrideAssets: templateConfiguration.override_assets ?? [],
+        })) -}}
     </body>
 </html>
