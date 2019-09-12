@@ -3,15 +3,16 @@
 namespace Becklyn\GluggiBundle\Usages;
 
 use Becklyn\GluggiBundle\Data\Component;
+use Becklyn\GluggiBundle\Data\References;
 
 class DependenciesResolver
 {
     /**
      * @param Component $component
      *
-     * @return ResolvedDependencies
+     * @return References
      */
-    public function resolveDependencies (Component $component) : ResolvedDependencies
+    public function resolveDependencies (Component $component) : References
     {
         $fetcher = function (Component $component)
         {
@@ -25,9 +26,9 @@ class DependenciesResolver
     /**
      * @param Component $component
      *
-     * @return ResolvedDependencies
+     * @return References
      */
-    public function resolveUsages (Component $component) : ResolvedDependencies
+    public function resolveUsages (Component $component) : References
     {
         $fetcher = function (Component $component)
         {
@@ -42,9 +43,9 @@ class DependenciesResolver
      * @param Component $component
      * @param callable  $fetcher
      *
-     * @return ResolvedDependencies
+     * @return References
      */
-    private function resolve (Component $component, callable $fetcher) : ResolvedDependencies
+    private function resolve (Component $component, callable $fetcher) : References
     {
         $direct = [];
         $transitive = [];
@@ -70,7 +71,7 @@ class DependenciesResolver
         }
 
 
-        return new ResolvedDependencies($direct, $transitive);
+        return new References($direct, $transitive);
     }
 
 

@@ -23,7 +23,7 @@ class ContentController extends AbstractController
     ) : Response
     {
         return $this->render("@Gluggi/content/content-actions.html.twig", [
-            "usages" => [
+            "references" => [
                 "dependencies" => $normalizer->normalizeDependencies(
                     $resolver->resolveDependencies($component)
                 ),

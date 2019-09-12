@@ -1,9 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace Becklyn\GluggiBundle\Usages;
+namespace Becklyn\GluggiBundle\Data;
 
-
-class ResolvedDependencies
+/**
+ * Returns two list of components:
+ *
+ * directly referenced ones and transitively referenced onces.
+ */
+class References
 {
     /**
      * @var array

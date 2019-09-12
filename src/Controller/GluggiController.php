@@ -2,6 +2,7 @@
 
 namespace Becklyn\GluggiBundle\Controller;
 
+use Becklyn\AssetsBundle\Exception\AssetsException;
 use Becklyn\AssetsBundle\Html\AssetHtmlGenerator;
 use Becklyn\GluggiBundle\Component\ComponentConfiguration;
 use Becklyn\GluggiBundle\Type\TypeRegistry;
@@ -24,7 +25,7 @@ class GluggiController extends AbstractController
      *
      * @return Response
      */
-    public function index (TypeRegistry $registry, GluggiConfig $config)
+    public function index (TypeRegistry $registry, GluggiConfig $config) : Response
     {
         return $this->render("@Gluggi/index/index.html.twig", [
             "types" => $registry->getAll(),
@@ -49,7 +50,7 @@ class GluggiController extends AbstractController
         ComponentConfiguration $componentConfiguration,
         string $type,
         string $key
-    )
+    ) : Response
     {
         try
         {
@@ -84,35 +85,6 @@ class GluggiController extends AbstractController
     }
 
 
-
-    /**
-     * Renders the HTML title
-     *
-     * @param GluggiConfig $config
-     * @param string|string[] $pageTitle
-     *
-     * @return Response
-     */
-    public function htmlTitle (GluggiConfig $config, $pageTitle)
-    {
-        $segments = (array) $pageTitle;
-        $mainTitle = "Gluggi";
-
-        if (null !== $config->getTitle())
-        {
-            $mainTitle .= " ({$config->getTitle()})";
-        }
-
-        $segments[] = $mainTitle;
-
-        return new Response(
-            \htmlspecialchars(
-                \implode(" // ", $segments)
-            )
-        );
-    }
-
-
     /**
      * Renders the layout assets
      *
@@ -123,9 +95,15 @@ class GluggiController extends AbstractController
      * @param array              $overrideAssets
      *
      * @return Response
-     * @throws \Becklyn\AssetsBundle\Exception\AssetsException
+     * @throws AssetsException
      */
-    public function layoutAssets (GluggiConfig $config, AssetHtmlGenerator $htmlGenerator, string $type, array $addAssets = [], array $overrideAssets = []) : Response
+    public function layoutAssets (
+        GluggiConfig $config,
+        AssetHtmlGenerator $htmlGenerator,
+        string $type,
+        array $addAssets = [],
+        array $overrideAssets = []
+    ) : Response
     {
         $overrideAssets = $overrideAssets[$type] ?? [];
         $coreAssets = [

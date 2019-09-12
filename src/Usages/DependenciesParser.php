@@ -7,6 +7,7 @@ use Becklyn\GluggiBundle\Type\TypeRegistry;
 use Becklyn\GluggiBundle\Data\Component;
 use Becklyn\GluggiBundle\Data\Error\CompilationError;
 use Becklyn\GluggiBundle\Data\Error\GluggiError;
+use Becklyn\GluggiBundle\Usages\Twig\TwigUsagesVisitor;
 use Twig\Environment;
 use Twig\Error\Error;
 use Twig\NodeTraverser;

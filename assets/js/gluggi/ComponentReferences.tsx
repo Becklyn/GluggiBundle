@@ -18,6 +18,10 @@ export interface ComponentUsagesProps
     router: GluggiRouter;
 }
 
+
+/**
+ * Renders a list of references
+ */
 function renderList (dependencies: Gluggi.Dependencies, showTransitive: boolean, router: GluggiRouter) : JSX.Element
 {
     if (!dependencies.direct.length && (!showTransitive || !dependencies.transitive.length))
@@ -40,11 +44,14 @@ function renderList (dependencies: Gluggi.Dependencies, showTransitive: boolean,
                 </li>
             ))}
         </ul>
-    )
+    );
 }
 
 
-export function ComponentUsages (props: ComponentUsagesProps): JSX.Element
+/**
+ * The complete references implementation
+ */
+export function ComponentReferences (props: ComponentUsagesProps): JSX.Element
 {
     let [open, setOpen] = useState(false);
     let [transitive, setTransitive] = useState(false);
@@ -63,7 +70,7 @@ export function ComponentUsages (props: ComponentUsagesProps): JSX.Element
         <div class={`gluggi-action-usages ${open ? "is-open" : ""}`}>
             <button type="button" class="gluggi-action" onClick={() => setOpen(!open)}>
                 {icon(usagesIcon)}
-                <span class="gluggi-action-label">Usages</span>
+                <span class="gluggi-action-label">References</span>
             </button>
             {open && (
                 <div class="gluggi-usages-overview">

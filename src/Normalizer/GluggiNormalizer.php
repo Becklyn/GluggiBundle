@@ -4,7 +4,7 @@ namespace Becklyn\GluggiBundle\Normalizer;
 
 use Becklyn\GluggiBundle\Data\Component;
 use Becklyn\GluggiBundle\Data\ComponentType;
-use Becklyn\GluggiBundle\Usages\ResolvedDependencies;
+use Becklyn\GluggiBundle\Data\References;
 
 /**
  * Normalizes all data structures used in gluggi
@@ -32,11 +32,11 @@ class GluggiNormalizer
 
 
     /**
-     * @param ResolvedDependencies $dependencies
+     * @param References $dependencies
      *
      * @return array
      */
-    public function normalizeDependencies (ResolvedDependencies $dependencies) : array
+    public function normalizeDependencies (References $dependencies) : array
     {
         return [
             "direct" => \array_map([$this, "normalizeComponent"], $this->sortComponentList($dependencies->getDirect())),

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Becklyn\GluggiBundle\Usages;
+namespace Becklyn\GluggiBundle\Usages\Twig;
 
 use Twig\Environment;
 use Twig\Node\Expression\ConstantExpression;
