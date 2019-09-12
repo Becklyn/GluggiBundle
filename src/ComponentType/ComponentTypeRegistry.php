@@ -2,11 +2,9 @@
 
 namespace Becklyn\GluggiBundle\ComponentType;
 
-use Becklyn\GluggiBundle\Component\ComponentLoader;
-use Becklyn\GluggiBundle\Configuration\GluggiConfig;
+use Becklyn\GluggiBundle\Component\ComponentTypeFactory;
 use Becklyn\GluggiBundle\Data\ComponentType;
 use Becklyn\GluggiBundle\Exception\UnknownComponentTypeException;
-use Becklyn\GluggiBundle\Paths\LayoutDirectory;
 
 
 /**
@@ -15,46 +13,24 @@ use Becklyn\GluggiBundle\Paths\LayoutDirectory;
 class ComponentTypeRegistry
 {
     /**
-     * @var ComponentType[]
+     * @var ComponentType[]|null
      */
     private $types;
 
 
     /**
-     * @param LayoutDirectory $layoutDirectory
-     * @param GluggiConfig    $config
+     * @var ComponentTypeFactory
      */
-    public function __construct (LayoutDirectory $layoutDirectory, GluggiConfig $config)
-    {
-        $loader = new ComponentLoader($layoutDirectory->resolve($config->getLayoutDir()), $config->getLayoutDir());
-
-        $this->prepareComponentList([
-            new ComponentType("atom", $loader),
-            new ComponentType("molecule", $loader),
-            new ComponentType("organism", $loader),
-            new ComponentType("template", $loader),
-            new ComponentType("page", $loader, ComponentType::ISOLATED_COMPONENT_VIEW),
-        ]);
-    }
-
+    private $factory;
 
 
     /**
-     * Prepares the internal data structure
-     *
-     * @param ComponentType[] $types
+     * @param ComponentTypeFactory $factory
      */
-    private function prepareComponentList (array $types)
+    public function __construct (ComponentTypeFactory $factory)
     {
-        $this->types = [];
-
-        foreach ($types as $type)
-        {
-            $this->types[$type->getKey()] = $type;
-        }
+        $this->factory = $factory;
     }
-
-
 
 
     /**
@@ -66,14 +42,14 @@ class ComponentTypeRegistry
      */
     public function getType (string $key) : ComponentType
     {
-        if (!array_key_exists($key, $this->types))
+        $types = $this->getAll();
+
+        if (!\array_key_exists($key, $types))
         {
-            throw new UnknownComponentTypeException($key, array_keys($this->types));
+            throw new UnknownComponentTypeException($key, \array_keys($types));
         }
 
-        $type = $this->types[$key];
-
-        return $type;
+        return $types[$key];
     }
 
 
@@ -85,12 +61,17 @@ class ComponentTypeRegistry
      */
     public function getAll () : array
     {
-        return array_map(
-            function (string $key)
-            {
-                return $this->getType($key);
-            },
-            array_keys($this->types)
-        );
+        if (null === $this->types)
+        {
+            $this->types = [
+                "atom" => $this->factory->create("atom"),
+                "molecule" => $this->factory->create("molecule"),
+                "organism" => $this->factory->create("organism"),
+                "template" => $this->factory->create("template"),
+                "page" => $this->factory->create("page"),
+            ];
+        }
+
+        return $this->types;
     }
 }

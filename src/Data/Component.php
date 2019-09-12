@@ -3,6 +3,8 @@
 namespace Becklyn\GluggiBundle\Data;
 
 
+use Becklyn\GluggiBundle\Data\Error\ComponentError;
+
 class Component
 {
     /**
@@ -42,33 +44,25 @@ class Component
 
 
     /**
+     * @var ComponentError|null
+     */
+    private $error;
+
+
+    /**
      * @param \SplFileInfo  $file
      * @param string        $templatePathPrefix
      * @param ComponentType $type
      */
-    public function __construct (\SplFileInfo $file, string $templatePathPrefix, ComponentType $type)
+    public function __construct (string $fileName, string $key, string $name, bool $hidden, ComponentType $type, string $importPath, ?ComponentError $error)
     {
-        $this->fileName = $file->getBasename();
-        $this->key = $file->getBasename('.html.twig');
-        $this->name = $this->generateName($this->key);
-        $this->hidden = "_" === substr($file->getBasename(), 0, 1);
+        $this->fileName = $fileName;
+        $this->key = $key;
+        $this->name = $name;
+        $this->hidden = $hidden;
         $this->type = $type;
-        $this->importPath = "{$templatePathPrefix}/{$this->type->getDirectory()}/{$this->fileName}";
-    }
-
-
-
-    /**
-     * Generates the name from the key
-     *
-     * @param string $key
-     *
-     * @return string
-     */
-    private function generateName ($key)
-    {
-        $parts = \preg_split("~[-_]~", $key, -1, PREG_SPLIT_NO_EMPTY);
-        return \ucwords(\implode(" ", $parts));
+        $this->importPath = $importPath;
+        $this->error = $error;
     }
 
 
@@ -140,5 +134,14 @@ class Component
     public function getFullKey ()
     {
         return "{$this->type->getKey()}/{$this->getKey()}";
+    }
+
+
+    /**
+     * @return ComponentError|null
+     */
+    public function getError () : ?ComponentError
+    {
+        return $this->error;
     }
 }

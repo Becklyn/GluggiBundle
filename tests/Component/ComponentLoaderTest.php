@@ -2,7 +2,7 @@
 
 namespace Tests\Becklyn\GluggiBundle\Component;
 
-use Becklyn\GluggiBundle\Component\ComponentLoader;
+use Becklyn\GluggiBundle\Component\ComponentTypeFactory;
 use Becklyn\GluggiBundle\Data\ComponentType;
 use PHPUnit\Framework\TestCase;
 
@@ -14,7 +14,7 @@ class ComponentLoaderTest extends TestCase
 {
     private function loadAtoms ()
     {
-        $loader = new ComponentLoader(__DIR__ . "/../templates/layout", "layout");
+        $loader = new ComponentTypeFactory(__DIR__ . "/../templates/layout", "layout");
         $type = self::getMockBuilder(ComponentType::class)
             ->disableOriginalConstructor()
             ->getMock();

@@ -2,12 +2,25 @@
 
 namespace Becklyn\GluggiBundle\Configuration;
 
+use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
  * Holds all configuration values
  */
 class GluggiConfig
 {
+    /**
+     * @var KernelInterface
+     */
+    private $kernel;
+
+
+    /**
+     * @var string
+     */
+    private $twigDefaultPath;
+
+
     /**
      * @var string
      */
@@ -51,16 +64,30 @@ class GluggiConfig
 
 
     /**
-     * @param string      $layoutDir
-     * @param string|null $infoAction
-     * @param string|null $title
-     * @param array       $cssFiles
-     * @param array       $javaScriptFiles
-     * @param array       $javaScriptHeadFiles
-     * @param array       $data
+     * @param KernelInterface $kernel
+     * @param string          $twigDefaultPath
+     * @param string          $layoutDir
+     * @param string|null     $infoAction
+     * @param string|null     $title
+     * @param array           $cssFiles
+     * @param array           $javaScriptFiles
+     * @param array           $javaScriptHeadFiles
+     * @param array           $data
      */
-    public function __construct (string $layoutDir, string $infoAction = null, string $title = null, array $cssFiles = [], array $javaScriptFiles = [], array $javaScriptHeadFiles = [], array $data = [])
+    public function __construct (
+        KernelInterface $kernel,
+        string $twigDefaultPath,
+        string $layoutDir,
+        string $infoAction = null,
+        string $title = null,
+        array $cssFiles = [],
+        array $javaScriptFiles = [],
+        array $javaScriptHeadFiles = [],
+        array $data = []
+    )
     {
+        $this->kernel = $kernel;
+        $this->twigDefaultPath = $twigDefaultPath;
         $this->layoutDir = $layoutDir;
         $this->infoAction = $infoAction;
         $this->title = $title;
@@ -146,5 +173,37 @@ class GluggiConfig
         }
 
         return $this->data[$key];
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getResolvedLayoutDir ()
+    {
+        return $this->resolvePath($this->layoutDir);
+    }
+
+
+    /**
+     * Resolves the configured layout directory path
+     *
+     * @param string $path
+     * @return string
+     */
+    public function resolvePath (string $path) : string
+    {
+        if (1 === \preg_match('~^@(?<bundle>[^/]+)(?<rest>.*?)$~i', $path, $matches))
+        {
+            // We get a twig import path like `@Layout/test` and need to transform it to a symfony resource
+            // location like `@LayoutBundle/Resources/views/test`.
+            $rest = \ltrim($matches["rest"], "/");
+
+            return $this->kernel->locateResource(
+                "@{$matches['bundle']}Bundle/Resources/views/{$rest}"
+            );
+        }
+
+        return \rtrim($this->twigDefaultPath, '/') . '/' . \trim($path, '/');
     }
 }

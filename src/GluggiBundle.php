@@ -52,13 +52,13 @@ class GluggiBundle extends Bundle
                 // wire provided config to config service
                 $container->getDefinition(GluggiConfig::class)
                     ->setArguments([
-                        $config["layout_dir"],
-                        $config["info_action"],
-                        $config["title"],
-                        $config['css'],
-                        $config['js'],
-                        $config['js_head'],
-                        $config['data']
+                        '$layoutDir' => $config["layout_dir"],
+                        '$infoAction' => $config["info_action"],
+                        '$title' => $config["title"],
+                        '$cssFiles' => $config['css'],
+                        '$javaScriptFiles' => $config['js'],
+                        '$javaScriptHeadFiles' => $config['js_head'],
+                        '$data' => $config['data'],
                     ]);
             }
 

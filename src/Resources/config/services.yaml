@@ -10,6 +10,6 @@ services:
         resource: '../../*'
         exclude: '../../{Data,Exception,Resources,GluggiBundle.php}'
 
-    Becklyn\GluggiBundle\Paths\LayoutDirectory:
-        arguments:
+    Becklyn\GluggiBundle\Configuration\GluggiConfig:
+        bind:
             $twigDefaultPath: '%twig.default_path%'
