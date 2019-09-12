@@ -2,22 +2,25 @@
 
 namespace Becklyn\GluggiBundle\Twig;
 
-use Becklyn\GluggiBundle\Component\GluggiFinder;
+use Becklyn\GluggiBundle\Type\TypeRegistry;
 use Becklyn\GluggiBundle\Configuration\GluggiConfig;
-use Becklyn\GluggiBundle\Exception\UnknownComponentException;
+use Becklyn\GluggiBundle\Exception\ComponentNotFoundException;
 use Psr\Container\ContainerInterface;
-use Symfony\Component\DependencyInjection\ServiceSubscriberInterface;
+use Symfony\Contracts\Service\ServiceSubscriberInterface;
+use Twig\Environment;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
 
 /**
  * Exposes all gluggi-related twig functions
  */
-class GluggiTwigExtension extends \Twig_Extension implements ServiceSubscriberInterface
+class GluggiTwigExtension extends AbstractExtension implements ServiceSubscriberInterface
 {
     /**
-     * @var GluggiFinder
+     * @var TypeRegistry
      */
-    private $finder;
+    private $registry;
 
 
     /**
@@ -33,13 +36,13 @@ class GluggiTwigExtension extends \Twig_Extension implements ServiceSubscriberIn
 
 
     /**
-     * @param GluggiFinder       $finder
+     * @param TypeRegistry       $registry
      * @param GluggiConfig       $config
      * @param ContainerInterface $container
      */
-    public function __construct (GluggiFinder $finder, GluggiConfig $config, ContainerInterface $container)
+    public function __construct (TypeRegistry $registry, GluggiConfig $config, ContainerInterface $container)
     {
-        $this->finder = $finder;
+        $this->registry = $registry;
         $this->config = $config;
         $this->container = $container;
     }
@@ -57,18 +60,18 @@ class GluggiTwigExtension extends \Twig_Extension implements ServiceSubscriberIn
      */
     public function renderGluggiComponent (string $type, string $name, array $context = []) : string
     {
-        $component = $this->finder->findComponent($type, $name);
+        $component = $this->registry->getComponent($type, $name);
 
         if (null === $component)
         {
-            throw new UnknownComponentException($name, $type);
+            throw new ComponentNotFoundException($name, $type);
         }
 
         $context = array_replace([
             "standalone" => false,
         ], $context);
 
-        return $this->container->get("twig")->render($component->getTemplatePath(), $context);
+        return $this->container->get(Environment::class)->render($component->getTemplatePath(), $context);
     }
 
 
@@ -83,11 +86,11 @@ class GluggiTwigExtension extends \Twig_Extension implements ServiceSubscriberIn
      */
     public function getTemplateName (string $type, string $name) : string
     {
-        $component = $this->finder->findComponent($type, $name);
+        $component = $this->registry->getComponent($type, $name);
 
         if (null === $component)
         {
-            throw new UnknownComponentException($name, $type);
+            throw new ComponentNotFoundException($name, $type);
         }
 
         return $component->getTemplatePath();
@@ -101,9 +104,9 @@ class GluggiTwigExtension extends \Twig_Extension implements ServiceSubscriberIn
     public function getFunctions ()
     {
         return [
-            new \Twig_SimpleFunction("gluggi_template", [$this, "getTemplateName"]),
-            new \Twig_SimpleFunction("gluggi", [$this, "renderGluggiComponent"], ["is_safe" => ["html"]]),
-            new \Twig_SimpleFunction("gluggi_data", [$this->config, "getData"]),
+            new TwigFunction("gluggi", [$this, "renderGluggiComponent"], ["is_safe" => ["html"]]),
+            new TwigFunction("gluggi_data", [$this->config, "getData"]),
+            new TwigFunction("gluggi_template", [$this, "getTemplateName"]),
         ];
     }
 
@@ -114,7 +117,7 @@ class GluggiTwigExtension extends \Twig_Extension implements ServiceSubscriberIn
     public static function getSubscribedServices ()
     {
         return [
-            "twig" => \Twig_Environment::class,
+            Environment::class,
         ];
     }
 }

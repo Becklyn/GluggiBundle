@@ -4,11 +4,9 @@ namespace Becklyn\GluggiBundle\Controller;
 
 use Becklyn\AssetsBundle\Html\AssetHtmlGenerator;
 use Becklyn\GluggiBundle\Component\ComponentConfiguration;
-use Becklyn\GluggiBundle\Component\GluggiFinder;
+use Becklyn\GluggiBundle\Type\TypeRegistry;
 use Becklyn\GluggiBundle\Configuration\GluggiConfig;
-use Becklyn\GluggiBundle\Data\Component;
-use Becklyn\GluggiBundle\Exception\UnknownComponentTypeException;
-use Becklyn\GluggiBundle\Serializer\TypesSerializer;
+use Becklyn\GluggiBundle\Exception\TypeNotFoundException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -19,28 +17,27 @@ use Symfony\Component\HttpFoundation\Response;
 class GluggiController extends AbstractController
 {
     /**
-     * Renders the index page
+     * Renders the welcome screen
      *
-     * @param GluggiFinder $finder
+     * @param TypeRegistry $registry
      * @param GluggiConfig $config
      *
      * @return Response
      */
-    public function index (GluggiFinder $finder, GluggiConfig $config)
+    public function index (TypeRegistry $registry, GluggiConfig $config)
     {
         return $this->render("@Gluggi/index/index.html.twig", [
-            "types" => $finder->getAllTypes(),
+            "types" => $registry->getAll(),
             "infoAction" => $config->getInfoAction(),
             "customTitle" => $config->getTitle(),
         ]);
     }
 
 
-
     /**
-     * Renders a component in single view
+     * Renders a single component
      *
-     * @param GluggiFinder           $finder
+     * @param TypeRegistry           $registry
      * @param ComponentConfiguration $componentConfiguration
      * @param string                 $type
      * @param string                 $key
@@ -48,7 +45,7 @@ class GluggiController extends AbstractController
      * @return Response
      */
     public function component (
-        GluggiFinder $finder,
+        TypeRegistry $registry,
         ComponentConfiguration $componentConfiguration,
         string $type,
         string $key
@@ -56,7 +53,7 @@ class GluggiController extends AbstractController
     {
         try
         {
-            $component = $finder->findComponent($type, $key);
+            $component = $registry->getComponent($type, $key);
 
             if (null === $component || $component->isHidden())
             {
@@ -80,7 +77,7 @@ class GluggiController extends AbstractController
                 "templateConfiguration" => $componentConfiguration->getConfiguration($component),
             ]);
         }
-        catch (UnknownComponentTypeException $e)
+        catch (TypeNotFoundException $e)
         {
             throw $this->createNotFoundException($e->getMessage(), $e);
         }

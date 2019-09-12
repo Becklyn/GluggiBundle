@@ -2,7 +2,7 @@
 
 namespace Becklyn\GluggiBundle\Usages;
 
-use Becklyn\GluggiBundle\ComponentType\ComponentTypeRegistry;
+use Becklyn\GluggiBundle\Type\TypeRegistry;
 use Becklyn\GluggiBundle\Data\Component;
 use Becklyn\GluggiBundle\Data\Error\CompilationError;
 use Becklyn\GluggiBundle\Data\Error\GluggiError;
@@ -19,7 +19,7 @@ class DependenciesParser
 
 
     /**
-     * @param ComponentTypeRegistry $typeRegistry
+     * @param TypeRegistry $typeRegistry
      */
     public function __construct (Environment $twig)
     {
@@ -32,9 +32,9 @@ class DependenciesParser
     /**
      * Parses all dependencies
      *
-     * @param ComponentTypeRegistry $typeRegistry
+     * @param TypeRegistry $typeRegistry
      */
-    public function parseDependencies (ComponentTypeRegistry $typeRegistry) : void
+    public function parseDependencies (TypeRegistry $typeRegistry) : void
     {
         foreach ($typeRegistry->getAll() as $type)
         {
@@ -53,7 +53,7 @@ class DependenciesParser
      *
      * @return Component[]
      */
-    private function findAndLinkDependencies (ComponentTypeRegistry $typeRegistry, Component $component) : void
+    private function findAndLinkDependencies (TypeRegistry $typeRegistry, Component $component) : void
     {
         try
         {
@@ -70,7 +70,7 @@ class DependenciesParser
             {
                 foreach ($names as $name)
                 {
-                    $dependency = $typeRegistry->getType($type)->getComponent($name);
+                    $dependency = $typeRegistry->getComponent($type, $name);
 
                     if (null === $dependency)
                     {

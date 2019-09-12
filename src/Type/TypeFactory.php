@@ -1,6 +1,6 @@
 <?php
 
-namespace Becklyn\GluggiBundle\Component;
+namespace Becklyn\GluggiBundle\Type;
 
 use Becklyn\GluggiBundle\Configuration\GluggiConfig;
 use Becklyn\GluggiBundle\Data\Component;
@@ -8,7 +8,7 @@ use Becklyn\GluggiBundle\Data\ComponentType;
 use Symfony\Component\Finder\Finder;
 
 
-class ComponentTypeFactory
+class TypeFactory
 {
     /**
      * @var string
@@ -85,7 +85,7 @@ class ComponentTypeFactory
             $this->generateComponentName($key),
             "_" === $fileName[0],
             $type,
-            "{$templatePathPrefix}/{$type->getDirectory()}/{$fileName}"
+            "{$templatePathPrefix}/{$type->getKey()}/{$fileName}"
         );
     }
 

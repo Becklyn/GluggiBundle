@@ -2,11 +2,12 @@
 
 namespace Becklyn\GluggiBundle\Exception;
 
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Exception to indicate an unknown component type
  */
-class UnknownComponentTypeException extends \InvalidArgumentException
+class TypeNotFoundException extends NotFoundHttpException
 {
     /**
      * @param string          $type
@@ -21,7 +22,6 @@ class UnknownComponentTypeException extends \InvalidArgumentException
 
         parent::__construct(
             sprintf($message, $type, implode("', '", $knownTypes)),
-            0,
             $previous
         );
     }

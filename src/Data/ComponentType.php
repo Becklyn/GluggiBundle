@@ -2,7 +2,7 @@
 
 namespace Becklyn\GluggiBundle\Data;
 
-use Becklyn\GluggiBundle\Component\ComponentFactory;
+use Becklyn\GluggiBundle\Exception\ComponentNotFoundException;
 
 /**
  * Describes a component type
@@ -49,17 +49,6 @@ class ComponentType
 
 
     /**
-     * Returns the directory in which the views are stored
-     *
-     * @return string
-     */
-    public function getDirectory () : string
-    {
-        return $this->key;
-    }
-
-
-    /**
      * Returns all components in this type
      *
      * @return Component[]
@@ -71,32 +60,20 @@ class ComponentType
 
 
     /**
-     * Returns all standalone components
-     *
-     * @return Component[]
-     */
-    public function getStandaloneComponents () : array
-    {
-        return array_filter(
-            $this->components,
-            function (Component $component)
-            {
-                return !$component->isHidden();
-            }
-        );
-    }
-
-
-    /**
      * Returns a single component by key
      *
      * @param string $key
      *
-     * @return Component|null
+     * @return Component
      */
-    public function getComponent (string $key)
+    public function getComponent (string $key) : Component
     {
-        return $this->components[$key] ?? null;
+        if (!isset($this->components[$key]))
+        {
+            throw new ComponentNotFoundException($key, $this->key);
+        }
+
+        return $this->components[$key];
     }
 
 

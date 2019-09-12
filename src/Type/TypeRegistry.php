@@ -1,17 +1,18 @@
 <?php
 
-namespace Becklyn\GluggiBundle\ComponentType;
+namespace Becklyn\GluggiBundle\Type;
 
-use Becklyn\GluggiBundle\Component\ComponentTypeFactory;
+use Becklyn\GluggiBundle\Type\TypeFactory;
+use Becklyn\GluggiBundle\Data\Component;
 use Becklyn\GluggiBundle\Data\ComponentType;
-use Becklyn\GluggiBundle\Exception\UnknownComponentTypeException;
+use Becklyn\GluggiBundle\Exception\TypeNotFoundException;
 use Becklyn\GluggiBundle\Usages\DependenciesParser;
 
 
 /**
  * Holds all known component types
  */
-class ComponentTypeRegistry
+class TypeRegistry
 {
     /**
      * @var ComponentType[]|null
@@ -20,7 +21,7 @@ class ComponentTypeRegistry
 
 
     /**
-     * @var ComponentTypeFactory
+     * @var TypeFactory
      */
     private $factory;
 
@@ -32,10 +33,10 @@ class ComponentTypeRegistry
 
 
     /**
-     * @param ComponentTypeFactory $factory
+     * @param TypeFactory $factory
      */
     public function __construct (
-        ComponentTypeFactory $factory,
+        TypeFactory $factory,
         DependenciesParser $dependenciesParser
     )
     {
@@ -57,10 +58,22 @@ class ComponentTypeRegistry
 
         if (!\array_key_exists($key, $types))
         {
-            throw new UnknownComponentTypeException($key, \array_keys($types));
+            throw new TypeNotFoundException($key, \array_keys($types));
         }
 
         return $types[$key];
+    }
+
+
+    /**
+     * @param string $type
+     * @param string $component
+     *
+     * @return Component
+     */
+    public function getComponent (string $type, string $component) : Component
+    {
+        return $this->getType($type)->getComponent($component);
     }
 
 
