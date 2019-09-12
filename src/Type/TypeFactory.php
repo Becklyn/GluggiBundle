@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Becklyn\GluggiBundle\Type;
 
@@ -6,7 +6,6 @@ use Becklyn\GluggiBundle\Configuration\GluggiConfig;
 use Becklyn\GluggiBundle\Data\Component;
 use Becklyn\GluggiBundle\Data\ComponentType;
 use Symfony\Component\Finder\Finder;
-
 
 class TypeFactory
 {
@@ -34,7 +33,7 @@ class TypeFactory
 
 
     /**
-     * Creates the component types and loads all components
+     * Creates the component types and loads all components.
      *
      * @param string $typeKey
      *
@@ -45,7 +44,7 @@ class TypeFactory
         $type = new ComponentType($typeKey);
         $path = "{$this->templatesDir}/{$type->getKey()}";
 
-        if (!is_dir($path) || !is_readable($path))
+        if (!\is_dir($path) || !\is_readable($path))
         {
             return $type;
         }
@@ -91,7 +90,7 @@ class TypeFactory
 
 
     /**
-     * Generates the name from the key
+     * Generates the name from the key.
      *
      * @param string $key
      *
@@ -99,7 +98,7 @@ class TypeFactory
      */
     private function generateComponentName ($key)
     {
-        $parts = \preg_split("~[-_]~", $key, -1, PREG_SPLIT_NO_EMPTY);
+        $parts = \preg_split("~[-_]~", $key, -1, \PREG_SPLIT_NO_EMPTY);
         return \ucwords(\implode(" ", $parts));
     }
 }

@@ -7,7 +7,7 @@ use Becklyn\GluggiBundle\Data\ComponentType;
 use Becklyn\GluggiBundle\Data\References;
 
 /**
- * Normalizes all data structures used in gluggi
+ * Normalizes all data structures used in gluggi.
  */
 class GluggiNormalizer
 {
@@ -46,7 +46,7 @@ class GluggiNormalizer
 
 
     /**
-     * Normalizes a component type
+     * Normalizes a component type.
      *
      * @param ComponentType  $type
      * @param Component|null $activeComponent
@@ -75,7 +75,7 @@ class GluggiNormalizer
 
 
     /**
-     * Normalizes a list of types
+     * Normalizes a list of types.
      *
      * @param ComponentType[] $types
      * @param Component|null  $activeComponent

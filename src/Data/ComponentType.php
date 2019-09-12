@@ -1,11 +1,11 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Becklyn\GluggiBundle\Data;
 
 use Becklyn\GluggiBundle\Exception\ComponentNotFoundException;
 
 /**
- * Describes a component type
+ * Describes a component type.
  */
 class ComponentType
 {
@@ -49,7 +49,7 @@ class ComponentType
 
 
     /**
-     * Returns all components in this type
+     * Returns all components in this type.
      *
      * @return Component[]
      */
@@ -60,7 +60,7 @@ class ComponentType
 
 
     /**
-     * Returns a single component by key
+     * Returns a single component by key.
      *
      * @param string $key
      *

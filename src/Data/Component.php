@@ -1,7 +1,6 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Becklyn\GluggiBundle\Data;
-
 
 use Becklyn\GluggiBundle\Data\Error\ComponentError;
 
@@ -44,7 +43,7 @@ class Component
 
 
     /**
-     * All components that are used inside this component
+     * All components that are used inside this component.
      *
      * @var Component[]
      */
@@ -52,7 +51,7 @@ class Component
 
 
     /**
-     * All components that use this component
+     * All components that use this component.
      *
      * @var Component[]
      */
@@ -123,7 +122,7 @@ class Component
 
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isHidden () : bool
     {
@@ -133,7 +132,7 @@ class Component
 
 
     /**
-     * Returns the import path as used by twig in symfony
+     * Returns the import path as used by twig in symfony.
      *
      * @return string
      */
@@ -173,7 +172,7 @@ class Component
     /**
      * @param Component $dependencies
      */
-    public function addDependency (Component $dependency) : void
+    public function addDependency (self $dependency) : void
     {
         $this->dependencies[$dependency->getFullKey()] = $dependency;
     }
@@ -182,7 +181,7 @@ class Component
     /**
      * @param Component $component
      */
-    public function addUsage (Component $component) : void
+    public function addUsage (self $component) : void
     {
         $this->usages[$component->getFullKey()] = $component;
     }

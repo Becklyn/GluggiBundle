@@ -1,24 +1,23 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Becklyn\GluggiBundle\Controller;
 
 use Becklyn\AssetsBundle\Exception\AssetsException;
 use Becklyn\AssetsBundle\Html\AssetHtmlGenerator;
 use Becklyn\GluggiBundle\Component\ComponentConfiguration;
-use Becklyn\GluggiBundle\Type\TypeRegistry;
 use Becklyn\GluggiBundle\Configuration\GluggiConfig;
 use Becklyn\GluggiBundle\Exception\TypeNotFoundException;
+use Becklyn\GluggiBundle\Type\TypeRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
-
 /**
- * Controller for the main gluggi view
+ * Controller for the main gluggi view.
  */
 class GluggiController extends AbstractController
 {
     /**
-     * Renders the welcome screen
+     * Renders the welcome screen.
      *
      * @param TypeRegistry $registry
      * @param GluggiConfig $config
@@ -36,7 +35,7 @@ class GluggiController extends AbstractController
 
 
     /**
-     * Renders a single component
+     * Renders a single component.
      *
      * @param TypeRegistry           $registry
      * @param ComponentConfiguration $componentConfiguration
@@ -86,7 +85,7 @@ class GluggiController extends AbstractController
 
 
     /**
-     * Renders the layout assets
+     * Renders the layout assets.
      *
      * @param GluggiConfig       $config
      * @param AssetHtmlGenerator $htmlGenerator
@@ -94,8 +93,9 @@ class GluggiController extends AbstractController
      * @param array              $addAssets
      * @param array              $overrideAssets
      *
-     * @return Response
      * @throws AssetsException
+     *
+     * @return Response
      */
     public function layoutAssets (
         GluggiConfig $config,

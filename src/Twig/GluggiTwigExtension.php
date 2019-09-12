@@ -1,19 +1,17 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Becklyn\GluggiBundle\Twig;
 
-use Becklyn\GluggiBundle\Type\TypeRegistry;
 use Becklyn\GluggiBundle\Configuration\GluggiConfig;
-use Becklyn\GluggiBundle\Exception\ComponentNotFoundException;
+use Becklyn\GluggiBundle\Type\TypeRegistry;
 use Psr\Container\ContainerInterface;
 use Symfony\Contracts\Service\ServiceSubscriberInterface;
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
-
 /**
- * Exposes all gluggi-related twig functions
+ * Exposes all gluggi-related twig functions.
  */
 class GluggiTwigExtension extends AbstractExtension implements ServiceSubscriberInterface
 {
@@ -50,7 +48,7 @@ class GluggiTwigExtension extends AbstractExtension implements ServiceSubscriber
 
 
     /**
-     * Renders a gluggi component
+     * Renders a gluggi component.
      *
      * @param string $type
      * @param string $name
@@ -62,7 +60,7 @@ class GluggiTwigExtension extends AbstractExtension implements ServiceSubscriber
     {
         $component = $this->registry->getComponent($type, $name);
 
-        $context = array_replace([
+        $context = \array_replace([
             "standalone" => false,
         ], $context);
 
@@ -72,7 +70,7 @@ class GluggiTwigExtension extends AbstractExtension implements ServiceSubscriber
 
 
     /**
-     * Returns the template name
+     * Returns the template name.
      *
      * @param string $type
      * @param string $name

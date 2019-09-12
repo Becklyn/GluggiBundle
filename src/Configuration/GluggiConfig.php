@@ -1,11 +1,11 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Becklyn\GluggiBundle\Configuration;
 
 use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
- * Holds all configuration values
+ * Holds all configuration values.
  */
 class GluggiConfig
 {
@@ -28,13 +28,13 @@ class GluggiConfig
 
 
     /**
-     * @var null|string
+     * @var string|null
      */
     private $infoAction;
 
 
     /**
-     * @var null|string
+     * @var string|null
      */
     private $title;
 
@@ -109,7 +109,7 @@ class GluggiConfig
 
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getInfoAction ()
     {
@@ -119,7 +119,7 @@ class GluggiConfig
 
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getTitle ()
     {
@@ -159,7 +159,7 @@ class GluggiConfig
 
 
     /**
-     * Returns the user defined data
+     * Returns the user defined data.
      *
      * @param string|int $key
      *
@@ -167,9 +167,9 @@ class GluggiConfig
      */
     public function getData ($key)
     {
-        if (!array_key_exists($key, $this->data))
+        if (!\array_key_exists($key, $this->data))
         {
-            throw new \InvalidArgumentException(sprintf("Can't find gluggi data with key '%s'.", $key));
+            throw new \InvalidArgumentException(\sprintf("Can't find gluggi data with key '%s'.", $key));
         }
 
         return $this->data[$key];
@@ -186,9 +186,10 @@ class GluggiConfig
 
 
     /**
-     * Resolves the configured layout directory path
+     * Resolves the configured layout directory path.
      *
      * @param string $path
+     *
      * @return string
      */
     public function resolvePath (string $path) : string

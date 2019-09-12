@@ -2,7 +2,6 @@
 
 namespace Becklyn\GluggiBundle\Data\Error;
 
-
 use Twig\Error\Error;
 
 class CompilationError implements ComponentError
@@ -27,6 +26,6 @@ class CompilationError implements ComponentError
      */
     public function getMessage () : string
     {
-        return "Twig compilation error: $this->error->getMessage()}";
+        return "Twig compilation error: {$this->error}->getMessage()}";
     }
 }

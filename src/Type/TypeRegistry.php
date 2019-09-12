@@ -1,16 +1,14 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Becklyn\GluggiBundle\Type;
 
-use Becklyn\GluggiBundle\Type\TypeFactory;
 use Becklyn\GluggiBundle\Data\Component;
 use Becklyn\GluggiBundle\Data\ComponentType;
 use Becklyn\GluggiBundle\Exception\TypeNotFoundException;
 use Becklyn\GluggiBundle\Usages\DependenciesParser;
 
-
 /**
- * Holds all known component types
+ * Holds all known component types.
  */
 class TypeRegistry
 {
@@ -46,7 +44,7 @@ class TypeRegistry
 
 
     /**
-     * Returns the type by key
+     * Returns the type by key.
      *
      * @param string $key
      *
@@ -79,7 +77,7 @@ class TypeRegistry
 
 
     /**
-     * Returns all component types
+     * Returns all component types.
      *
      * @return ComponentType[]
      */

@@ -3,7 +3,7 @@
 namespace Becklyn\GluggiBundle\Data;
 
 /**
- * Returns two list of components:
+ * Returns two list of components:.
  *
  * directly referenced ones and transitively referenced onces.
  */

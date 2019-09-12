@@ -2,11 +2,11 @@
 
 namespace Becklyn\GluggiBundle\Usages;
 
-use Becklyn\GluggiBundle\Exception\ComponentNotFoundException;
-use Becklyn\GluggiBundle\Type\TypeRegistry;
 use Becklyn\GluggiBundle\Data\Component;
 use Becklyn\GluggiBundle\Data\Error\CompilationError;
 use Becklyn\GluggiBundle\Data\Error\GluggiError;
+use Becklyn\GluggiBundle\Exception\ComponentNotFoundException;
+use Becklyn\GluggiBundle\Type\TypeRegistry;
 use Becklyn\GluggiBundle\Usages\Twig\TwigUsagesVisitor;
 use Twig\Environment;
 use Twig\Error\Error;
@@ -32,7 +32,7 @@ class DependenciesParser
 
 
     /**
-     * Parses all dependencies
+     * Parses all dependencies.
      *
      * @param TypeRegistry $typeRegistry
      */
@@ -49,7 +49,7 @@ class DependenciesParser
 
 
     /**
-     * Find every component that is used in the given template
+     * Find every component that is used in the given template.
      *
      * @param string $template
      *

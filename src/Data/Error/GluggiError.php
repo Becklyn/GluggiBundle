@@ -2,7 +2,6 @@
 
 namespace Becklyn\GluggiBundle\Data\Error;
 
-
 class GluggiError implements ComponentError
 {
     /**

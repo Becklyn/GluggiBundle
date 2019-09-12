@@ -1,11 +1,10 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Becklyn\GluggiBundle\DependencyInjection;
 
 use Becklyn\GluggiBundle\GluggiBundle;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
-
 
 class GluggiBundleConfiguration implements ConfigurationInterface
 {
