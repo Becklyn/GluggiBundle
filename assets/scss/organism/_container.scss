@@ -2,7 +2,6 @@
 @import "../helper/variables";
 
 .gluggi-container {
-    $box-shadow: 0 5px 12px 0 $shadow-color;
     display: flex;
     width: 100%;
     height: 100%;
@@ -64,8 +63,18 @@
         }
     }
 
+    @include on-small-only {
+        .gluggi-sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    }
 
-    @include on-tablet {
+
+    @include on-desktop {
         .gluggi-sidebar-toggle {
             background-color: $bg;
             color: $text;

@@ -69,6 +69,8 @@
             border-radius: 10px;
             width: 640px;
             padding: 50px;
+            box-shadow: $box-shadow;
+            overflow-y: auto;
         }
 
         .gluggi-usages-transitive-toggle {
@@ -122,7 +124,17 @@
         }
     }
 
-    @include on-tablet {
+    @include on-small-only {
+        .gluggi-action-usages .gluggi-usages-overview {
+            position: fixed;
+            top: 5px;
+            left: 5px;
+            width: calc(100% - 10px);
+            height: calc(100% - #{20px + 56px + 15px});
+        }
+    }
+
+    @include on-desktop {
         padding: 100px;
         background-color: $bg;
 

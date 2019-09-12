@@ -14,9 +14,18 @@
 
 
 ///
-/// Main breakpoint for tablets+
+/// Main breakpoint for the mobile view
 ///
-@mixin on-tablet {
+@mixin on-small-only {
+    @include on-max-width(1199px) {
+        @content;
+    }
+}
+
+///
+/// Main breakpoint for desktops
+///
+@mixin on-desktop {
     @include on-min-width(1200px) {
         @content;
     }
