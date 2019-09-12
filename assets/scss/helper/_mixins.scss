@@ -11,3 +11,13 @@
     outline: 0;
     cursor: pointer;
 }
+
+
+///
+/// Main breakpoint for tablets+
+///
+@mixin on-tablet {
+    @include on-min-width(1200px) {
+        @content;
+    }
+}

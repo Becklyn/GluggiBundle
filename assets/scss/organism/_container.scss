@@ -2,13 +2,15 @@
 @import "../helper/variables";
 
 .gluggi-container {
+    $box-shadow: 0 5px 12px 0 $shadow-color;
     display: flex;
     width: 100%;
     height: 100%;
     position: relative;
 
     .gluggi-sidebar {
-        @include fixed-flex-width(300px);
+        @include fixed-flex-width(350px);
+        display: none;
         z-index: 1;
     }
 
@@ -17,7 +19,7 @@
         z-index: 1;
     }
 
-    .gluggi-sidebar-open {
+    .gluggi-sidebar-toggle {
         @include center-children;
         @include invisible-button;
         position: absolute;
@@ -26,18 +28,79 @@
         right: 20px;
         height: 32px;
         width: 32px;
+        color: $text;
         background-color: $content-bg;
-        box-shadow: 0 5px 12px 0 $shadow-color;
-        display: none;
+        box-shadow: $box-shadow;
+        display: flex;
+
+        .gluggi-toggled {
+            display: none;
+        }
 
         &:hover,
         &:focus {
             background-color: $bg-dark;
             color: $inverted;
         }
+    }
 
-        &.is-visible {
+    &.gluggi-is-toggled {
+        .gluggi-sidebar {
             display: flex;
+        }
+
+        .gluggi-sidebar-toggle {
+            background-color: $bg;
+            color: $text;
+            box-shadow: none;
+
+            .gluggi-default {
+                display: none;
+            }
+
+            .gluggi-toggled {
+                display: flex;
+            }
+        }
+    }
+
+
+    @include on-tablet {
+        .gluggi-sidebar-toggle {
+            background-color: $bg;
+            color: $text;
+            box-shadow: none;
+
+            .gluggi-toggled {
+                display: flex;
+            }
+
+            .gluggi-default {
+                display: none;
+            }
+        }
+
+        .gluggi-sidebar {
+            display: flex;
+        }
+
+        &.gluggi-is-toggled {
+            .gluggi-sidebar {
+                display: none;
+            }
+
+            .gluggi-sidebar-toggle {
+                background-color: $content-bg;
+                box-shadow: $box-shadow;
+
+                .gluggi-toggled {
+                    display: none;
+                }
+
+                .gluggi-default {
+                    display: flex;
+                }
+            }
         }
     }
 }

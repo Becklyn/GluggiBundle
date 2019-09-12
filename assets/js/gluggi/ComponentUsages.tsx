@@ -6,7 +6,7 @@ import {GluggiRouter} from "./GluggiRouter";
 import {icon} from "./icon";
 
 // @ts-ignore
-import chevronIcon from "../../icon/chevron.svg";
+import usagesIcon from "../../icon/usages.svg";
 // @ts-ignore
 import transitiveIcon from "../../icon/transitive.svg";
 
@@ -62,7 +62,8 @@ export function ComponentUsages (props: ComponentUsagesProps): JSX.Element
     return (
         <div class={`gluggi-action-usages ${open ? "is-open" : ""}`}>
             <button type="button" class="gluggi-action" onClick={() => setOpen(!open)}>
-                {icon(chevronIcon)} Usages
+                {icon(usagesIcon)}
+                <span class="gluggi-action-label">Usages</span>
             </button>
             {open && (
                 <div class="gluggi-usages-overview">

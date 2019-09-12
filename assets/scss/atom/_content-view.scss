@@ -1,25 +1,10 @@
+@import "../helper/mixins";
 @import "../helper/variables";
 
 .gluggi-content-view {
-    padding: 100px;
+    padding: 0;
+    background-color: $content-bg;
     position: relative;
-
-    .gluggi-content {
-        background-color: $content-bg;
-        border-radius: 10px;
-        padding: 50px;
-    }
-
-    &.is-fullscreen {
-        padding: 0;
-        background-color: $content-bg;
-
-        .gluggi-content {
-            padding: 0;
-            border-radius: 0;
-            background-color: transparent;
-        }
-    }
 
     &.gluggi-contains-welcome {
         @include center-children;
@@ -57,17 +42,20 @@
         }
     }
 
+    .gluggi-toggle-fullscreen {
+        display: none;
+    }
+
     .gluggi-action-usages {
         position: relative;
 
-        .gluggi-action {
-            .gluggi-icon {
-                margin-right: 5px;
+        .gluggi-action .gluggi-icon {
+            padding: 0 4px;
+        }
 
-                svg {
-                    @include transition(transform);
-                }
-            }
+        .gluggi-action-label {
+            display: none;
+            margin-left: 5px;
         }
 
         .gluggi-usages-overview {
@@ -88,7 +76,7 @@
             display: flex;
             align-items: center;
             position: absolute;
-            top: 10px;
+            bottom: 10px;
             right: 10px;
             border-radius: 5px;
             font-size: 12px;
@@ -123,12 +111,45 @@
         }
 
         &.is-open {
-            .gluggi-action svg {
-                transform: rotateZ(180deg);
+            .gluggi-action {
+                background-color: $bg-dark;
+                color: $inverted;
             }
 
             .gluggi-usages-overview {
                 display: flex;
+            }
+        }
+    }
+
+    @include on-tablet {
+        padding: 100px;
+        background-color: $bg;
+
+
+        .gluggi-toggle-fullscreen {
+            display: flex;
+        }
+
+        .gluggi-action-usages .gluggi-action-label {
+            display: block;
+        }
+
+
+        .gluggi-content {
+            background-color: $content-bg;
+            border-radius: 10px;
+            padding: 50px;
+        }
+
+        &.is-fullscreen {
+            padding: 0;
+            background-color: $content-bg;
+
+            .gluggi-content {
+                padding: 0;
+                border-radius: 0;
+                background-color: transparent;
             }
         }
     }

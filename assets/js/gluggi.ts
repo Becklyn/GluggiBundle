@@ -19,7 +19,7 @@ let data = parseElementAsJson(dataContainer);
 let router = new GluggiRouter(data.url);
 let contentView = findOne(".gluggi-content-view");
 
-mount(".gluggi-sidebar", initSidebarVisibilityToggle);
+mount(".gluggi-container", initSidebarVisibilityToggle);
 mount(".gluggi-sidebar-content-data", SidebarContent, {type: "jsx", params: {router}});
 mount(".gluggi-data-container-usages", ComponentUsages, {type: "jsx", params: {router}});
 

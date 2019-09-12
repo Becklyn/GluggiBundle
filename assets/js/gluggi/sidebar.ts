@@ -1,5 +1,5 @@
 import {on} from "mojave/dom/events";
-import {createUnstyledElement, prepend} from "mojave/dom/manipulate";
+import {createUnstyledElement, prepend, toggleClass} from "mojave/dom/manipulate";
 // @ts-ignore
 import closeIcon from "../../icon/close.svg";
 // @ts-ignore
@@ -8,29 +8,18 @@ import menuIcon from "../../icon/menu.svg";
 /**
  * Initializes the close button
  */
-export function initSidebarVisibilityToggle (sidebar: HTMLElement)
+export function initSidebarVisibilityToggle (container: HTMLElement)
 {
-    let close = createUnstyledElement("button", {
-        class: "gluggi-sidebar-close",
-        html: closeIcon,
-    });
-    let open = createUnstyledElement("button", {
-        class: "gluggi-sidebar-open",
-        html: menuIcon,
-    });
-    prepend(sidebar, close);
-    prepend(sidebar.parentElement, open);
-    let visible = true;
-
-    on(close, "click", () => {
-        sidebar.classList.add("is-hidden");
-        open.classList.add("is-visible");
-        visible = false;
+    let button = createUnstyledElement("button", {
+        class: "gluggi-sidebar-toggle",
+        html: `<span class="gluggi-default">${menuIcon}</span><span class="gluggi-toggled">${closeIcon}</span>`,
     });
 
-    on(open, "click", () => {
-        sidebar.classList.remove("is-hidden");
-        open.classList.remove("is-visible");
-        visible = true;
+    let isToggled = false;
+    prepend(container, button);
+
+    on(button, "click", () => {
+        isToggled = !isToggled;
+        toggleClass(container, "gluggi-is-toggled", isToggled);
     });
 }
