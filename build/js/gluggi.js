@@ -78,7 +78,7 @@
   !*** ./assets/js/components/GluggiType.tsx ***!
   \*********************************************/
 /*! exports provided: GluggiType */
-/*! exports used: GluggiType */function(e,t,n){"use strict";n.d(t,"a",(function(){return i}));var r=n(/*! preact */0),o=n(/*! ./ComponentLink */6);function i(e){return Object(r.c)("div",{class:"gluggi-component"},Object(r.c)("h2",{class:"gluggi-component-title"},e.type.title),e.type.components.length>0?Object(r.c)("ul",{class:"gluggi-component-list"},e.type.components.map((function(t){return Object(r.c)(o.a,{component:t,router:e.router,shortName:!e.showFullName})}))):Object(r.c)("div",{class:"gluggi-component-empty"},e.emptyText))}},
+/*! exports used: GluggiType */function(e,t,n){"use strict";n.d(t,"a",(function(){return u}));var r=n(/*! preact */0),o=n(/*! ./ComponentLink */6),i=n(/*! ./Icon */1);function u(e){return Object(r.c)("div",{class:"gluggi-component"},Object(r.c)("h2",{class:"gluggi-component-title"},e.type.title),e.type.components.length>0?Object(r.c)("ul",{class:"gluggi-component-list"},e.type.components.map((function(t){return Object(r.c)(o.a,{component:t,router:e.router,shortName:!e.showFullName},t.error&&Object(r.c)(i.a,{name:"error",title:t.error}))}))):Object(r.c)("div",{class:"gluggi-component-empty"},e.emptyText))}},
 /*!******************************************************!*\
   !*** ./assets/js/components/ComponentReferences.tsx ***!
   \******************************************************/

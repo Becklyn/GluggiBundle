@@ -2,6 +2,7 @@ import {h, JSX} from "preact";
 import {Gluggi} from "../@types/gluggi";
 import {ComponentLink} from "./ComponentLink";
 import {GluggiRouter} from "../lib/GluggiRouter";
+import {Icon} from "./Icon";
 
 
 interface GluggiTypeProps
@@ -27,7 +28,11 @@ export function GluggiType (props: GluggiTypeProps) : JSX.Element
                             component={component}
                             router={props.router}
                             shortName={!props.showFullName}
-                        />
+                        >
+                            {component.error && (
+                                <Icon name="error" title={component.error} />
+                            )}
+                        </ComponentLink>
                     ))}
                 </ul>
             ) : (
