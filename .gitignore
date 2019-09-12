@@ -5,4 +5,6 @@
 /package-lock.json
 /tests/app/cache
 /tests/app/logs
+/tests/public
+/tests/var
 /vendor
