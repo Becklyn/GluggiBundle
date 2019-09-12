@@ -13,7 +13,7 @@ use Twig\TwigFunction;
 /**
  * Exposes all gluggi-related twig functions.
  */
-class GluggiTwigExtension extends AbstractExtension implements ServiceSubscriberInterface
+class GluggiTwigExtension extends AbstractExtension
 {
     /**
      * @var TypeRegistry
@@ -30,19 +30,19 @@ class GluggiTwigExtension extends AbstractExtension implements ServiceSubscriber
     /**
      * @var ContainerInterface
      */
-    private $container;
+    private $locator;
 
 
     /**
+     * @param ContainerInterface $locator
      * @param TypeRegistry       $registry
      * @param GluggiConfig       $config
-     * @param ContainerInterface $container
      */
-    public function __construct (TypeRegistry $registry, GluggiConfig $config, ContainerInterface $container)
+    public function __construct (ContainerInterface $locator, TypeRegistry $registry, GluggiConfig $config)
     {
         $this->registry = $registry;
         $this->config = $config;
-        $this->container = $container;
+        $this->locator = $locator;
     }
 
 
@@ -64,7 +64,7 @@ class GluggiTwigExtension extends AbstractExtension implements ServiceSubscriber
             "standalone" => false,
         ], $context);
 
-        return $this->container->get(Environment::class)->render($component->getTemplatePath(), $context);
+        return $this->locator->get("twig")->render($component->getTemplatePath(), $context);
     }
 
 
@@ -93,17 +93,6 @@ class GluggiTwigExtension extends AbstractExtension implements ServiceSubscriber
             new TwigFunction("gluggi", [$this, "renderGluggiComponent"], ["is_safe" => ["html"]]),
             new TwigFunction("gluggi_data", [$this->config, "getData"]),
             new TwigFunction("gluggi_template", [$this, "getTemplateName"]),
-        ];
-    }
-
-
-    /**
-     * @inheritdoc
-     */
-    public static function getSubscribedServices ()
-    {
-        return [
-            Environment::class,
         ];
     }
 }

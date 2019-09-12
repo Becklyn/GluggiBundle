@@ -13,3 +13,12 @@ services:
     Becklyn\GluggiBundle\Configuration\GluggiConfig:
         bind:
             $twigDefaultPath: '%twig.default_path%'
+
+    Becklyn\GluggiBundle\Twig\GluggiTwigExtension:
+        $locator: '@gluggi.twig.locator'
+
+    gluggi.twig.locator:
+        class: Symfony\Component\DependencyInjection\ServiceLocator
+        tags: ['container.service_locator']
+        arguments:
+            - twig: '@twig'
