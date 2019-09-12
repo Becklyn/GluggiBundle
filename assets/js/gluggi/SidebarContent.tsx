@@ -10,6 +10,8 @@ import arrowIcon from "../../icon/active.svg";
 import searchIcon from "../../icon/search.svg";
 // @ts-ignore
 import externalIcon from "../../icon/external.svg";
+// @ts-ignore
+import errorIcon from "../../icon/error.svg";
 
 interface GluggiComponent
 {
@@ -17,6 +19,7 @@ interface GluggiComponent
     url: string;
     type: string;
     active: boolean;
+    error?: string|null;
 }
 
 interface GluggiType
@@ -49,6 +52,9 @@ function renderComponent (component: GluggiComponent, showFullName: boolean = fa
                         <span class="gluggi-component-type">{component.type}</span>
                     )}
                     {` ${component.name}`}
+                    {component.error && (
+                        icon(errorIcon, component.error)
+                    )}
                     {"page" === component.type ? icon(externalIcon) : ""}
                 </span>
             </a>

@@ -3,9 +3,9 @@
 namespace Becklyn\GluggiBundle\Component;
 
 use Becklyn\GluggiBundle\Data\Component;
-use Becklyn\GluggiBundle\Data\ComponentType;
 use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Yaml;
+use Twig\Error\Error;
 
 
 class ComponentConfiguration
@@ -40,14 +40,14 @@ class ComponentConfiguration
             $loader = $this->twig->getLoader();
             $template = $loader->getSourceContext($component->getTemplatePath())->getCode();
 
-            if (1 === preg_match('~^\\s*\\{#-?(?P<config>.*?)-?#\\}~s', $template, $matches))
+            if (1 === preg_match('~^\\s*{#-?(?P<config>.*?)-?#}~s', $template, $matches))
             {
                 return $this->parseConfig($matches["config"]);
             }
 
             return [];
         }
-        catch (\Twig_Error $e)
+        catch (Error $e)
         {
             return [];
         }
@@ -96,7 +96,7 @@ class ComponentConfiguration
      */
     private function deindent (string $configText) : string
     {
-        $configText = rtrim($configText);
+        $configText = \rtrim($configText);
 
         if (empty($configText))
         {
@@ -104,13 +104,13 @@ class ComponentConfiguration
         }
 
         // remove all heading whitespace-only lines
-        $configText = preg_replace("~\\A\\s*\n~", "", $configText);
+        $configText = \preg_replace("~\\A\\s*\n~", "", $configText);
 
         // fetch indention of first line
-        if (1 === preg_match('~\A(?P<indention>\\s*)[^\\s]~', $configText, $matches))
+        if (1 === \preg_match('~\A(?P<indention>\\s*)[^\\s]~', $configText, $matches))
         {
             // check whether all lines have at least the indention of the first line
-            if (1 === preg_match('~^(?!' . $matches["indention"] . ')~m', $configText))
+            if (1 === \preg_match('~^(?!' . $matches["indention"] . ')~m', $configText))
             {
                 // there is a line with a smaller indention than the first line
                 // -> abort
@@ -118,7 +118,7 @@ class ComponentConfiguration
             }
 
             // deindent all lines
-            return preg_replace('~^' . $matches["indention"] . '~m', "", $configText);
+            return \preg_replace('~^' . $matches["indention"] . '~m', "", $configText);
         }
 
         return "";

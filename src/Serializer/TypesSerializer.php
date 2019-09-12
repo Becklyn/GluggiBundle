@@ -63,6 +63,9 @@ class TypesSerializer
                     ]),
                     "type" => $type->getKey(),
                     "active" => $component === $activeComponent,
+                    "error" => null !== $component->getError()
+                        ? $component->getError()->getMessage()
+                        : null,
                 ];
             }
 
