@@ -2,6 +2,7 @@
 
 namespace Becklyn\GluggiBundle\Usages;
 
+use Becklyn\GluggiBundle\Exception\ComponentNotFoundException;
 use Becklyn\GluggiBundle\Type\TypeRegistry;
 use Becklyn\GluggiBundle\Data\Component;
 use Becklyn\GluggiBundle\Data\Error\CompilationError;
@@ -71,13 +72,6 @@ class DependenciesParser
                 foreach ($names as $name)
                 {
                     $dependency = $typeRegistry->getComponent($type, $name);
-
-                    if (null === $dependency)
-                    {
-                        $component->setError(new GluggiError("Component imports unknown component: '{$type}/{$name}'"));
-                        return;
-                    }
-
                     $component->addDependency($dependency);
                     $dependency->addUsage($component);
                 }
@@ -86,7 +80,10 @@ class DependenciesParser
         catch (Error $e)
         {
             $component->setError(new CompilationError($e));
-            return;
+        }
+        catch (ComponentNotFoundException $e)
+        {
+            $component->setError(new GluggiError("Invalid import: {$e->getMessage()}"));
         }
     }
 }

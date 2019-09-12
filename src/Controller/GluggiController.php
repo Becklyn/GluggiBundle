@@ -55,7 +55,7 @@ class GluggiController extends AbstractController
         {
             $component = $registry->getComponent($type, $key);
 
-            if (null === $component || $component->isHidden())
+            if ($component->isHidden())
             {
                 $message = null === $component
                     ? "No component found: '%s/%s'"

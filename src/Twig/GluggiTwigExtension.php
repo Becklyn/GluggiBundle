@@ -62,11 +62,6 @@ class GluggiTwigExtension extends AbstractExtension implements ServiceSubscriber
     {
         $component = $this->registry->getComponent($type, $name);
 
-        if (null === $component)
-        {
-            throw new ComponentNotFoundException($name, $type);
-        }
-
         $context = array_replace([
             "standalone" => false,
         ], $context);
@@ -86,14 +81,7 @@ class GluggiTwigExtension extends AbstractExtension implements ServiceSubscriber
      */
     public function getTemplateName (string $type, string $name) : string
     {
-        $component = $this->registry->getComponent($type, $name);
-
-        if (null === $component)
-        {
-            throw new ComponentNotFoundException($name, $type);
-        }
-
-        return $component->getTemplatePath();
+        return $this->registry->getComponent($type, $name)->getTemplatePath();
     }
 
 
