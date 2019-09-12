@@ -2,8 +2,8 @@ import {h, JSX} from "preact";
 import {useState} from "preact/hooks";
 import {Gluggi} from "../@types/gluggi";
 import {ComponentLink} from "./ComponentLink";
-import {GluggiRouter} from "./GluggiRouter";
-import {icon} from "./icon";
+import {GluggiRouter} from "../lib/GluggiRouter";
+import {icon} from "../lib/icon";
 
 // @ts-ignore
 import usagesIcon from "../../icon/usages.svg";

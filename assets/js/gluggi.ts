@@ -1,35 +1,29 @@
 import {findOne} from "mojave/dom/traverse";
 import {parseElementAsJson} from "mojave/json";
 import {mount} from "mojave/mount";
-import {ComponentReferences} from "./gluggi/ComponentReferences";
-import {initToggleFullScreen} from "./gluggi/full-screen";
-import {GluggiRouter} from "./gluggi/GluggiRouter";
-import {initSidebarVisibilityToggle} from "./gluggi/sidebar";
-import {SidebarContent} from "./gluggi/SidebarContent";
+import {ComponentReferences} from "./components/ComponentReferences";
+import {initToggleFullScreen} from "./handlers/full-screen";
+import {GluggiRouter} from "./lib/GluggiRouter";
+import {initSidebarVisibilityToggle} from "./handlers/sidebar";
+import {SidebarContent} from "./components/SidebarContent";
 
-
-let dataContainer = findOne(".gluggi-global-data");
-
-if (dataContainer === null)
-{
-    throw new Error("Can't run Gluggi, as the global gluggi data is missing.");
-}
-
-let data = parseElementAsJson(dataContainer);
+// prepare variables
+let data = parseElementAsJson(document.getElementById("gluggi-global-data"));
 let router = new GluggiRouter(data.url);
-let contentView = findOne(".gluggi-content-view");
+let stage = findOne(".gluggi-stage");
 
+// mount components
 mount(".gluggi-container", initSidebarVisibilityToggle);
-mount(".gluggi-sidebar-content-data", SidebarContent, {
+mount("#gluggi-sidebar-content-data", SidebarContent, {
     type: "jsx",
     params: {router},
 });
-mount(".gluggi-data-container-references", ComponentReferences, {
+mount("#gluggi-data-container-references", ComponentReferences, {
     type: "jsx",
     params: {router},
 });
 
-if (null !== contentView)
+if (null !== stage)
 {
-    mount(".gluggi-toggle-fullscreen", initToggleFullScreen, {params: [contentView]});
+    mount(".gluggi-toggle-fullscreen", initToggleFullScreen, {params: [stage]});
 }

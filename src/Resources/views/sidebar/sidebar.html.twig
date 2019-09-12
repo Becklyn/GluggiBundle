@@ -2,8 +2,11 @@
 {# @var types \Becklyn\GluggiBundle\Data\ComponentType[] #}
 
 <div class="gluggi-sidebar">
-    {{- data_container({
-        types: types,
-        title: customTitle ?? "Gluggi",
-    }, "gluggi-sidebar-content-data") -}}
+    {{- render(controller("Becklyn\\GluggiBundle\\Controller\\EmbedController::dataContainer", {
+        data: {
+            types: types,
+            title: customTitle ?? "Gluggi",
+        },
+        id: "gluggi-sidebar-content-data"
+    })) -}}
 </div>

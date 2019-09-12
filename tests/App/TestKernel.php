@@ -17,6 +17,16 @@ class TestKernel extends Kernel
 {
     use MicroKernelTrait;
 
+
+    /**
+     * @inheritDoc
+     */
+    public function __construct ()
+    {
+        parent::__construct("dev", true);
+    }
+
+
     /**
      * @inheritdoc
      */
@@ -36,8 +46,8 @@ class TestKernel extends Kernel
      */
     protected function configureRoutes (RouteCollectionBuilder $routes)
     {
-        $routes->import(__DIR__  ."/../../Resources/config/routes.yaml");
-        $routes->import(__DIR__  ."/../../vendor/becklyn/assets-bundle/Resources/config/routes.yaml");
+        $routes->import(__DIR__  ."/../../src/Resources/config/routes.yaml");
+        $routes->import(__DIR__  ."/../../vendor/becklyn/assets-bundle/src/Resources/config/routes.yaml");
     }
 
 
@@ -47,5 +57,14 @@ class TestKernel extends Kernel
     protected function configureContainer (ContainerBuilder $c, LoaderInterface $loader)
     {
         $loader->load(__DIR__ . "/config.yaml");
+    }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function getProjectDir ()
+    {
+        return \dirname(__DIR__);
     }
 }

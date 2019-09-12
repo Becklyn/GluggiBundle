@@ -2,8 +2,6 @@
 
 namespace Becklyn\GluggiBundle\Controller;
 
-use Becklyn\AssetsBundle\Exception\AssetsException;
-use Becklyn\AssetsBundle\Html\AssetHtmlGenerator;
 use Becklyn\GluggiBundle\Component\ComponentConfiguration;
 use Becklyn\GluggiBundle\Configuration\GluggiConfig;
 use Becklyn\GluggiBundle\Exception\TypeNotFoundException;
@@ -77,71 +75,5 @@ class GluggiController extends AbstractController
         {
             throw $this->createNotFoundException($e->getMessage(), $e);
         }
-    }
-
-
-    /**
-     * Renders the layout assets.
-     *
-     * @param GluggiConfig       $config
-     * @param AssetHtmlGenerator $htmlGenerator
-     * @param string             $type
-     * @param array              $addAssets
-     * @param array              $overrideAssets
-     *
-     * @throws AssetsException
-     *
-     * @return Response
-     */
-    public function layoutAssets (
-        GluggiConfig $config,
-        AssetHtmlGenerator $htmlGenerator,
-        string $type,
-        array $addAssets = [],
-        array $overrideAssets = []
-    ) : Response
-    {
-        $overrideAssets = $overrideAssets[$type] ?? [];
-        $coreAssets = [
-            "css" => "@gluggi_core/css/gluggi.css",
-            "js" => "@gluggi_core/js/gluggi.js",
-        ];
-
-        if (!empty($overrideAssets))
-        {
-            $assetPaths = $overrideAssets;
-        }
-        else
-        {
-            switch ($type)
-            {
-                case "js_head":
-                    $assetPaths = $config->getJavaScriptHeadFiles();
-                    break;
-
-                case "js":
-                    $assetPaths = $config->getJavaScriptFiles();
-                    break;
-
-                case "css":
-                    $assetPaths = $config->getCssFiles();
-                    break;
-
-                default:
-                    $assetPaths = [];
-                    break;
-            }
-
-            $assetPaths = \array_merge($assetPaths, $addAssets[$type] ?? []);
-        }
-
-        if (\array_key_exists($type, $coreAssets))
-        {
-            \array_unshift($assetPaths, $coreAssets[$type]);
-        }
-
-        return new Response(
-            $htmlGenerator->linkAssets($assetPaths)
-        );
     }
 }

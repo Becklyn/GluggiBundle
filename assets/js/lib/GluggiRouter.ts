@@ -1,9 +1,9 @@
-/**
- * A very simple router that mimics the URL structure of the main app
- */
 import {Gluggi} from "../@types/gluggi";
 
 
+/**
+ * A very simple router that mimics the URL structure of the main app
+ */
 export class GluggiRouter
 {
     private prefix: string;

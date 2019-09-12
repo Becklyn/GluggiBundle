@@ -6,13 +6,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0{% if (templateConfiguration.prevent_zoom ?? false) %}, maximum-scale=1.0, user-scalable=no{% endif %}">
         <title>{%- if component is defined %}{{ component.name }} // {{ component.type.name}} // {% endif -%}Gluggi</title>
 
-        {{- render(controller('Becklyn\\GluggiBundle\\Controller\\GluggiController::layoutAssets', {
+        {{- render(controller('Becklyn\\GluggiBundle\\Controller\\EmbedController::layoutAssets', {
             type: "css",
             addAssets: templateConfiguration.add_assets ?? [],
             overrideAssets: templateConfiguration.override_assets ?? [],
         })) -}}
 
-        {{ render(controller("Becklyn\\GluggiBundle\\Controller\\GluggiController::layoutAssets", {
+        {{ render(controller("Becklyn\\GluggiBundle\\Controller\\EmbedController::layoutAssets", {
             type: "js_head",
             addAssets: templateConfiguration.add_assets ?? [],
             overrideAssets: templateConfiguration.override_assets ?? [],
@@ -20,9 +20,12 @@
     </head>
     <body class="gluggi {{ templateConfiguration.body_class ?? "" }}">
 
-        {{- data_container({
-            url: path("gluggi"),
-        }, "gluggi-global-data") -}}
+        {{- render(controller("Becklyn\\GluggiBundle\\Controller\\EmbedController::dataContainer", {
+            data: {
+                url: path("gluggi"),
+            },
+            id: "gluggi-global-data"
+        })) -}}
 
         <div class="gluggi-container">
         {%- block body -%}
@@ -44,7 +47,7 @@
         {%- endblock -%}
         </div>
 
-        {{- render(controller("Becklyn\\GluggiBundle\\Controller\\GluggiController::layoutAssets", {
+        {{- render(controller("Becklyn\\GluggiBundle\\Controller\\EmbedController::layoutAssets", {
             type: "js",
             addAssets: templateConfiguration.add_assets ?? [],
             overrideAssets: templateConfiguration.override_assets ?? [],

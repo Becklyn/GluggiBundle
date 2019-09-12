@@ -14,7 +14,7 @@ class GluggiControllerTest extends WebTestCase
         $content = $client->getResponse()->getContent();
 
         self::assertContains(
-            "<title>Index // Gluggi</title>",
+            "<title>Gluggi</title>",
             $content
         );
     }
@@ -52,7 +52,7 @@ class GluggiControllerTest extends WebTestCase
     public function testGluggiWrapperOnTypeComponentView (string $type, bool $shouldHaveWrapper)
     {
         $client = static::createClient();
-        $crawler = $client->request("GET", "/{$type}/example/");
+        $crawler = $client->request("GET", "/{$type}/example");
 
         // if the page should have a wrapper, it should exactly have one of each component
         // otherwise 0
@@ -61,10 +61,8 @@ class GluggiControllerTest extends WebTestCase
 
         // all elements that create the structural view of gluggi
         $gluggiSelectors = [
-            "#gluggi-content",
-            ".gluggi-header",
-            ".gluggi-preview",
-            ".gluggi-component",
+            ".gluggi-container",
+            ".gluggi-stage",
         ];
 
         foreach ($gluggiSelectors as $selector)
@@ -80,7 +78,7 @@ class GluggiControllerTest extends WebTestCase
     public function testUnknownComponent ()
     {
         $client = static::createClient();
-        $client->request("GET", "/atom/unknown/");
+        $client->request("GET", "/atom/unknown");
 
         self::assertSame(404, $client->getResponse()->getStatusCode());
     }
@@ -89,7 +87,7 @@ class GluggiControllerTest extends WebTestCase
     public function testUnknownComponentWithUnknownComponentType ()
     {
         $client = static::createClient();
-        $client->request("GET", "/unknown/unknown/");
+        $client->request("GET", "/unknown/unknown");
 
         self::assertSame(404, $client->getResponse()->getStatusCode());
     }

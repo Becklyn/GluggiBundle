@@ -4,5 +4,8 @@
         <span class="gluggi-icon gluggi-icon-inactive">{{ include("@Gluggi/icon/maximize.svg") }}</span>
     </button>
 
-    {{- data_container(references, "gluggi-data-container-references") -}}
+    {{- render(controller("Becklyn\\GluggiBundle\\Controller\\EmbedController::dataContainer", {
+        data: references,
+        id: "gluggi-data-container-references"
+    })) -}}
 </div>

@@ -77,7 +77,7 @@ class GluggiConfig
     public function __construct (
         KernelInterface $kernel,
         string $twigDefaultPath,
-        string $layoutDir,
+        string $layoutDir = "_layout",
         string $infoAction = null,
         string $title = null,
         array $cssFiles = [],
