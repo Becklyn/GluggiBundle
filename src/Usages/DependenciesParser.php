@@ -21,7 +21,19 @@ class DependenciesParser
 
 
     /**
-     * @param TypeRegistry $typeRegistry
+     * @var TwigUsagesVisitor
+     */
+    private $visitor;
+
+
+    /**
+     * @var NodeTraverser
+     */
+    private $traverser;
+
+
+    /**
+     * @param Environment $twig
      */
     public function __construct (Environment $twig)
     {
@@ -51,9 +63,8 @@ class DependenciesParser
     /**
      * Find every component that is used in the given template.
      *
-     * @param string $template
-     *
-     * @return Component[]
+     * @param TypeRegistry $typeRegistry
+     * @param Component    $component
      */
     private function findAndLinkDependencies (TypeRegistry $typeRegistry, Component $component) : void
     {

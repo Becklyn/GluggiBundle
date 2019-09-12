@@ -57,11 +57,7 @@ class GluggiController extends AbstractController
 
             if ($component->isHidden())
             {
-                $message = null === $component
-                    ? "No component found: '%s/%s'"
-                    : "The component '%s/%s' has no single view.";
-
-                throw $this->createNotFoundException(\sprintf($message, $type, $key));
+                throw $this->createNotFoundException(\sprintf("The component '%s/%s' has no single view.", $type, $key));
             }
 
             $template = "page" === $component->getType()->getKey()

@@ -65,9 +65,12 @@ class Component
 
 
     /**
-     * @param \SplFileInfo  $file
-     * @param string        $templatePathPrefix
+     * @param string        $fileName
+     * @param string        $key
+     * @param string        $name
+     * @param bool          $hidden
      * @param ComponentType $type
+     * @param string        $templatePath
      */
     public function __construct (string $fileName, string $key, string $name, bool $hidden, ComponentType $type, string $templatePath)
     {
@@ -170,7 +173,7 @@ class Component
 
 
     /**
-     * @param Component $dependencies
+     * @param Component $dependency
      */
     public function addDependency (self $dependency) : void
     {

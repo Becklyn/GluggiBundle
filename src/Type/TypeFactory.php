@@ -22,8 +22,7 @@ class TypeFactory
 
 
     /**
-     * @param string $templatesDir
-     * @param string $layoutDir
+     * @param GluggiConfig $config
      */
     public function __construct (GluggiConfig $config)
     {

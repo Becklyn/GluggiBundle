@@ -76,8 +76,9 @@ class DependenciesResolver
 
 
     /**
-     * @param array     $map
-     * @param Component $component
+     * @param Component   $component
+     * @param Component[] $direct
+     * @param callable    $fetcher
      *
      * @return Component[]
      */
