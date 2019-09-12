@@ -99,13 +99,13 @@
         .gluggi-usages-list {
             @include fixed-flex-width(50%);
 
-            h3 {
+            .gluggi-references-headline {
                 color: $section;
                 margin: 0 0 20px;
                 font-size: 20px;
             }
 
-            ul {
+            .gluggi-references-component-list {
                 list-style: none;
                 padding: 0;
                 margin: 0;

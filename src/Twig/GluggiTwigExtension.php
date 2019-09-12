@@ -5,8 +5,6 @@ namespace Becklyn\GluggiBundle\Twig;
 use Becklyn\GluggiBundle\Configuration\GluggiConfig;
 use Becklyn\GluggiBundle\Type\TypeRegistry;
 use Psr\Container\ContainerInterface;
-use Symfony\Contracts\Service\ServiceSubscriberInterface;
-use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 

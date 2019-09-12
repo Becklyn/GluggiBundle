@@ -22,7 +22,6 @@
         "symfony/twig-bundle": "^4.1",
         "symfony/yaml": "^4.1",
         "twig/twig": "^2.10"
-
     },
     "require-dev": {
         "becklyn/php-cs": "^1.5",

@@ -25,7 +25,7 @@ function renderList (dependencies: Gluggi.Dependencies, showTransitive: boolean,
     }
 
     return (
-        <ul>
+        <ul class="gluggi-references-component-list">
             {dependencies.direct.map(component => (
                 <li>
                     <ComponentLink component={component} router={router} />
@@ -76,12 +76,12 @@ export function ComponentReferences (props: ComponentUsagesProps): JSX.Element
                         </button>
                     )}
                     <div class="gluggi-usages-list">
-                        <h3>{`Dependencies (${dependenciesCount})`}</h3>
+                        <h3 class="gluggi-references-headline">{`Dependencies (${dependenciesCount})`}</h3>
                         {renderList(props.dependencies, transitive, props.router)}
                     </div>
 
                     <div class="gluggi-usages-list">
-                        <h3>{`Usages (${usagesCount})`}</h3>
+                        <h3 class="gluggi-references-headline">{`Usages (${usagesCount})`}</h3>
                         {renderList(props.usages, transitive, props.router)}
                     </div>
                 </div>

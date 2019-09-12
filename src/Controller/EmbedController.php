@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 class EmbedController extends AbstractController
 {
     /**
-     * Renders a data container
+     * Renders a data container.
      *
      * @param array  $data
      * @param string $id
