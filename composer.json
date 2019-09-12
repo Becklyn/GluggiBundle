@@ -14,23 +14,23 @@
         "php": "^7.3",
         "becklyn/assets-bundle": "^2.5",
         "becklyn/rad-bundle": "^6.1",
-        "symfony/dependency-injection": "^4.3",
-        "symfony/finder": "^4.3",
-        "symfony/framework-bundle": "^4.3",
-        "symfony/http-kernel": "^4.3",
+        "symfony/dependency-injection": "^4.1",
+        "symfony/finder": "^4.1",
+        "symfony/framework-bundle": "^4.1",
+        "symfony/http-kernel": "^4.1",
         "symfony/service-contracts": "^1.1",
-        "symfony/translation": "^4.3",
-        "symfony/twig-bundle": "^4.3",
-        "symfony/yaml": "^4.3",
+        "symfony/translation": "^4.1",
+        "symfony/twig-bundle": "^4.1",
+        "symfony/yaml": "^4.1",
         "twig/twig": "^2.10"
     },
     "require-dev": {
-        "becklyn/php-cs": "^1.4",
+        "becklyn/php-cs": "^1.5",
         "roave/security-advisories": "dev-master",
-        "symfony/browser-kit": "^4.3",
-        "symfony/css-selector": "^4.3",
-        "symfony/phpunit-bridge": "^4.3",
-        "symfony/twig-bundle": "^4.3"
+        "symfony/browser-kit": "^4.1",
+        "symfony/css-selector": "^4.1",
+        "symfony/phpunit-bridge": "^4.1",
+        "symfony/twig-bundle": "^4.1"
     },
     "config": {
         "sort-packages": true
