@@ -1,9 +1,9 @@
-{%- set templateConfiguration = templateConfiguration | default({}) -%}
+{%- set templateConfiguration = templateConfiguration ?? [] -%}
 <!DOCTYPE html>
 <html lang="{{ app.request.locale }}">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0{% if templateConfiguration.prevent_zoom is defined and templateConfiguration.prevent_zoom %}, maximum-scale=1.0, user-scalable=no{% endif %}">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0{% if (templateConfiguration.prevent_zoom ?? false) %}, maximum-scale=1.0, user-scalable=no{% endif %}">
         <title>{{ render(controller("Becklyn\\GluggiBundle\\Controller\\GluggiController::htmlTitle", {pageTitle: pageTitle})) }}</title>
 
         {%- block stylesheets -%}

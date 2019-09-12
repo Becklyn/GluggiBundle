@@ -5,26 +5,25 @@ namespace Becklyn\GluggiBundle\Component;
 use Becklyn\GluggiBundle\Data\Component;
 use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Yaml;
+use Twig\Environment;
 use Twig\Error\Error;
 
 
 class ComponentConfiguration
 {
     /**
-     * @var \Twig_Environment
+     * @var Environment
      */
     private $twig;
 
 
-
     /**
-     * @param \Twig_Environment $twig
+     * @param Environment $twig
      */
-    public function __construct (\Twig_Environment $twig)
+    public function __construct (Environment $twig)
     {
         $this->twig = $twig;
     }
-
 
 
     /**
@@ -36,7 +35,6 @@ class ComponentConfiguration
     {
         try
         {
-            /** @var \Twig_Loader_Filesystem $loader */
             $loader = $this->twig->getLoader();
             $template = $loader->getSourceContext($component->getTemplatePath())->getCode();
 
@@ -52,7 +50,6 @@ class ComponentConfiguration
             return [];
         }
     }
-
 
 
     /**
@@ -84,7 +81,6 @@ class ComponentConfiguration
             return [];
         }
     }
-
 
 
     /**
