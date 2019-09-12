@@ -1,16 +1,14 @@
-<?php
+<?php declare(strict_types=1);
 
-namespace Tests\Becklyn\GluggiBundle\Paths;
+namespace Tests\Becklyn\GluggiBundle\Configuration;
 
-
-use Becklyn\GluggiBundle\Paths\LayoutDirectory;
+use Becklyn\GluggiBundle\Configuration\GluggiConfig;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-
-class LayoutDirectoryTest extends TestCase
+class GluggiConfigurationTest extends TestCase
 {
-    private $resolver;
+    private $config;
 
 
     protected function setUp ()
@@ -28,8 +26,9 @@ class LayoutDirectoryTest extends TestCase
                 }
             );
 
-        $this->resolver = new LayoutDirectory($kernel, "/twig/");
+        $this->config = new GluggiConfig($kernel, "/twig/");
     }
+
 
 
     public function dataProviderResolver ()
@@ -52,7 +51,7 @@ class LayoutDirectoryTest extends TestCase
      */
     public function testResolver (string $path, string $expected)
     {
-        $actual = $this->resolver->resolve($path);
+        $actual = $this->config->resolvePath($path);
         self::assertEquals($expected, $actual);
     }
 }

@@ -23,7 +23,7 @@ class GluggiControllerTest extends WebTestCase
     public function testComponent ()
     {
         $client = static::createClient();
-        $client->request("GET", "/atom/example/");
+        $client->request("GET", "/atom/example");
         $content = $client->getResponse()->getContent();
 
         self::assertContains(
@@ -61,7 +61,7 @@ class GluggiControllerTest extends WebTestCase
 
         // all elements that create the structural view of gluggi
         $gluggiSelectors = [
-            ".gluggi-container",
+            ".gluggi-sidebar",
             ".gluggi-stage",
         ];
 
