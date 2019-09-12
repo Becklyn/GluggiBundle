@@ -13,8 +13,8 @@ import transitiveIcon from "../../icon/transitive.svg";
 
 export interface ComponentUsagesProps
 {
-    uses: Gluggi.Dependencies;
-    usedBy: Gluggi.Dependencies;
+    dependencies: Gluggi.Dependencies;
+    usages: Gluggi.Dependencies;
     router: GluggiRouter;
 }
 
@@ -48,15 +48,15 @@ export function ComponentUsages (props: ComponentUsagesProps): JSX.Element
 {
     let [open, setOpen] = useState(false);
     let [transitive, setTransitive] = useState(false);
-    let hasTransitiveDependencies = (props.uses.transitive.length + props.usedBy.transitive.length) > 0;
+    let hasTransitiveDependencies = (props.dependencies.transitive.length + props.usages.transitive.length) > 0;
 
-    let usagesCount = props.usedBy.direct.length;
-    let dependenciesCount = props.uses.direct.length;
+    let dependenciesCount = props.dependencies.direct.length;
+    let usagesCount = props.usages.direct.length;
 
     if (transitive)
     {
-        usagesCount += props.usedBy.transitive.length;
-        dependenciesCount += props.uses.transitive.length;
+        dependenciesCount += props.dependencies.transitive.length;
+        usagesCount += props.usages.transitive.length;
     }
 
     return (
@@ -75,12 +75,12 @@ export function ComponentUsages (props: ComponentUsagesProps): JSX.Element
                     )}
                     <div class="gluggi-usages-list">
                         <h3>{`Dependencies (${dependenciesCount})`}</h3>
-                        {renderList(props.uses, transitive, props.router)}
+                        {renderList(props.dependencies, transitive, props.router)}
                     </div>
 
                     <div class="gluggi-usages-list">
                         <h3>{`Usages (${usagesCount})`}</h3>
-                        {renderList(props.usedBy, transitive, props.router)}
+                        {renderList(props.usages, transitive, props.router)}
                     </div>
                 </div>
             )}

@@ -7,25 +7,57 @@ use Becklyn\GluggiBundle\Data\Component;
 class DependenciesResolver
 {
     /**
-     * @param Component[] $map
-     * @param Component     $component
+     * @param Component $component
      *
      * @return ResolvedDependencies
      */
-    public function resolveDependencies (array $map, Component $component) : ResolvedDependencies
+    public function resolveDependencies (Component $component) : ResolvedDependencies
+    {
+        $fetcher = function (Component $component)
+        {
+            return $component->getDependencies();
+        };
+
+        return $this->resolve($component, $fetcher);
+    }
+
+
+    /**
+     * @param Component $component
+     *
+     * @return ResolvedDependencies
+     */
+    public function resolveUsages (Component $component) : ResolvedDependencies
+    {
+        $fetcher = function (Component $component)
+        {
+            return $component->getUsages();
+        };
+
+        return $this->resolve($component, $fetcher);
+    }
+
+
+    /**
+     * @param Component $component
+     * @param callable  $fetcher
+     *
+     * @return ResolvedDependencies
+     */
+    private function resolve (Component $component, callable $fetcher) : ResolvedDependencies
     {
         $direct = [];
         $transitive = [];
 
         // deduplicate dependencies
-        foreach ($map[$component->getFullKey()] ?? [] as $directUsage)
+        foreach ($fetcher($component) as $directUsage)
         {
             $direct[$directUsage->getFullKey()] = $directUsage;
         }
 
         if (!empty($direct))
         {
-            $transitive = $this->findTransitiveDependencies($map, $component);
+            $transitive = $this->findTransitiveDependencies($component, $direct, $fetcher);
         }
 
         // remove transitive dependencies, that are already direct dependencies
@@ -48,9 +80,9 @@ class DependenciesResolver
      *
      * @return Component[]
      */
-    private function findTransitiveDependencies (array $map, Component $component) : array
+    private function findTransitiveDependencies (Component $component, array $direct, callable $fetcher) : array
     {
-        $queue = $map[$component->getFullKey()];
+        $queue = $direct;
         $alreadyChecked = [
             $component->getFullKey() => true,
         ];
@@ -67,7 +99,7 @@ class DependenciesResolver
             }
 
             /** @var Component[] $queueUses */
-            $queueUses = $map[$queueEntry->getFullKey()] ?? [];
+            $queueUses = $fetcher($queueEntry);
 
             foreach ($queueUses as $queueUse)
             {

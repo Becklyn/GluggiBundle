@@ -5,6 +5,7 @@ namespace Becklyn\GluggiBundle\ComponentType;
 use Becklyn\GluggiBundle\Component\ComponentTypeFactory;
 use Becklyn\GluggiBundle\Data\ComponentType;
 use Becklyn\GluggiBundle\Exception\UnknownComponentTypeException;
+use Becklyn\GluggiBundle\Usages\DependenciesParser;
 
 
 /**
@@ -25,11 +26,21 @@ class ComponentTypeRegistry
 
 
     /**
+     * @var DependenciesParser
+     */
+    private $dependenciesParser;
+
+
+    /**
      * @param ComponentTypeFactory $factory
      */
-    public function __construct (ComponentTypeFactory $factory)
+    public function __construct (
+        ComponentTypeFactory $factory,
+        DependenciesParser $dependenciesParser
+    )
     {
         $this->factory = $factory;
+        $this->dependenciesParser = $dependenciesParser;
     }
 
 
@@ -70,6 +81,8 @@ class ComponentTypeRegistry
                 "template" => $this->factory->create("template"),
                 "page" => $this->factory->create("page"),
             ];
+
+            $this->dependenciesParser->parseDependencies($this);
         }
 
         return $this->types;

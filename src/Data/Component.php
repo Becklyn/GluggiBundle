@@ -40,7 +40,23 @@ class Component
     /**
      * @var string
      */
-    private $importPath;
+    private $templatePath;
+
+
+    /**
+     * All components that are used inside this component
+     *
+     * @var Component[]
+     */
+    private $dependencies = [];
+
+
+    /**
+     * All components that use this component
+     *
+     * @var Component[]
+     */
+    private $usages = [];
 
 
     /**
@@ -54,15 +70,14 @@ class Component
      * @param string        $templatePathPrefix
      * @param ComponentType $type
      */
-    public function __construct (string $fileName, string $key, string $name, bool $hidden, ComponentType $type, string $importPath, ?ComponentError $error)
+    public function __construct (string $fileName, string $key, string $name, bool $hidden, ComponentType $type, string $templatePath)
     {
         $this->fileName = $fileName;
         $this->key = $key;
         $this->name = $name;
         $this->hidden = $hidden;
         $this->type = $type;
-        $this->importPath = $importPath;
-        $this->error = $error;
+        $this->templatePath = $templatePath;
     }
 
 
@@ -122,9 +137,9 @@ class Component
      *
      * @return string
      */
-    public function getImportPath () : string
+    public function getTemplatePath () : string
     {
-        return $this->importPath;
+        return $this->templatePath;
     }
 
 
@@ -143,5 +158,50 @@ class Component
     public function getError () : ?ComponentError
     {
         return $this->error;
+    }
+
+
+    /**
+     * @param ComponentError|null $error
+     */
+    public function setError (?ComponentError $error) : void
+    {
+        $this->error = $error;
+    }
+
+
+    /**
+     * @param Component $dependencies
+     */
+    public function addDependency (Component $dependency) : void
+    {
+        $this->dependencies[$dependency->getFullKey()] = $dependency;
+    }
+
+
+    /**
+     * @param Component $component
+     */
+    public function addUsage (Component $component) : void
+    {
+        $this->usages[$component->getFullKey()] = $component;
+    }
+
+
+    /**
+     * @return Component[]
+     */
+    public function getUsages () : array
+    {
+        return $this->usages;
+    }
+
+
+    /**
+     * @return Component[]
+     */
+    public function getDependencies () : array
+    {
+        return $this->dependencies;
     }
 }

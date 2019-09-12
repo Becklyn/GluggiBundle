@@ -68,7 +68,7 @@ class GluggiTwigExtension extends \Twig_Extension implements ServiceSubscriberIn
             "standalone" => false,
         ], $context);
 
-        return $this->container->get("twig")->render($component->getImportPath(), $context);
+        return $this->container->get("twig")->render($component->getTemplatePath(), $context);
     }
 
 
@@ -90,7 +90,7 @@ class GluggiTwigExtension extends \Twig_Extension implements ServiceSubscriberIn
             throw new UnknownComponentException($name, $type);
         }
 
-        return $component->getImportPath();
+        return $component->getTemplatePath();
     }
 
 

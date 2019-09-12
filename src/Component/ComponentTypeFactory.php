@@ -85,8 +85,7 @@ class ComponentTypeFactory
             $this->generateComponentName($key),
             "_" === $fileName[0],
             $type,
-            "{$templatePathPrefix}/{$type->getDirectory()}/{$fileName}",
-            null
+            "{$templatePathPrefix}/{$type->getDirectory()}/{$fileName}"
         );
     }
 

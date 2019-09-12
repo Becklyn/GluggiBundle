@@ -38,7 +38,7 @@ class ComponentConfiguration
         {
             /** @var \Twig_Loader_Filesystem $loader */
             $loader = $this->twig->getLoader();
-            $template = $loader->getSourceContext($component->getImportPath())->getCode();
+            $template = $loader->getSourceContext($component->getTemplatePath())->getCode();
 
             if (1 === preg_match('~^\\s*\\{#-?(?P<config>.*?)-?#\\}~s', $template, $matches))
             {
