@@ -50,6 +50,15 @@ export function ComponentUsages (props: ComponentUsagesProps): JSX.Element
     let [transitive, setTransitive] = useState(false);
     let hasTransitiveDependencies = (props.uses.transitive.length + props.usedBy.transitive.length) > 0;
 
+    let usagesCount = props.usedBy.direct.length;
+    let dependenciesCount = props.uses.direct.length;
+
+    if (transitive)
+    {
+        usagesCount += props.usedBy.transitive.length;
+        dependenciesCount += props.uses.transitive.length;
+    }
+
     return (
         <div class={`gluggi-action-usages ${open ? "is-open" : ""}`}>
             <button type="button" class="gluggi-action" onClick={() => setOpen(!open)}>
@@ -64,12 +73,12 @@ export function ComponentUsages (props: ComponentUsagesProps): JSX.Element
                         </button>
                     )}
                     <div class="gluggi-usages-list">
-                        <h3>Uses</h3>
+                        <h3>{`Dependencies (${dependenciesCount})`}</h3>
                         {renderList(props.uses, transitive, props.router)}
                     </div>
 
                     <div class="gluggi-usages-list">
-                        <h3>Used by</h3>
+                        <h3>{`Usages (${usagesCount})`}</h3>
                         {renderList(props.usedBy, transitive, props.router)}
                     </div>
                 </div>
