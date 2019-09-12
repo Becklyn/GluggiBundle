@@ -3,12 +3,7 @@ import {useState} from "preact/hooks";
 import {Gluggi} from "../@types/gluggi";
 import {ComponentLink} from "./ComponentLink";
 import {GluggiRouter} from "../lib/GluggiRouter";
-import {icon} from "../lib/icon";
-
-// @ts-ignore
-import usagesIcon from "../../icon/usages.svg";
-// @ts-ignore
-import transitiveIcon from "../../icon/transitive.svg";
+import {Icon} from "./Icon";
 
 
 export interface ComponentUsagesProps
@@ -39,7 +34,7 @@ function renderList (dependencies: Gluggi.Dependencies, showTransitive: boolean,
             {showTransitive && dependencies.transitive.map(component => (
                 <li>
                     <ComponentLink component={component} router={router}>
-                        {icon(transitiveIcon, "transitive dependency")}
+                        <Icon name="transitive" title="transitive dependency" />
                     </ComponentLink>
                 </li>
             ))}
@@ -69,14 +64,14 @@ export function ComponentReferences (props: ComponentUsagesProps): JSX.Element
     return (
         <div class={`gluggi-action-usages ${open ? "is-open" : ""}`}>
             <button type="button" class="gluggi-action" onClick={() => setOpen(!open)}>
-                {icon(usagesIcon)}
+                <Icon name="usages" />
                 <span class="gluggi-action-label">References</span>
             </button>
             {open && (
                 <div class="gluggi-usages-overview">
                     {hasTransitiveDependencies && (
                         <button type="button" class="gluggi-usages-transitive-toggle" onClick={() => setTransitive(!transitive)}>
-                            {icon(transitiveIcon)}
+                            <Icon name="transitive" title="transitive dependency" />
                             {transitive ? "hide transitive" : "show transitive"}
                         </button>
                     )}

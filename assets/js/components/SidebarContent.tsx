@@ -4,10 +4,8 @@ import matchSorter from 'match-sorter'
 import {Gluggi} from "../@types/gluggi";
 import {GluggiRouter} from "../lib/GluggiRouter";
 import {GluggiType} from "./GluggiType";
-import {icon} from "../lib/icon";
+import {Icon} from "./Icon";
 
-// @ts-ignore
-import searchIcon from "../../icon/search.svg";
 
 export interface SidebarContentProps
 {
@@ -54,7 +52,7 @@ export function SidebarContent (props: SidebarContentProps): JSX.Element
                         placeholder="Search..."
                         onInput={e => setQuery((e.currentTarget as HTMLInputElement).value)}
                     />
-                    {icon(searchIcon)}
+                    <Icon name="search" />
                 </label>
             </div>,
             <div class="gluggi-components">

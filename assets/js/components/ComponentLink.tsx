@@ -1,12 +1,7 @@
 import {h, JSX, RenderableProps} from "preact";
 import {Gluggi} from "../@types/gluggi";
 import {GluggiRouter} from "../lib/GluggiRouter";
-import {icon} from "../lib/icon";
-
-// @ts-ignore
-import arrowIcon from "../../icon/active.svg";
-// @ts-ignore
-import externalIcon from "../../icon/external.svg";
+import {Icon} from "./Icon";
 
 
 export interface ComponentLinkProps
@@ -17,7 +12,9 @@ export interface ComponentLinkProps
     active?: boolean;
 }
 
-
+/**
+ *
+ */
 export function ComponentLink (props: RenderableProps<ComponentLinkProps>): JSX.Element
 {
     let component = props.component;
@@ -25,7 +22,7 @@ export function ComponentLink (props: RenderableProps<ComponentLinkProps>): JSX.
     return (
         <a class={`gluggi-component-link ${props.component.active ? " gluggi-active" : ""}`} href={props.router.component(component)}>
             {props.component.active && (
-                icon(arrowIcon)
+                <Icon name="active" />
             )}
             <span class="gluggi-component-name">
                 {(true !== props.shortName) && (
@@ -33,7 +30,7 @@ export function ComponentLink (props: RenderableProps<ComponentLinkProps>): JSX.
                 )}
                 {` ${component.name}`}
                 {props.children}
-                {"page" === component.type ? icon(externalIcon, "isolated view") : ""}
+                {"page" === component.type ? <Icon name="external" title="isolated view" /> : ""}
             </span>
         </a>
     );
