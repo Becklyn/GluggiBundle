@@ -27,9 +27,10 @@ class SidebarController extends AbstractController
     )
     {
         return $this->render("@Gluggi/sidebar/sidebar.html.twig", [
-            "types" => $normalizer->normalizeTypes($registry->getAll(), $activeComponent),
-            "customTitle" => $config->getTitle(),
-            "active" => $activeComponent,
+            "data" => [
+                "types" => $normalizer->normalizeTypes($registry->getAll(), $activeComponent),
+                "title" => $config->getTitle(),
+            ]
         ]);
     }
 }

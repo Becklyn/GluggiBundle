@@ -3,10 +3,7 @@
 
 <div class="gluggi-sidebar">
     {{- render(controller("Becklyn\\GluggiBundle\\Controller\\EmbedController::dataContainer", {
-        data: {
-            types: types,
-            title: customTitle ?? "Gluggi",
-        },
-        id: "gluggi-sidebar-content-data"
+        data: data,
+        id: "gluggi-sidebar-content-data",
     })) -}}
 </div>

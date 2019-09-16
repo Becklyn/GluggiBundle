@@ -17,17 +17,14 @@ class GluggiController extends AbstractController
     /**
      * Renders the welcome screen.
      *
-     * @param TypeRegistry $registry
      * @param GluggiConfig $config
      *
      * @return Response
      */
-    public function index (TypeRegistry $registry, GluggiConfig $config) : Response
+    public function index (GluggiConfig $config) : Response
     {
         return $this->render("@Gluggi/index/index.html.twig", [
-            "types" => $registry->getAll(),
             "infoAction" => $config->getInfoAction(),
-            "customTitle" => $config->getTitle(),
         ]);
     }
 

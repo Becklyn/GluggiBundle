@@ -22,79 +22,25 @@ class GluggiConfig
 
 
     /**
-     * @var string
-     */
-    private $layoutDir;
-
-
-    /**
-     * @var string|null
-     */
-    private $infoAction;
-
-
-    /**
-     * @var string|null
-     */
-    private $title;
-
-
-    /**
      * @var array
      */
-    private $cssFiles;
-
-
-    /**
-     * @var array
-     */
-    private $javaScriptFiles;
-
-
-    /**
-     * @var array
-     */
-    private $javaScriptHeadFiles;
-
-
-    /**
-     * @var array
-     */
-    private $data;
+    private $config;
 
 
     /**
      * @param KernelInterface $kernel
      * @param string          $twigDefaultPath
-     * @param string          $layoutDir
-     * @param string|null     $infoAction
-     * @param string|null     $title
-     * @param array           $cssFiles
-     * @param array           $javaScriptFiles
-     * @param array           $javaScriptHeadFiles
-     * @param array           $data
+     * @param array           $config
      */
     public function __construct (
         KernelInterface $kernel,
         string $twigDefaultPath,
-        string $layoutDir = "_layout",
-        string $infoAction = null,
-        string $title = null,
-        array $cssFiles = [],
-        array $javaScriptFiles = [],
-        array $javaScriptHeadFiles = [],
-        array $data = []
+        array $config = []
     )
     {
         $this->kernel = $kernel;
         $this->twigDefaultPath = $twigDefaultPath;
-        $this->layoutDir = $layoutDir;
-        $this->infoAction = $infoAction;
-        $this->title = $title;
-        $this->cssFiles = $cssFiles;
-        $this->javaScriptFiles = $javaScriptFiles;
-        $this->javaScriptHeadFiles = $javaScriptHeadFiles;
-        $this->data = $data;
+        $this->config = $config;
     }
 
 
@@ -103,7 +49,7 @@ class GluggiConfig
      */
     public function getLayoutDir () : string
     {
-        return $this->layoutDir;
+        return $this->config["layout_dir"] ?? "_layout";
     }
 
 
@@ -111,19 +57,19 @@ class GluggiConfig
     /**
      * @return string|null
      */
-    public function getInfoAction ()
+    public function getInfoAction () : ?string
     {
-        return $this->infoAction;
+        return $this->config["info_action"] ?? null;
     }
 
 
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getTitle ()
+    public function getTitle () : string
     {
-        return $this->title;
+        return $this->config["title"] ?? "Gluggi";
     }
 
 
@@ -133,7 +79,7 @@ class GluggiConfig
      */
     public function getCssFiles () : array
     {
-        return $this->cssFiles;
+        return $this->config["css"] ?? [];
     }
 
 
@@ -143,7 +89,7 @@ class GluggiConfig
      */
     public function getJavaScriptFiles () : array
     {
-        return $this->javaScriptFiles;
+        return $this->config["js"] ?? [];
     }
 
 
@@ -153,7 +99,16 @@ class GluggiConfig
      */
     public function getJavaScriptHeadFiles () : array
     {
-        return $this->javaScriptHeadFiles;
+        return $this->config["js_head"] ?? [];
+    }
+
+
+    /**
+     * @return string|null
+     */
+    public function getGlobalBodyClass () : ?string
+    {
+        return $this->config["global_body_class"] ?? null;
     }
 
 
@@ -167,12 +122,14 @@ class GluggiConfig
      */
     public function getData ($key)
     {
-        if (!\array_key_exists($key, $this->data))
+        $data = $this->config["data"] ?? [];
+
+        if (!\array_key_exists($key, $data))
         {
             throw new \InvalidArgumentException(\sprintf("Can't find gluggi data with key '%s'.", $key));
         }
 
-        return $this->data[$key];
+        return $data[$key];
     }
 
 
@@ -181,7 +138,7 @@ class GluggiConfig
      */
     public function getResolvedLayoutDir ()
     {
-        return $this->resolvePath($this->layoutDir);
+        return $this->resolvePath($this->getLayoutDir());
     }
 
 
