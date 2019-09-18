@@ -3,6 +3,7 @@
 
 .gluggi-icon {
     @include fixed-flex-width($icon-size);
+    box-sizing: content-box;
     display: inline-block;
     height: $icon-size;
 
