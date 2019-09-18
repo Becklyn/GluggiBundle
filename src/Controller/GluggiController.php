@@ -24,7 +24,7 @@ class GluggiController extends AbstractController
     public function index (GluggiConfig $config) : Response
     {
         return $this->render("@Gluggi/index/index.html.twig", [
-            "infoAction" => $config->getInfoAction(),
+            "config" => $config,
         ]);
     }
 
@@ -33,6 +33,7 @@ class GluggiController extends AbstractController
      * Renders a single component.
      *
      * @param TypeRegistry           $registry
+     * @param GluggiConfig           $config
      * @param ComponentConfiguration $componentConfiguration
      * @param string                 $type
      * @param string                 $key
@@ -41,6 +42,7 @@ class GluggiController extends AbstractController
      */
     public function component (
         TypeRegistry $registry,
+        GluggiConfig $config,
         ComponentConfiguration $componentConfiguration,
         string $type,
         string $key
@@ -66,6 +68,7 @@ class GluggiController extends AbstractController
                     $component->getType()->getName(),
                 ],
                 "templateConfiguration" => $componentConfiguration->getConfiguration($component),
+                "config" => $config,
             ]);
         }
         catch (TypeNotFoundException $e)
