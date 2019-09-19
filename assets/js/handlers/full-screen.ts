@@ -1,6 +1,6 @@
 import {on} from "mojave/dom/events";
 import {toggleClass} from "mojave/dom/manipulate";
-import {PersistedToggle} from "../lib/PersistedToggle";
+import {persistedToggle} from "../lib/PersistedToggle";
 
 
 /**
@@ -8,14 +8,13 @@ import {PersistedToggle} from "../lib/PersistedToggle";
  */
 export function initToggleFullScreen (button: HTMLButtonElement, stage: HTMLElement)
 {
-    let toggle = new PersistedToggle("gluggi:fullscreen");
-    toggle
-        .init(active => {
+    let toggle = persistedToggle(
+        "gluggi:fullscreen",
+        active => {
             toggleClass(stage, "gluggi-is-fullscreen", active);
             toggleClass(button, "gluggi-is-active", active);
-        });
+        }
+    );
 
-    on(button, "click", () => {
-        toggle.toggle();
-    });
+    on(button, "click", toggle);
 }

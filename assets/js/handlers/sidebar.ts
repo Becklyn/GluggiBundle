@@ -6,7 +6,7 @@ import {findOne} from "mojave/dom/traverse";
 import closeIcon from "../../icon/close.svg";
 // @ts-ignore
 import menuIcon from "../../icon/menu.svg";
-import {PersistedToggle} from "../lib/PersistedToggle";
+import {persistedToggle} from "../lib/PersistedToggle";
 
 
 /**
@@ -26,9 +26,10 @@ export function initSidebarVisibilityToggle (container: HTMLElement)
 
     prepend(container, button);
 
-    let toggle = new PersistedToggle("gluggi:sidebar");
-    toggle
-        .init(active => toggleClass(container, "gluggi-is-open", active));
+    let toggle = persistedToggle(
+        "gluggi:sidebar",
+        active => toggleClass(container, "gluggi-is-open", active)
+    );
 
-    on(button, "click", () => toggle.toggle());
+    on(button, "click", toggle);
 }
