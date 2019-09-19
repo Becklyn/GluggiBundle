@@ -1,11 +1,12 @@
 import {on} from "mojave/dom/events";
-import {createUnstyledElement, prepend} from "mojave/dom/manipulate";
+import {createUnstyledElement, prepend, toggleClass} from "mojave/dom/manipulate";
 import {findOne} from "mojave/dom/traverse";
 
 // @ts-ignore
 import closeIcon from "../../icon/close.svg";
 // @ts-ignore
 import menuIcon from "../../icon/menu.svg";
+import {PersistedToggle} from "../lib/PersistedToggle";
 
 
 /**
@@ -24,28 +25,10 @@ export function initSidebarVisibilityToggle (container: HTMLElement)
     });
 
     prepend(container, button);
-    let classes = container.classList;
-    let opened = "open" === window.localStorage.getItem("gluggi:sidebar");
 
-    let open = () => {
-        classes.add("gluggi-is-open");
-        opened = true;
-        window.localStorage.setItem("gluggi:sidebar", "open");
-    };
+    let toggle = new PersistedToggle("gluggi:sidebar");
+    toggle
+        .init(active => toggleClass(container, "gluggi-is-open", active));
 
-    let close = () => {
-        classes.remove("gluggi-is-open");
-        opened = false;
-        window.localStorage.removeItem("gluggi:sidebar");
-    };
-
-    on(button, "click", () => {
-        (opened ? close : open)();
-    });
-
-    // if initially opened -> open
-    if (opened)
-    {
-        open();
-    }
+    on(button, "click", () => toggle.toggle());
 }
