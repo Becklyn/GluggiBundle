@@ -4,6 +4,9 @@ namespace Becklyn\GluggiBundle\Controller;
 
 use Becklyn\GluggiBundle\Component\ComponentConfiguration;
 use Becklyn\GluggiBundle\Configuration\GluggiConfig;
+use Becklyn\GluggiBundle\Data\Component;
+use Becklyn\GluggiBundle\Data\ComponentType;
+use Becklyn\GluggiBundle\Exception\ComponentNotFoundException;
 use Becklyn\GluggiBundle\Exception\TypeNotFoundException;
 use Becklyn\GluggiBundle\Type\TypeRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -74,6 +77,39 @@ class GluggiController extends AbstractController
         catch (TypeNotFoundException $e)
         {
             throw $this->createNotFoundException($e->getMessage(), $e);
+        }
+        catch (ComponentNotFoundException $e)
+        {
+            /** @var Component[] $found */
+            $found = [];
+
+            foreach ($registry->getAll() as $registeredType)
+            {
+                if ($registeredType->hasComponent($key))
+                {
+                    $found[] = $registeredType->getComponent($key);
+                }
+            }
+
+            // a component with the same key exists in only a single other type -> redirect there
+            if (1 === count($found))
+            {
+                return $this->redirectToRoute("gluggi.component", [
+                    "type" => $found[0]->getType()->getKey(),
+                    "key" => $key,
+                ]);
+            }
+
+            $message = empty($found)
+                ? $e->getMessage()
+                : \sprintf(
+                    "Component with key '%s' doesn't exist in type '%s', but in these types: %s",
+                    $key,
+                    $type,
+                    \implode(", ", \array_map(function (Component $c) { return $c->getType()->getKey(); }, $found))
+                );
+
+            throw $this->createNotFoundException($message, $e);
         }
     }
 }
