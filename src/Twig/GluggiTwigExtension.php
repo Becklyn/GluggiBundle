@@ -66,6 +66,33 @@ class GluggiTwigExtension extends AbstractExtension
     }
 
 
+    /**
+     * Returns the dummy content
+     *
+     * @param string $type
+     *
+     * @return string
+     */
+    public function getDummy (string $type) : string
+    {
+        $twig = $this->locator->get("twig");
+        $allowedContentTypes = [
+            "content",
+        ];
+
+        if ($allowedContentTypes[0] === $type)
+        {
+            return $twig->render("@Gluggi/dummy/content.html.twig");
+        }
+
+        throw new \InvalidArgumentException(\sprintf(
+            "Unsupported dummy content '%s'. Supported are: %s",
+            $type,
+            "'" . \implode("', '", $allowedContentTypes) . "'"
+        ));
+    }
+
+
 
     /**
      * Returns the template name.
@@ -90,6 +117,7 @@ class GluggiTwigExtension extends AbstractExtension
         return [
             new TwigFunction("gluggi", [$this, "renderGluggiComponent"], ["is_safe" => ["html"]]),
             new TwigFunction("gluggi_data", [$this->config, "getData"]),
+            new TwigFunction("gluggi_dummy", [$this, "getDummy"], ["is_safe" => ["html"]]),
             new TwigFunction("gluggi_template", [$this, "getTemplateName"]),
         ];
     }

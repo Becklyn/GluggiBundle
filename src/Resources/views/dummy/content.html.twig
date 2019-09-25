@@ -1,0 +1,112 @@
+<h1 class="h1">Content</h1>
+
+<p>
+    This example shows a lot of different cases of content that you can enter in the rich text editor. All example
+    texts are excerpts from the book <strong>Dr Jekyll and Mr Hyde</strong> from Robert Louis Stevenson.
+    All sections that separate the different test cases are separated by a small headline using the 📚 emoji.
+</p>
+
+{# region Headline Types #}
+{{ _self.section("Inline styles") }}
+<p>
+    This is an example text with <strong>strong emphasized text</strong> (using &lt;strong&gt;) and <b>strong emphasized text</b> (using &lt;b&gt;).
+    There is also <em>weak emphasized text</em> (using &lt;em&gt;) and <i>weak emphasized text</i> (using &lt;i&gt;).
+    There is also <u>underlined text</u>.
+    There can be <code>inline code</code>.
+    Sometimes there is also a <a href="https://mayd.io">Link</a> and a link to open in a new tab <a href="https://mayd.io" target="_blank"></a>.<br>
+    That was a line break.<br>
+    Another one.
+</p>
+<p>This is the next paragraph</p>
+{# endregion #}
+
+{# region Headline Types #}
+{{ _self.section("A list of all headline types:") }}
+
+<p>“Yes, I know,” said Utterson; “I know it must seem strange. The fact is, if I do not ask you the name of the other party, it is because I know it already. You see, Richard, your tale has gone home. If you have been inexact in any point you had better correct it.”</p>
+
+{%- for i in 1..4 -%}
+    {{ _self.h(i, "Headline Level %d before + after some content from Dr Jekyll and Mr Hyde") }}
+    <p>“Yes, I know,” said Utterson; “I know it must seem strange. The fact is, if I do not ask you the name of the other party, it is because I know it already. You see, Richard, your tale has gone home. If you have been inexact in any point you had better correct it.”</p>
+{%- endfor -%}
+{# endregion #}
+
+
+{# region Consecutive Headlines #}
+{{ _self.section("A list of consecutive headlines:") }}
+
+{%- for i in 1..4 -%}
+    {{ _self.h(i, "Headline Level %d") }}
+{%- endfor -%}
+{# endregion #}
+
+
+{# region Lists #}
+{{ _self.section("Lists:") }}
+
+{{ _self.h(1, "Headline Before List") }}
+{{ _self.list("ul", "ul") }}
+
+<p>Some separating text block: "Not only that, but the signature is typewritten. Look at the neat little 'Hosmer Angel' at the bottom. There is a date, you see, but no superscription except Leadenhall Street, which is rather vague. The point about the signature is very suggestive--in fact, we may call it conclusive."</p>
+<p>ul list:</p>
+
+{{ _self.list("ul", "ul") }}
+
+<p>Some separating text block: "Not only that, but the signature is typewritten. Look at the neat little 'Hosmer Angel' at the bottom. There is a date, you see, but no superscription except Leadenhall Street, which is rather vague. The point about the signature is very suggestive--in fact, we may call it conclusive."</p>
+<p>ol list:</p>
+
+{{ _self.list("ol", "ol") }}
+
+<p>Some separating text block: "Not only that, but the signature is typewritten. Look at the neat little 'Hosmer Angel' at the bottom. There is a date, you see, but no superscription except Leadenhall Street, which is rather vague. The point about the signature is very suggestive--in fact, we may call it conclusive."</p>
+<p>ol in ul list:</p>
+
+{{ _self.list("ol", "ul") }}
+
+<p>Some separating text block: "Not only that, but the signature is typewritten. Look at the neat little 'Hosmer Angel' at the bottom. There is a date, you see, but no superscription except Leadenhall Street, which is rather vague. The point about the signature is very suggestive--in fact, we may call it conclusive."</p>
+<p>ul in ol list:</p>
+
+{{ _self.list("ul", "ol") }}
+{# endregion #}
+
+
+{# region Image #}
+{{ _self.section("Image:") }}
+<p>That is a huge example image (landscape)</p>
+<div class="_content-image"><img src="https://images.unsplash.com/photo-1569259233993-5c71840d3016?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format" alt="Large landscape"></div>
+<p>It should not clip out of the box</p>
+<p>This is a huge example image (portrait)</p>
+<div class="_content-image"><img src="https://images.unsplash.com/photo-1569251200481-5df7232856ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format" alt="Large portrait"></div>
+<p>It should not clip out of the box and also you might want to set a maximal height.</p>
+<p>Smaller content images (landscape):</p>
+<div class="_content-image"><img src="https://images.unsplash.com/photo-1569259233993-5c71840d3016?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400" alt="Small landscape"></div>
+<p>Smaller content images (portrait):</p>
+<div class="_content-image"><img src="https://images.unsplash.com/photo-1569251200481-5df7232856ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400" alt="Small portrait"></div>
+{# endregion #}
+
+
+{# ################################### #}
+{# Helper Macros #}
+{# ################################### #}
+
+{%- macro section (text) -%}
+<p><strong>📚 {{ text }}</strong></p>
+{%- endmacro -%}
+
+{%- macro h (level, text) -%}
+<h{{ level }} class="h{{ level }}">{{ text | format(level) }}</h{{ level }}>
+{%- endmacro -%}
+
+{%- macro list (type, innerType) -%}
+<{{ type }}>
+    <li>First entry</li>
+    <li>Second entry</li>
+    <li>
+        Third entry
+        <{{ innerType }}>
+            <li>Entry 3.1</li>
+            <li>Entry 3.2</li>
+        </{{ innerType }}>
+    </li>
+    <li>Last Entry</li>
+</{{ type }}>
+{%- endmacro -%}

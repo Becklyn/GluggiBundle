@@ -1,2 +1,4 @@
-4.0.0
+3.2.0
 =====
+
+*   Added `gluggi_dummy()` for dummy content. Currently supported is only `gluggi_dummy("content")`.
