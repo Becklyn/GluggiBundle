@@ -10,6 +10,11 @@
         @include center-children;
     }
 
+    .gluggi-stage-window {
+        max-height: 100%;
+        overflow-y: auto;
+    }
+
     .gluggi-content-actions {
         @include gluggi-font;
         position: absolute;
@@ -135,8 +140,11 @@
     }
 
     @include on-desktop {
-        padding: 100px;
         background-color: $bg;
+
+        .gluggi-stage-window {
+            padding: 100px;
+        }
 
 
         .gluggi-toggle-fullscreen {
