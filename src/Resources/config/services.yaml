@@ -1,0 +1,24 @@
+parameters:
+    gluggi.routing.requirements.key: '[a-z0-9-_]+'
+
+services:
+    _defaults:
+        autoconfigure: true
+        autowire: true
+
+    Becklyn\GluggiBundle\:
+        resource: '../../*'
+        exclude: '../../{Data,Exception,Resources,GluggiBundle.php}'
+
+    Becklyn\GluggiBundle\Configuration\GluggiConfig:
+        bind:
+            $twigDefaultPath: '%twig.default_path%'
+
+    Becklyn\GluggiBundle\Twig\GluggiTwigExtension:
+        $locator: '@gluggi.twig.locator'
+
+    gluggi.twig.locator:
+        class: Symfony\Component\DependencyInjection\ServiceLocator
+        tags: ['container.service_locator']
+        arguments:
+            - twig: '@twig'

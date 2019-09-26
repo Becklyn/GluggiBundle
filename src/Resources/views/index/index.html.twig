@@ -1,0 +1,13 @@
+{#- @var config \Becklyn\GluggiBundle\Configuration\GluggiConfig -#}
+{% extends "@Gluggi/layout.html.twig" %}
+
+{%- block stage_class "gluggi-stage-welcome" -%}
+
+
+{%- block stage -%}
+<div class="gluggi-welcome">
+    <div class="gluggi-welcome-message">What are you looking for?</div>
+
+    <div class="gluggi-icon">{{ include('@Gluggi/icon/arrow-right.svg') }}</div>
+</div>
+{%- endblock -%}

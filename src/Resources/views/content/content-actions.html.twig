@@ -1,0 +1,11 @@
+<div class="gluggi-content-actions">
+    <button type="button" class="gluggi-action gluggi-toggle-fullscreen">
+        <span class="gluggi-icon gluggi-icon-active">{{ include("@Gluggi/icon/minimize.svg") }}</span>
+        <span class="gluggi-icon gluggi-icon-inactive">{{ include("@Gluggi/icon/maximize.svg") }}</span>
+    </button>
+
+    {{- render(controller("Becklyn\\GluggiBundle\\Controller\\EmbedController::dataContainer", {
+        data: references,
+        id: "gluggi-data-container-references"
+    })) -}}
+</div>

@@ -1,0 +1,176 @@
+@import "../helper/mixins";
+@import "../helper/variables";
+
+.gluggi-stage {
+    padding: 0;
+    background-color: $content-bg;
+    position: relative;
+
+    &.gluggi-stage-welcome {
+        @include center-children;
+    }
+
+    .gluggi-stage-window {
+        max-height: 100%;
+        overflow-y: auto;
+    }
+
+    .gluggi-content-actions {
+        @include gluggi-font;
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        display: flex;
+
+        > * + * {
+            margin-left: 10px;
+        }
+    }
+
+    .gluggi-action {
+        @include invisible-button($content-bg);
+        box-shadow: 0 2px 12px 0 $shadow-color;
+        height: 56px;
+        line-height: 56px;
+        padding: 0 16px;
+        vertical-align: middle;
+        border-radius: 10px;
+        font-family: inherit;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+
+        &:hover,
+        &:focus {
+            background-color: $bg-dark;
+            color: $inverted;
+        }
+    }
+
+    .gluggi-toggle-fullscreen {
+        display: none;
+    }
+
+    .gluggi-action-usages {
+        position: relative;
+
+        .gluggi-action .gluggi-icon {
+            padding: 0 4px;
+        }
+
+        .gluggi-action-label {
+            display: none;
+            margin-left: 5px;
+        }
+
+        .gluggi-usages-overview {
+            display: none;
+            box-sizing: border-box;
+            position: absolute;
+            bottom: 100%;
+            margin-bottom: 10px;
+            right: 0;
+            background-color: $content-bg;
+            border-radius: 10px;
+            width: 640px;
+            padding: 50px;
+            box-shadow: $box-shadow;
+            overflow-y: auto;
+        }
+
+        .gluggi-usages-transitive-toggle {
+            @include invisible-button($bg);
+            display: flex;
+            align-items: center;
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            border-radius: 5px;
+            font-size: 12px;
+
+            .gluggi-icon {
+                width: 12px;
+                height: 12px;
+                margin-right: 3px;
+            }
+
+            &:hover,
+            &:focus {
+                background-color: $bg-dark;
+                color: $inverted;
+            }
+        }
+
+        .gluggi-usages-list {
+            @include fixed-flex-width(50%);
+
+            .gluggi-references-headline {
+                color: $section;
+                margin: 0 0 20px;
+                font-size: 20px;
+            }
+
+            .gluggi-references-component-list {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+        }
+
+        &.is-open {
+            .gluggi-action {
+                background-color: $bg-dark;
+                color: $inverted;
+            }
+
+            .gluggi-usages-overview {
+                display: flex;
+            }
+        }
+    }
+
+    @include on-small-only {
+        .gluggi-action-usages .gluggi-usages-overview {
+            position: fixed;
+            top: 5px;
+            left: 5px;
+            width: calc(100% - 10px);
+            height: calc(100% - #{20px + 56px + 15px});
+        }
+    }
+
+    @include on-desktop {
+        background-color: $bg;
+
+        .gluggi-stage-window {
+            padding: 100px;
+        }
+
+
+        .gluggi-toggle-fullscreen {
+            display: flex;
+        }
+
+        .gluggi-action-usages .gluggi-action-label {
+            display: block;
+        }
+
+
+        .gluggi-content {
+            background-color: $content-bg;
+            border-radius: 10px;
+            padding: 50px;
+        }
+
+        &.gluggi-is-fullscreen {
+            padding: 0;
+            background-color: $content-bg;
+
+            .gluggi-content {
+                padding: 0;
+                border-radius: 0;
+                background-color: transparent;
+            }
+        }
+    }
+}

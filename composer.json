@@ -1,39 +1,48 @@
 {
-    "name":         "becklyn/gluggi-bundle",
-    "description":  "Modular layout preview system, to be used within a symfony app.",
-    "type":         "symfony-bundle",
-    "homepage":     "https://github.com/Becklyn/GluggiBundle",
-    "license":      "BSD-3-Clause",
-    "authors": [{
-        "name":     "Becklyn Studios",
-        "homepage": "http://becklyn.com/"
-    }],
+    "name": "becklyn/gluggi-bundle",
+    "type": "symfony-bundle",
+    "description": "Modular layout preview system, to be used within a symfony app.",
+    "homepage": "https://github.com/Becklyn/GluggiBundle",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Becklyn Studios",
+            "homepage": "http://becklyn.com/"
+        }
+    ],
+    "require": {
+        "php": "^7.2",
+        "ext-json": "*",
+        "becklyn/assets-bundle": "^2.3",
+        "symfony/dependency-injection": "^4.1",
+        "symfony/finder": "^4.1",
+        "symfony/framework-bundle": "^4.1",
+        "symfony/http-kernel": "^4.1",
+        "symfony/translation": "^4.1",
+        "symfony/twig-bundle": "^4.1",
+        "symfony/yaml": "^4.1",
+        "twig/twig": "^2.10"
+    },
+    "require-dev": {
+        "becklyn/php-cs": "^1.5",
+        "roave/security-advisories": "dev-master",
+        "symfony/browser-kit": "^4.1",
+        "symfony/css-selector": "^4.1",
+        "symfony/phpunit-bridge": "^4.1",
+        "symfony/twig-bundle": "^4.1",
+        "symfony/var-dumper": "^4.1"
+    },
+    "config": {
+        "sort-packages": true
+    },
     "autoload": {
-        "psr-4": { "Becklyn\\GluggiBundle\\": "" }
+        "psr-4": {
+            "Becklyn\\GluggiBundle\\": "src/"
+        }
     },
     "autoload-dev": {
         "psr-4": {
             "Tests\\Becklyn\\GluggiBundle\\": "tests/"
         }
-    },
-    "require": {
-        "php": "^7.0",
-        "becklyn/assets-bundle": "^2.0",
-        "symfony/dependency-injection": "^3.3|^4.0",
-        "symfony/finder": "^3.3|^4.0",
-        "symfony/framework-bundle": "^3.3|^4.0",
-        "symfony/http-kernel": "^3.3|^4.0",
-        "symfony/twig-bundle": "^3.3|^4.0",
-        "symfony/yaml": "^3.3|^4.0",
-        "twig/twig": "^1.27|^2.0"
-    },
-    "require-dev": {
-        "symfony/browser-kit": "^3.3|^4.0",
-        "symfony/css-selector": "^3.3|^4.0",
-        "symfony/phpunit-bridge": "^3.3|^4.0",
-        "symfony/twig-bundle": "^3.3|^4.0"
-    },
-    "config": {
-        "sort-packages": true
     }
 }

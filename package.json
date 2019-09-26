@@ -1,6 +1,13 @@
 {
     "private": true,
     "dependencies": {
-        "kaba": "^1.1.1"
+        "match-sorter": "^4.0.1",
+        "mojave": "^4.6.0",
+        "preact": "^10.0.0-rc.1",
+        "samos": "^2.1.0"
+    },
+    "devDependencies": {
+        "kaba": "^8.1.0",
+        "kaba-scss": "^3.0.1"
     }
 }

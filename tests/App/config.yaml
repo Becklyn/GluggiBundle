@@ -7,7 +7,4 @@ framework:
 
 twig:
     strict_variables: true
-    default_path: '%kernel.project_dir%/tests/templates'
-
-gluggi:
-    layout_dir: 'layout'
+    default_path: '%kernel.project_dir%/templates'

@@ -1,0 +1,88 @@
+@import "../helper/mixins";
+@import "../helper/variables";
+
+.gluggi-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    .gluggi-sidebar {
+        @include fixed-flex-width(350px);
+        display: none;
+        z-index: 1;
+    }
+
+    .gluggi-stage {
+        @include flex-fill-width;
+        z-index: 1;
+    }
+
+    .gluggi-sidebar-toggle {
+        @include center-children;
+        @include invisible-button;
+        position: absolute;
+        z-index: 3;
+        top: 20px;
+        right: 20px;
+        height: 32px;
+        width: 32px;
+        color: $text;
+        background-color: $content-bg;
+        box-shadow: $box-shadow;
+        display: flex;
+
+        svg {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .gluggi-icon-menu {
+            width: 2rem;
+            height: 1.4rem;
+        }
+
+        .gluggi-icon-close {
+            display: none;
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        &:hover,
+        &:focus {
+            background-color: $bg-dark;
+            color: $inverted;
+        }
+    }
+
+    &.gluggi-is-open {
+        .gluggi-sidebar {
+            display: flex;
+        }
+
+        .gluggi-sidebar-toggle {
+            background-color: $bg;
+            color: $text;
+            box-shadow: none;
+
+            .gluggi-icon-close {
+                display: block;
+            }
+
+            .gluggi-icon-menu {
+                display: none;
+            }
+        }
+    }
+
+    @include on-small-only {
+        .gluggi-sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    }
+}

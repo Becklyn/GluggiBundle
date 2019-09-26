@@ -1,0 +1,21 @@
+.gluggi-toggle-fullscreen {
+    .gluggi-icon {
+        height: 24px;
+        width: 24px;
+        margin: 0;
+    }
+
+    .gluggi-icon-active {
+        display: none;
+    }
+
+    &.gluggi-is-active {
+        .gluggi-icon-active {
+            display: block;
+        }
+
+        .gluggi-icon-inactive {
+            display: none;
+        }
+    }
+}

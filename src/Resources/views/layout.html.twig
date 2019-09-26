@@ -1,0 +1,58 @@
+{%- set templateConfiguration = templateConfiguration ?? [] -%}
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0{% if (templateConfiguration.prevent_zoom ?? false) %}, maximum-scale=1.0, user-scalable=no{% endif %}">
+        <title>{%- if component is defined %}{{ component.name }} // {{ component.type.name}} // {% endif -%}Gluggi</title>
+
+        {{- render(controller('Becklyn\\GluggiBundle\\Controller\\EmbedController::layoutAssets', {
+            type: "css",
+            addAssets: templateConfiguration.add_assets ?? [],
+            overrideAssets: templateConfiguration.override_assets ?? [],
+        })) -}}
+
+        {{ render(controller("Becklyn\\GluggiBundle\\Controller\\EmbedController::layoutAssets", {
+            type: "js_head",
+            addAssets: templateConfiguration.add_assets ?? [],
+            overrideAssets: templateConfiguration.override_assets ?? [],
+        })) }}
+    </head>
+    <body class="gluggi {% block body_class (templateConfiguration.body_class ?? "") %}">
+
+        {{- render(controller("Becklyn\\GluggiBundle\\Controller\\EmbedController::dataContainer", {
+            data: {
+                url: path("gluggi"),
+            },
+            id: "gluggi-global-data"
+        })) -}}
+
+        <div class="gluggi-container">
+        {%- block body -%}
+            <div class="gluggi-stage {% block stage_class "" %}">
+                {%- block stage -%}
+                    <div class="gluggi-stage-window">
+                        <div class="gluggi-content">
+                            {%- block content "" -%}
+                        </div>
+                    </div>
+                {%- endblock -%}
+
+                {%- if component is defined -%}
+                    {{- render(controller("Becklyn\\GluggiBundle\\Controller\\ContentController::contentActions", {component: component})) -}}
+                {%- endif -%}
+            </div>
+
+            {{- render(controller("Becklyn\\GluggiBundle\\Controller\\SidebarController::sidebar", {
+                activeComponent: component ?? null,
+            })) -}}
+        {%- endblock -%}
+        </div>
+
+        {{- render(controller("Becklyn\\GluggiBundle\\Controller\\EmbedController::layoutAssets", {
+            type: "js",
+            addAssets: templateConfiguration.add_assets ?? [],
+            overrideAssets: templateConfiguration.override_assets ?? [],
+        })) -}}
+    </body>
+</html>

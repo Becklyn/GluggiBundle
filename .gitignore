@@ -1,5 +1,10 @@
+/.php_cs.cache
+/.stylelintcache
 /composer.lock
-/vendor
+/node_modules
+/package-lock.json
 /tests/app/cache
 /tests/app/logs
-/node_modules
+/tests/public
+/tests/var
+/vendor

@@ -1,0 +1,6 @@
+{#- @var config \Becklyn\GluggiBundle\Configuration\GluggiConfig -#}
+{% extends "@Gluggi/layout.html.twig" %}
+
+{% block content %}
+    {{- gluggi(component.type.key, component.key, {standalone: true}) -}}
+{% endblock %}
