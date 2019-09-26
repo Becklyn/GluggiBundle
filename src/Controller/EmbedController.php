@@ -53,8 +53,8 @@ class EmbedController extends AbstractController
     {
         $overrideAssets = $overrideAssets[$type] ?? [];
         $coreAssets = [
-            "css" => "@gluggi_core/css/gluggi.css",
-            "js" => "@gluggi_core/js/gluggi.js",
+            "css" => "@gluggi/css/gluggi.css",
+            "js" => "@gluggi/js/gluggi.js",
         ];
 
         if (!empty($overrideAssets))

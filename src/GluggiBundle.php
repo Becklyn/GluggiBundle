@@ -24,7 +24,7 @@ class GluggiBundle extends Bundle
         parent::build($container);
 
         $container->addCompilerPass(new RegisterAssetNamespacesCompilerPass([
-            "gluggi_core" => __DIR__ . "/../build",
+            "gluggi" => __DIR__ . "/../build",
         ]));
     }
 
