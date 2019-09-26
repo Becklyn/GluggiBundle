@@ -3,6 +3,8 @@
 
 {# don't include any assets from Gluggi #}
 {% block gluggi_stylesheets "" %}
+{%- block container_class "gluggi-isolated-container" -%}
+
 
 {% block body %}
     {{ gluggi(component.type.key, component.key) }}

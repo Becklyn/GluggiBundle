@@ -7,6 +7,10 @@
     height: 100%;
     position: relative;
 
+    &.gluggi-isolated-container {
+        display: block;
+    }
+
     .gluggi-sidebar {
         @include fixed-flex-width(350px);
         display: none;
