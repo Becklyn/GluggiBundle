@@ -30,7 +30,7 @@ class SidebarController extends AbstractController
             "data" => [
                 "types" => $normalizer->normalizeTypes($registry->getAll(), $activeComponent),
                 "title" => $config->getTitle(),
-            ]
+            ],
         ]);
     }
 }

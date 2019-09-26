@@ -5,7 +5,6 @@ namespace Becklyn\GluggiBundle\Controller;
 use Becklyn\GluggiBundle\Component\ComponentConfiguration;
 use Becklyn\GluggiBundle\Configuration\GluggiConfig;
 use Becklyn\GluggiBundle\Data\Component;
-use Becklyn\GluggiBundle\Data\ComponentType;
 use Becklyn\GluggiBundle\Exception\ComponentNotFoundException;
 use Becklyn\GluggiBundle\Exception\TypeNotFoundException;
 use Becklyn\GluggiBundle\Type\TypeRegistry;
@@ -92,7 +91,7 @@ class GluggiController extends AbstractController
             }
 
             // a component with the same key exists in only a single other type -> redirect there
-            if (1 === count($found))
+            if (1 === \count($found))
             {
                 return $this->redirectToRoute("gluggi.component", [
                     "type" => $found[0]->getType()->getKey(),

@@ -67,7 +67,7 @@ class GluggiTwigExtension extends AbstractExtension
 
 
     /**
-     * Returns the dummy content
+     * Returns the dummy content.
      *
      * @param string $type
      *
