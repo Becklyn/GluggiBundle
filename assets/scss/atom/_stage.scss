@@ -146,7 +146,6 @@
             padding: 100px;
         }
 
-
         .gluggi-toggle-fullscreen {
             display: flex;
         }
@@ -163,8 +162,11 @@
         }
 
         &.gluggi-is-fullscreen {
-            padding: 0;
             background-color: $content-bg;
+
+            .gluggi-stage-window {
+                padding: 0;
+            }
 
             .gluggi-content {
                 padding: 0;
