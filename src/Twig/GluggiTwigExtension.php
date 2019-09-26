@@ -62,7 +62,10 @@ class GluggiTwigExtension extends AbstractExtension
             "standalone" => false,
         ], $context);
 
-        return $this->locator->get("twig")->render($component->getTemplatePath(), $context);
+        return
+            "<!-- Component Start: {$type}/{$name} -->" .
+            $this->locator->get("twig")->render($component->getTemplatePath(), $context) .
+            "<!-- / Component End: {$type}/{$name} -->";
     }
 
 
