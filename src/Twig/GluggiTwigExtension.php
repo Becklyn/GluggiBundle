@@ -90,7 +90,6 @@ class GluggiTwigExtension extends AbstractExtension
             ], $options);
 
             $options["headlines"] = \min(6, max(1, $options["headlines"]));
-
             return $twig->render("@Gluggi/dummy/content.html.twig", $options);
         }
 

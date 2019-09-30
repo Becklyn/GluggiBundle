@@ -1,0 +1,23 @@
+<?php declare(strict_types=1);
+
+namespace Tests\Becklyn\GluggiBundle\Twig;
+
+use Becklyn\GluggiBundle\Twig\GluggiTwigExtension;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
+abstract class AbstractGluggiTwigExtensionTest extends WebTestCase
+{
+    /**
+     * @return GluggiTwigExtension
+     */
+    protected function createTwigExtension () : GluggiTwigExtension
+    {
+        self::bootKernel();
+
+        /** @var ContainerInterface $container */
+        $container = self::$container;
+
+        return $container->get(GluggiTwigExtension::class);
+    }
+}
