@@ -316,3 +316,17 @@ So for example:
 
 To ease fast debugging, the twig function will throw an exception, if the key is not defined in the data array.
 
+
+Dummy Content
+=============
+
+To easily produce some example pages, there are several helper functions that render to dummy content:
+
+`content`
+---------
+
+Renders example rich text content.
+
+Options:
+
+*   `headlines`: the number of headline levels to render (default: `4`)

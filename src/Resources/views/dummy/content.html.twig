@@ -25,7 +25,7 @@
 
 <p>“Yes, I know,” said Utterson; “I know it must seem strange. The fact is, if I do not ask you the name of the other party, it is because I know it already. You see, Richard, your tale has gone home. If you have been inexact in any point you had better correct it.”</p>
 
-{%- for i in 1..4 -%}
+{%- for i in 1..headlines -%}
     {{ _self.h(i, "Headline Level %d before + after some content from Dr Jekyll and Mr Hyde") }}
     <p>“Yes, I know,” said Utterson; “I know it must seem strange. The fact is, if I do not ask you the name of the other party, it is because I know it already. You see, Richard, your tale has gone home. If you have been inexact in any point you had better correct it.”</p>
 {%- endfor -%}
@@ -35,7 +35,7 @@
 {# region Consecutive Headlines #}
 {{ _self.section("A list of consecutive headlines:") }}
 
-{%- for i in 1..4 -%}
+{%- for i in 1..headlines -%}
     {{ _self.h(i, "Headline Level %d") }}
 {%- endfor -%}
 {# endregion #}

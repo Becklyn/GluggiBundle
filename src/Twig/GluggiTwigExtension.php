@@ -76,7 +76,7 @@ class GluggiTwigExtension extends AbstractExtension
      *
      * @return string
      */
-    public function getDummy (string $type) : string
+    public function getDummy (string $type, array $options = []) : string
     {
         $twig = $this->locator->get("twig");
         $allowedContentTypes = [
@@ -85,7 +85,13 @@ class GluggiTwigExtension extends AbstractExtension
 
         if ($allowedContentTypes[0] === $type)
         {
-            return $twig->render("@Gluggi/dummy/content.html.twig");
+            $options = \array_replace([
+                "headlines" => 4,
+            ], $options);
+
+            $options["headlines"] = \min(6, max(1, $options["headlines"]));
+
+            return $twig->render("@Gluggi/dummy/content.html.twig", $options);
         }
 
         throw new \InvalidArgumentException(\sprintf(
