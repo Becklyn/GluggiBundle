@@ -2,12 +2,8 @@
 
 namespace Tests\Becklyn\GluggiBundle\Twig;
 
-use PHPUnit\Framework\TestCase;
-
-class HtmlCommentWrapperTest extends TestCase
+class HtmlCommentWrapperTest extends AbstractGluggiTwigExtensionTest
 {
-    use GluggiTwigExtensionTestTrait;
-
     /**
      *
      */
@@ -16,7 +12,7 @@ class HtmlCommentWrapperTest extends TestCase
         $extension = $this->createTwigExtension();
 
         self::assertSame(
-            '<!-- Component Start: atom/example -->rendered_template<!-- / Component End: atom/example -->',
+            '<!-- Component Start: atom/example -->example<!-- / Component End: atom/example -->',
             $extension->renderGluggiComponent("atom", "example")
         );
     }

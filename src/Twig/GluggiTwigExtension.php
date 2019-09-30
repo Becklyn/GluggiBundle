@@ -64,7 +64,7 @@ class GluggiTwigExtension extends AbstractExtension
 
         return
             "<!-- Component Start: {$type}/{$name} -->" .
-            $this->locator->get("twig")->render($component->getTemplatePath(), $context) .
+            \trim($this->locator->get("twig")->render($component->getTemplatePath(), $context)) .
             "<!-- / Component End: {$type}/{$name} -->";
     }
 
