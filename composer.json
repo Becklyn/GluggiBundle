@@ -16,6 +16,7 @@
         "becklyn/assets-bundle": "^2.3",
         "symfony/dependency-injection": "^4.1",
         "symfony/finder": "^4.1",
+        "symfony/form": "^4.1",
         "symfony/framework-bundle": "^4.1",
         "symfony/http-kernel": "^4.1",
         "symfony/translation": "^4.1",
@@ -31,6 +32,9 @@
         "symfony/phpunit-bridge": "^4.1",
         "symfony/twig-bundle": "^4.1",
         "symfony/var-dumper": "^4.1"
+    },
+    "suggest": {
+        "becklyn/rad-bundle": "To use the 'form' dummy content."
     },
     "config": {
         "sort-packages": true
