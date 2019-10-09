@@ -3,8 +3,11 @@
 namespace Becklyn\GluggiBundle\Twig;
 
 use Becklyn\GluggiBundle\Configuration\GluggiConfig;
+use Becklyn\GluggiBundle\Form\ExampleForm;
 use Becklyn\GluggiBundle\Type\TypeRegistry;
+use Becklyn\RadBundle\Html\DataContainer;
 use Psr\Container\ContainerInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -32,15 +35,27 @@ class GluggiTwigExtension extends AbstractExtension
 
 
     /**
+     * @var FormFactoryInterface
+     */
+    private $formFactory;
+
+
+    /**
      * @param ContainerInterface $locator
      * @param TypeRegistry       $registry
      * @param GluggiConfig       $config
      */
-    public function __construct (ContainerInterface $locator, TypeRegistry $registry, GluggiConfig $config)
+    public function __construct (
+        ContainerInterface $locator,
+        TypeRegistry $registry,
+        GluggiConfig $config,
+        FormFactoryInterface $formFactory
+    )
     {
         $this->registry = $registry;
         $this->config = $config;
         $this->locator = $locator;
+        $this->formFactory = $formFactory;
     }
 
 
@@ -79,18 +94,38 @@ class GluggiTwigExtension extends AbstractExtension
     public function getDummy (string $type, array $options = []) : string
     {
         $twig = $this->locator->get("twig");
+        $hasModernRadBundle = \class_exists(DataContainer::class);
         $allowedContentTypes = [
             "content",
+            "form",
         ];
 
+
+        // dummy: "content"
         if ($allowedContentTypes[0] === $type)
         {
             $options = \array_replace([
                 "headlines" => 4,
             ], $options);
 
-            $options["headlines"] = \min(6, max(1, $options["headlines"]));
+            $options["headlines"] = \min(6, \max(1, $options["headlines"]));
             return $twig->render("@Gluggi/dummy/content.html.twig", $options);
+        }
+
+        // dummy: "form"
+        if ($allowedContentTypes[1] === $type)
+        {
+            if (!$hasModernRadBundle)
+            {
+                throw new \InvalidArgumentException("The 'form' dummy content needs becklyn/rad-bundle v6+");
+            }
+
+            $form = $this->formFactory->create(ExampleForm::class, null);
+            ExampleForm::addErrors($form);
+
+            return $twig->render("@Gluggi/dummy/form.html.twig", [
+                "form" => $form->createView(),
+            ]);
         }
 
         throw new \InvalidArgumentException(\sprintf(

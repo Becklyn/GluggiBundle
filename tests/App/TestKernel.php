@@ -4,6 +4,7 @@ namespace Tests\Becklyn\GluggiBundle\App;
 
 use Becklyn\AssetsBundle\BecklynAssetsBundle;
 use Becklyn\GluggiBundle\GluggiBundle;
+use Becklyn\RadBundle\BecklynRadBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Bundle\TwigBundle\TwigBundle;
@@ -36,6 +37,7 @@ class TestKernel extends Kernel
             new FrameworkBundle(),
             new TwigBundle(),
             new GluggiBundle(),
+            new BecklynRadBundle(),
             new BecklynAssetsBundle(),
         ];
     }
