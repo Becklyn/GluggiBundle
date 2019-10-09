@@ -18,7 +18,7 @@ class ExampleForm extends AbstractType
     /**
      * @inheritDoc
      */
-    public function buildForm (FormBuilderInterface $builder, array $options)
+    public function buildForm (FormBuilderInterface $builder, array $options) : void
     {
         $choices = [
             "Value 1" => 1,
@@ -66,13 +66,12 @@ class ExampleForm extends AbstractType
                 "choices" => $choices,
                 "expanded" => true,
                 "multiple" => true,
-            ], [2, 3])
-        ;
+            ], [2, 3]);
     }
 
 
     /**
-     * Adds a field with all variations to the form
+     * Adds a field with all variations to the form.
      *
      * @param FormBuilderInterface $builder
      * @param string               $name    the base name of the field
