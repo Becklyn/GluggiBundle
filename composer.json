@@ -25,6 +25,7 @@
         "twig/twig": "^2.10"
     },
     "require-dev": {
+        "becklyn/rad-bundle": "^6.2",
         "becklyn/php-cs": "^1.5",
         "roave/security-advisories": "dev-master",
         "symfony/browser-kit": "^4.1",
