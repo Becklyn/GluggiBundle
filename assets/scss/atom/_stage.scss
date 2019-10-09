@@ -11,6 +11,7 @@
     }
 
     .gluggi-stage-window {
+        position: relative;
         height: 100%;
         overflow-y: auto;
     }
@@ -156,6 +157,7 @@
 
 
         .gluggi-content {
+            position: relative;
             background-color: $content-bg;
             border-radius: 10px;
             padding: 50px;

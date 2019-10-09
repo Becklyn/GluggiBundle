@@ -5,6 +5,8 @@ namespace Becklyn\GluggiBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -30,6 +32,13 @@ class ExampleForm extends AbstractType
             ], "Some Value")
             ->addField($builder, "textarea", TextareaType::class, [
                 "label" => "Text Multi Line",
+            ])
+            ->addField($builder, "date", DateType::class, [
+                "label" => "Date",
+                "widget" => "single_text",
+            ])
+            ->addField($builder, "email", EmailType::class, [
+                "label" => "E-Mail",
             ])
             ->addField($builder, "checkbox", CheckboxType::class, [
                 "label" => "Single Checkbox",
@@ -88,7 +97,7 @@ class ExampleForm extends AbstractType
                 ],
                 $options
             ))
-            ->add("{$name}_empty", $type, \array_replace_recursive(
+            ->add("{$name}_help", $type, \array_replace_recursive(
                 [
                     "label" => "{$options['label']} + Help",
                     "attr" => [
@@ -99,6 +108,15 @@ class ExampleForm extends AbstractType
                 $options
             ))
             ->add("{$name}_error", $type, \array_replace_recursive(
+                [
+                    "data" => $data,
+                ],
+                $options,
+                [
+                    "label" => "{$options['label']} + Error",
+                ]
+            ))
+            ->add("{$name}_help_error", $type, \array_replace_recursive(
                 [
                     "data" => $data,
                     "attr" => [
