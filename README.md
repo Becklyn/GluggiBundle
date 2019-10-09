@@ -330,3 +330,9 @@ Renders example rich text content.
 Options:
 
 *   `headlines`: the number of headline levels to render (default: `4`)
+
+
+`form`
+------
+
+Renders a form with a lot of different form field types + states.
