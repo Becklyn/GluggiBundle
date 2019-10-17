@@ -18,7 +18,7 @@
             overrideAssets: templateConfiguration.override_assets ?? [],
         })) }}
     </head>
-    <body class="gluggi {% block body_class (templateConfiguration.body_class ?? "") %}">
+    <body class="{% block body_class "gluggi " ~ (templateConfiguration.body_class ?? "") %}">
 
         {{- render(controller("Becklyn\\GluggiBundle\\Controller\\EmbedController::dataContainer", {
             data: {
