@@ -12,11 +12,6 @@ class EmbedController extends AbstractController
 {
     /**
      * Renders a data container.
-     *
-     * @param array  $data
-     * @param string $id
-     *
-     * @return Response
      */
     public function dataContainer (array $data, string $id) : Response
     {
@@ -33,15 +28,7 @@ class EmbedController extends AbstractController
     /**
      * Renders the layout assets.
      *
-     * @param GluggiConfig       $config
-     * @param AssetHtmlGenerator $htmlGenerator
-     * @param string             $type
-     * @param array              $addAssets
-     * @param array              $overrideAssets
-     *
      * @throws AssetsException
-     *
-     * @return Response
      */
     public function layoutAssets (
         GluggiConfig $config,

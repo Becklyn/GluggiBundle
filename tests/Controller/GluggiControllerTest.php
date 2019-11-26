@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class GluggiControllerTest extends WebTestCase
 {
-    public function testIndex ()
+    public function testIndex () : void
     {
         $client = static::createClient();
         $client->request("GET", "/");
@@ -20,7 +20,7 @@ class GluggiControllerTest extends WebTestCase
     }
 
 
-    public function testComponent ()
+    public function testComponent () : void
     {
         $client = static::createClient();
         $client->request("GET", "/atom/example");
@@ -33,7 +33,7 @@ class GluggiControllerTest extends WebTestCase
     }
 
 
-    public function dataProviderComponentTypes ()
+    public function dataProviderComponentTypes () : array
     {
         // mapping component type on "should have staged view"
         return [
@@ -49,7 +49,7 @@ class GluggiControllerTest extends WebTestCase
     /**
      * @dataProvider dataProviderComponentTypes
      */
-    public function testGluggiWrapperOnTypeComponentView (string $type, bool $shouldHaveWrapper)
+    public function testGluggiWrapperOnTypeComponentView (string $type, bool $shouldHaveWrapper) : void
     {
         $client = static::createClient();
         $crawler = $client->request("GET", "/{$type}/example");
@@ -75,7 +75,7 @@ class GluggiControllerTest extends WebTestCase
     /**
      *
      */
-    public function testUnknownComponent ()
+    public function testUnknownComponent () : void
     {
         $client = static::createClient();
         $client->request("GET", "/atom/unknown");
@@ -84,7 +84,7 @@ class GluggiControllerTest extends WebTestCase
     }
 
 
-    public function testUnknownComponentWithUnknownComponentType ()
+    public function testUnknownComponentWithUnknownComponentType () : void
     {
         $client = static::createClient();
         $client->request("GET", "/unknown/unknown");

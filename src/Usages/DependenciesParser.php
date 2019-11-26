@@ -33,7 +33,6 @@ class DependenciesParser
 
 
     /**
-     * @param Environment $twig
      */
     public function __construct (Environment $twig)
     {
@@ -45,8 +44,6 @@ class DependenciesParser
 
     /**
      * Parses all dependencies.
-     *
-     * @param TypeRegistry $typeRegistry
      */
     public function parseDependencies (TypeRegistry $typeRegistry) : void
     {
@@ -62,9 +59,6 @@ class DependenciesParser
 
     /**
      * Find every component that is used in the given template.
-     *
-     * @param TypeRegistry $typeRegistry
-     * @param Component    $component
      */
     private function findAndLinkDependencies (TypeRegistry $typeRegistry, Component $component) : void
     {

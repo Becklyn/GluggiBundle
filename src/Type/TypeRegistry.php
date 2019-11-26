@@ -31,7 +31,6 @@ class TypeRegistry
 
 
     /**
-     * @param TypeFactory $factory
      */
     public function __construct (
         TypeFactory $factory,
@@ -45,10 +44,6 @@ class TypeRegistry
 
     /**
      * Returns the type by key.
-     *
-     * @param string $key
-     *
-     * @return ComponentType
      */
     public function getType (string $key) : ComponentType
     {
@@ -64,10 +59,7 @@ class TypeRegistry
 
 
     /**
-     * @param string $type
-     * @param string $component
      *
-     * @return Component
      */
     public function getComponent (string $type, string $component) : Component
     {

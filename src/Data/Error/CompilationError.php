@@ -13,7 +13,6 @@ class CompilationError implements ComponentError
 
 
     /**
-     * @param Error $error
      */
     public function __construct (Error $error)
     {

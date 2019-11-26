@@ -10,11 +10,9 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class ComponentNotFoundException extends NotFoundHttpException
 {
     /**
-     * @param string          $name
-     * @param string          $type
      * @param \Exception|null $previous
      */
-    public function __construct (string $name, string $type, \Throwable $previous = null)
+    public function __construct (string $name, string $type, ?\Throwable $previous = null)
     {
         parent::__construct(
             \sprintf("Component '%s' with type '%s' could not be found.", $name, $type),

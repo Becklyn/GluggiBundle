@@ -10,11 +10,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class TypeNotFoundException extends NotFoundHttpException
 {
     /**
-     * @param string          $type
-     * @param array           $knownTypes
-     * @param \Exception|null $previous
      */
-    public function __construct (string $type, array $knownTypes = [], \Exception $previous = null)
+    public function __construct (string $type, array $knownTypes = [], ?\Exception $previous = null)
     {
         $message = !empty($knownTypes)
             ? "Unknown type '%s', known types are '%s'."

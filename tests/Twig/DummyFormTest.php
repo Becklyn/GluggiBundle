@@ -9,7 +9,7 @@ use Symfony\Component\DomCrawler\Crawler;
  */
 class DummyFormTest extends AbstractGluggiTwigExtensionTest
 {
-    public function testFormRendering ()
+    public function testFormRendering () : void
     {
         $extension = $this->createTwigExtension();
 

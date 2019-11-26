@@ -40,7 +40,7 @@ class DummyContentTest extends AbstractGluggiTwigExtensionTest
         bool $hasH4,
         bool $hasH5,
         bool $hasH6
-    )
+    ) : void
     {
         $extension = $this->createTwigExtension();
 

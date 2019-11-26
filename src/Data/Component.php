@@ -65,12 +65,6 @@ class Component
 
 
     /**
-     * @param string        $fileName
-     * @param string        $key
-     * @param string        $name
-     * @param bool          $hidden
-     * @param ComponentType $type
-     * @param string        $templatePath
      */
     public function __construct (string $fileName, string $key, string $name, bool $hidden, ComponentType $type, string $templatePath)
     {
@@ -85,7 +79,6 @@ class Component
 
 
     /**
-     * @return string
      */
     public function getFileName () : string
     {
@@ -95,7 +88,6 @@ class Component
 
 
     /**
-     * @return string
      */
     public function getKey () : string
     {
@@ -105,7 +97,6 @@ class Component
 
 
     /**
-     * @return string
      */
     public function getName () : string
     {
@@ -115,7 +106,6 @@ class Component
 
 
     /**
-     * @return ComponentType
      */
     public function getType () : ComponentType
     {
@@ -125,7 +115,6 @@ class Component
 
 
     /**
-     * @return bool
      */
     public function isHidden () : bool
     {
@@ -136,8 +125,6 @@ class Component
 
     /**
      * Returns the import path as used by twig in symfony.
-     *
-     * @return string
      */
     public function getTemplatePath () : string
     {
@@ -155,7 +142,6 @@ class Component
 
 
     /**
-     * @return ComponentError|null
      */
     public function getError () : ?ComponentError
     {
@@ -164,7 +150,6 @@ class Component
 
 
     /**
-     * @param ComponentError|null $error
      */
     public function setError (?ComponentError $error) : void
     {

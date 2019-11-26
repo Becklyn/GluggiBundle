@@ -17,7 +17,6 @@ class ComponentConfiguration
 
 
     /**
-     * @param Environment $twig
      */
     public function __construct (Environment $twig)
     {
@@ -26,9 +25,7 @@ class ComponentConfiguration
 
 
     /**
-     * @param Component $component
      *
-     * @return array
      */
     public function getConfiguration (Component $component) : array
     {
@@ -53,10 +50,6 @@ class ComponentConfiguration
 
     /**
      * Parses the config from the given config text.
-     *
-     * @param string $configText
-     *
-     * @return array
      */
     private function parseConfig (string $configText) : array
     {
@@ -84,10 +77,6 @@ class ComponentConfiguration
 
     /**
      * Deindents the given text.
-     *
-     * @param string $configText
-     *
-     * @return string
      */
     private function deindent (string $configText) : string
     {

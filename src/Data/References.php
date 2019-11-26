@@ -22,8 +22,6 @@ class References
 
 
     /**
-     * @param array $direct
-     * @param array $transitive
      */
     public function __construct (array $direct, array $transitive)
     {
@@ -33,7 +31,6 @@ class References
 
 
     /**
-     * @return array
      */
     public function getDirect () : array
     {
@@ -42,7 +39,6 @@ class References
 
 
     /**
-     * @return array
      */
     public function getTransitive () : array
     {

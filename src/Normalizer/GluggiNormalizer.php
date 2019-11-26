@@ -12,9 +12,7 @@ use Becklyn\GluggiBundle\Data\References;
 class GluggiNormalizer
 {
     /**
-     * @param Component $component
      *
-     * @return array
      */
     public function normalizeComponent (Component $component, ?Component $activeComponent = null) : array
     {
@@ -32,9 +30,7 @@ class GluggiNormalizer
 
 
     /**
-     * @param References $dependencies
      *
-     * @return array
      */
     public function normalizeDependencies (References $dependencies) : array
     {
@@ -47,11 +43,6 @@ class GluggiNormalizer
 
     /**
      * Normalizes a component type.
-     *
-     * @param ComponentType  $type
-     * @param Component|null $activeComponent
-     *
-     * @return array
      */
     public function normalizeType (ComponentType $type, ?Component $activeComponent = null) : array
     {
@@ -78,9 +69,6 @@ class GluggiNormalizer
      * Normalizes a list of types.
      *
      * @param ComponentType[] $types
-     * @param Component|null  $activeComponent
-     *
-     * @return array
      */
     public function normalizeTypes (array $types, ?Component $activeComponent = null) : array
     {
@@ -101,9 +89,7 @@ class GluggiNormalizer
 
 
     /**
-     * @param array $components
      *
-     * @return array
      */
     private function sortComponentList (array $components) : array
     {

@@ -25,7 +25,6 @@ class TwigUsagesVisitor implements NodeVisitorInterface
 
 
     /**
-     * @return array
      */
     public function getUsages () : array
     {
@@ -36,7 +35,7 @@ class TwigUsagesVisitor implements NodeVisitorInterface
     /**
      * @inheritDoc
      */
-    public function enterNode (Node $node, Environment $env)
+    public function enterNode (Node $node, Environment $env) : Node
     {
         if (!$node instanceof FunctionExpression)
         {
@@ -60,8 +59,8 @@ class TwigUsagesVisitor implements NodeVisitorInterface
             return $node;
         }
 
-        $typeArgument = $arguments->getNode(0);
-        $nameArgument = $arguments->getNode(1);
+        $typeArgument = $arguments->getNode("0");
+        $nameArgument = $arguments->getNode("1");
 
         // everything correct -> store
         if ($typeArgument instanceof ConstantExpression && $nameArgument instanceof ConstantExpression)
@@ -76,7 +75,7 @@ class TwigUsagesVisitor implements NodeVisitorInterface
     /**
      * @inheritDoc
      */
-    public function leaveNode (Node $node, Environment $env)
+    public function leaveNode (Node $node, Environment $env) : Node
     {
         return $node;
     }
@@ -85,7 +84,7 @@ class TwigUsagesVisitor implements NodeVisitorInterface
     /**
      * @inheritDoc
      */
-    public function getPriority ()
+    public function getPriority () : int
     {
         return 0;
     }

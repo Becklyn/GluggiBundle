@@ -22,7 +22,6 @@ class ComponentType
 
 
     /**
-     * @param string $key
      */
     public function __construct (string $key)
     {
@@ -31,7 +30,6 @@ class ComponentType
 
 
     /**
-     * @return string
      */
     public function getKey () : string
     {
@@ -40,7 +38,6 @@ class ComponentType
 
 
     /**
-     * @return string
      */
     public function getName () : string
     {
@@ -61,10 +58,6 @@ class ComponentType
 
     /**
      * Returns a single component by key.
-     *
-     * @param string $key
-     *
-     * @return Component
      */
     public function getComponent (string $key) : Component
     {
@@ -79,10 +72,6 @@ class ComponentType
 
     /**
      * Returns whether a component with the given key exists in this type.
-     *
-     * @param string $key
-     *
-     * @return bool
      */
     public function hasComponent (string $key) : bool
     {
@@ -91,7 +80,6 @@ class ComponentType
 
 
     /**
-     * @param Component $component
      */
     public function addComponent (Component $component) : void
     {
