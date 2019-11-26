@@ -22,7 +22,6 @@ class TypeFactory
 
 
     /**
-     * @param GluggiConfig $config
      */
     public function __construct (GluggiConfig $config)
     {
@@ -33,10 +32,6 @@ class TypeFactory
 
     /**
      * Creates the component types and loads all components.
-     *
-     * @param string $typeKey
-     *
-     * @return ComponentType
      */
     public function create (string $typeKey) : ComponentType
     {
@@ -66,10 +61,6 @@ class TypeFactory
 
 
     /**
-     * @param \SplFileInfo  $file
-     * @param string        $templatePathPrefix
-     * @param ComponentType $type
-     *
      * @return Component
      */
     private function createComponent (\SplFileInfo $file, string $templatePathPrefix, ComponentType $type)

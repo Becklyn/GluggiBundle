@@ -8,3 +8,5 @@
 /tests/public
 /tests/var
 /vendor
+/vendor-bin/*/composer.lock
+/vendor-bin/*/vendor

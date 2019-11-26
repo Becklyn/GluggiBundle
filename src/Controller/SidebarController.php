@@ -12,11 +12,6 @@ use Symfony\Component\HttpFoundation\Response;
 class SidebarController extends AbstractController
 {
     /**
-     * @param TypeRegistry     $registry
-     * @param GluggiNormalizer $normalizer
-     * @param GluggiConfig     $config
-     * @param Component|null   $activeComponent
-     *
      * @return Response
      */
     public function sidebar (

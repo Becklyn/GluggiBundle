@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class TemplateVariablesTest extends WebTestCase
 {
-    public function testStandaloneComponentView ()
+    public function testStandaloneComponentView () : void
     {
         $client = static::createClient();
         $client->request("GET", "/atom/standalone_test");
@@ -18,7 +18,7 @@ class TemplateVariablesTest extends WebTestCase
 
 
 
-    public function testStandaloneIncludeWithDefaultValue ()
+    public function testStandaloneIncludeWithDefaultValue () : void
     {
         $client = static::createClient();
         $client->request("GET", "/molecule/standalone_include");
@@ -32,7 +32,7 @@ class TemplateVariablesTest extends WebTestCase
 
 
 
-    public function testStandaloneIncludeWithExplicitValue ()
+    public function testStandaloneIncludeWithExplicitValue () : void
     {
         $client = static::createClient();
         $client->request("GET", "/molecule/standalone_include_explicit");

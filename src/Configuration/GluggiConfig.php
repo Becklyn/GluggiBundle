@@ -28,9 +28,6 @@ class GluggiConfig
 
 
     /**
-     * @param KernelInterface $kernel
-     * @param string          $twigDefaultPath
-     * @param array           $config
      */
     public function __construct (
         KernelInterface $kernel,
@@ -45,7 +42,6 @@ class GluggiConfig
 
 
     /**
-     * @return string
      */
     public function getLayoutDir () : string
     {
@@ -55,7 +51,6 @@ class GluggiConfig
 
 
     /**
-     * @return string|null
      */
     public function getInfoAction () : ?string
     {
@@ -65,7 +60,6 @@ class GluggiConfig
 
 
     /**
-     * @return string
      */
     public function getTitle () : string
     {
@@ -75,7 +69,6 @@ class GluggiConfig
 
 
     /**
-     * @return array
      */
     public function getCssFiles () : array
     {
@@ -85,7 +78,6 @@ class GluggiConfig
 
 
     /**
-     * @return array
      */
     public function getJavaScriptFiles () : array
     {
@@ -95,7 +87,6 @@ class GluggiConfig
 
 
     /**
-     * @return array
      */
     public function getJavaScriptHeadFiles () : array
     {
@@ -104,7 +95,6 @@ class GluggiConfig
 
 
     /**
-     * @return string|null
      */
     public function getGlobalBodyClass () : ?string
     {
@@ -144,10 +134,6 @@ class GluggiConfig
 
     /**
      * Resolves the configured layout directory path.
-     *
-     * @param string $path
-     *
-     * @return string
      */
     public function resolvePath (string $path) : string
     {

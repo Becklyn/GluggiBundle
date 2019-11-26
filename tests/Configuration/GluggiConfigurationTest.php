@@ -11,7 +11,7 @@ class GluggiConfigurationTest extends TestCase
     private $config;
 
 
-    protected function setUp ()
+    protected function setUp () : void
     {
         $kernel = $this->getMockBuilder(KernelInterface::class)
             ->disableOriginalConstructor()
@@ -31,7 +31,7 @@ class GluggiConfigurationTest extends TestCase
 
 
 
-    public function dataProviderResolver ()
+    public function dataProviderResolver () : array
     {
         return [
             ["test", "/twig/test"],
@@ -49,7 +49,7 @@ class GluggiConfigurationTest extends TestCase
      * @param string $path
      * @param string $expected
      */
-    public function testResolver (string $path, string $expected)
+    public function testResolver (string $path, string $expected) : void
     {
         $actual = $this->config->resolvePath($path);
         self::assertEquals($expected, $actual);

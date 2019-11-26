@@ -41,9 +41,6 @@ class GluggiTwigExtension extends AbstractExtension
 
 
     /**
-     * @param ContainerInterface $locator
-     * @param TypeRegistry       $registry
-     * @param GluggiConfig       $config
      */
     public function __construct (
         ContainerInterface $locator,
@@ -62,12 +59,6 @@ class GluggiTwigExtension extends AbstractExtension
 
     /**
      * Renders a gluggi component.
-     *
-     * @param string $type
-     * @param string $name
-     * @param array  $context
-     *
-     * @return string
      */
     public function renderGluggiComponent (string $type, string $name, array $context = []) : string
     {
@@ -86,10 +77,6 @@ class GluggiTwigExtension extends AbstractExtension
 
     /**
      * Returns the dummy content.
-     *
-     * @param string $type
-     *
-     * @return string
      */
     public function getDummy (string $type, array $options = []) : string
     {
@@ -99,7 +86,6 @@ class GluggiTwigExtension extends AbstractExtension
             "content",
             "form",
         ];
-
 
         // dummy: "content"
         if ($allowedContentTypes[0] === $type)
@@ -139,11 +125,6 @@ class GluggiTwigExtension extends AbstractExtension
 
     /**
      * Returns the template name.
-     *
-     * @param string $type
-     * @param string $name
-     *
-     * @return string
      */
     public function getTemplateName (string $type, string $name) : string
     {

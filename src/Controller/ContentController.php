@@ -11,10 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 class ContentController extends AbstractController
 {
     /**
-     * @param GluggiNormalizer $normalizer
-     * @param Component        $component
      *
-     * @return Response
      */
     public function contentActions (
         GluggiNormalizer $normalizer,

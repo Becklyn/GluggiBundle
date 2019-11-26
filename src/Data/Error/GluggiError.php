@@ -11,7 +11,6 @@ class GluggiError implements ComponentError
 
 
     /**
-     * @param string $message
      */
     public function __construct (string $message)
     {
@@ -20,7 +19,6 @@ class GluggiError implements ComponentError
 
 
     /**
-     * @return string
      */
     public function getMessage () : string
     {

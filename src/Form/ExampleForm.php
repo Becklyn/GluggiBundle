@@ -73,11 +73,10 @@ class ExampleForm extends AbstractType
     /**
      * Adds a field with all variations to the form.
      *
-     * @param FormBuilderInterface $builder
-     * @param string               $name    the base name of the field
-     * @param string               $type    the type
-     * @param array                $options the options for the field of this type (will be dynamically extended)
-     * @param mixed                $data    if the field is not empty, which data should be present?
+     * @param string $name    the base name of the field
+     * @param string $type    the type
+     * @param array  $options the options for the field of this type (will be dynamically extended)
+     * @param mixed  $data    if the field is not empty, which data should be present?
      *
      * @return $this
      */
@@ -134,7 +133,6 @@ class ExampleForm extends AbstractType
 
 
     /**
-     * @param FormInterface $form
      */
     public static function addErrors (FormInterface $form) : void
     {

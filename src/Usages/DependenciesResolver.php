@@ -8,9 +8,7 @@ use Becklyn\GluggiBundle\Data\References;
 class DependenciesResolver
 {
     /**
-     * @param Component $component
      *
-     * @return References
      */
     public function resolveDependencies (Component $component) : References
     {
@@ -24,9 +22,7 @@ class DependenciesResolver
 
 
     /**
-     * @param Component $component
      *
-     * @return References
      */
     public function resolveUsages (Component $component) : References
     {
@@ -40,10 +36,7 @@ class DependenciesResolver
 
 
     /**
-     * @param Component $component
-     * @param callable  $fetcher
      *
-     * @return References
      */
     private function resolve (Component $component, callable $fetcher) : References
     {
@@ -76,9 +69,7 @@ class DependenciesResolver
 
 
     /**
-     * @param Component   $component
      * @param Component[] $direct
-     * @param callable    $fetcher
      *
      * @return Component[]
      */

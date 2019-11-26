@@ -18,10 +18,6 @@ class GluggiController extends AbstractController
 {
     /**
      * Renders the welcome screen.
-     *
-     * @param GluggiConfig $config
-     *
-     * @return Response
      */
     public function index (GluggiConfig $config) : Response
     {
@@ -33,14 +29,6 @@ class GluggiController extends AbstractController
 
     /**
      * Renders a single component.
-     *
-     * @param TypeRegistry           $registry
-     * @param GluggiConfig           $config
-     * @param ComponentConfiguration $componentConfiguration
-     * @param string                 $type
-     * @param string                 $key
-     *
-     * @return Response
      */
     public function component (
         TypeRegistry $registry,
