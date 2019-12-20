@@ -10,16 +10,16 @@ git:
 
 php:
     - "7.2"
-    - "7.3"
+    - "7.4"
 
 before_install:
     - composer self-update --stable
-    - composer require php-coveralls/php-coveralls
-    - composer global require ergebnis/composer-normalize bamarni/composer-bin-plugin --prefer-dist --no-interaction --no-progress
+    - composer require php-coveralls/php-coveralls --no-suggest
+    - composer global require ergebnis/composer-normalize bamarni/composer-bin-plugin --prefer-dist --no-interaction --no-progress --no-suggest
 
 install:
-    - composer install --prefer-dist --no-interaction --no-progress
-    - composer bin all install --prefer-dist --no-interaction --no-progress
+    - composer install --prefer-dist --no-interaction --no-progress --no-suggest
+    - composer bin all install --prefer-dist --no-interaction --no-progress --no-suggest
     - mkdir -p build/logs
 
 script:
