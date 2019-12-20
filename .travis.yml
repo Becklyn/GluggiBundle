@@ -15,7 +15,7 @@ php:
 before_install:
     - composer self-update --stable
     - composer require php-coveralls/php-coveralls
-    - composer global require localheinz/composer-normalize bamarni/composer-bin-plugin --prefer-dist --no-interaction --no-progress
+    - composer global require ergebnis/composer-normalize bamarni/composer-bin-plugin --prefer-dist --no-interaction --no-progress
 
 install:
     - composer install --prefer-dist --no-interaction --no-progress
