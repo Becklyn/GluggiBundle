@@ -1,3 +1,9 @@
+3.2.1
+=====
+
+*   (bug) If a component references itself within a `standalone` check the dependency calculation does not longer fail. 
+
+
 3.2.0
 =====
 
