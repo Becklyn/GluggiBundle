@@ -104,6 +104,8 @@ class DependenciesResolver
                 $result[$queueUse->getFullKey()] = $queueUse;
                 $queue[] = $queueUse;
             }
+
+            $alreadyChecked[$queueEntry->getFullKey()] = true;
         }
 
         return $result;
