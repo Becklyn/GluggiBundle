@@ -1,3 +1,9 @@
+3.2.2
+=====
+
+*   (improvement) Fix wrong choice labels 
+
+
 3.2.1
 =====
 

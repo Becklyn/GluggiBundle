@@ -56,13 +56,13 @@ class ExampleForm extends AbstractType
                 "multiple" => true,
             ], [2, 3])
             ->addField($builder, "choice_expanded_single", ChoiceType::class, [
-                "label" => "Checkbox List",
+                "label" => "Radio List",
                 "choices" => $choices,
                 "expanded" => true,
                 "multiple" => false,
             ], 3)
             ->addField($builder, "choice_expanded_multi", ChoiceType::class, [
-                "label" => "Radio List",
+                "label" => "Checkbox List",
                 "choices" => $choices,
                 "expanded" => true,
                 "multiple" => true,
