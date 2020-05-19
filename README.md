@@ -77,7 +77,7 @@ Gluggi contains a simple twig function that includes a component:
 
 ```jinja
 <div class="wrapper">
-    {{ gluggi("atom", "example")
+    {{ gluggi("atom", "example") }}
 </div>
 ```
 
@@ -131,7 +131,7 @@ To allow overwriting certain values, the [`|default(...)` filter from Twig](http
 `molecule/long-list.html.twig`:
 ```jinja
 <div class="long-list">
-    {{ gluggi("atom", "list", {entries: 10}) }
+    {{ gluggi("atom", "list", {entries: 10}) }}
 </div>
 ```
 
