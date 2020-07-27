@@ -1,3 +1,11 @@
+3.3.0
+=====
+
+*   (internal) Bump minimum PHP version to ^7.4.
+*   (internal) Upgrade to `becklyn/rad`.
+*   (bug) Check against `DataContainer` form `becklyn/rad`.
+
+
 3.2.2
 =====
 
