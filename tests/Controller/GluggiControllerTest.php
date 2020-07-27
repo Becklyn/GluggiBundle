@@ -4,7 +4,6 @@ namespace Tests\Becklyn\GluggiBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-
 class GluggiControllerTest extends WebTestCase
 {
     public function testIndex () : void

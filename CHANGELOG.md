@@ -1,3 +1,11 @@
+3.3.0
+=====
+
+*   (improvement) Bump minimum PHP version to ^7.4.
+*   (improvement) Upgrade to `becklyn/rad`.
+*   (bug) Add support for both the new and old RAD bundles in `gluggy_dummy()`.
+
+
 3.2.2
 =====
 

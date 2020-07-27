@@ -5,7 +5,8 @@ namespace Becklyn\GluggiBundle\Twig;
 use Becklyn\GluggiBundle\Configuration\GluggiConfig;
 use Becklyn\GluggiBundle\Form\ExampleForm;
 use Becklyn\GluggiBundle\Type\TypeRegistry;
-use Becklyn\RadBundle\Html\DataContainer;
+use Becklyn\Rad\Html\DataContainer;
+use Becklyn\RadBundle\Html\DataContainer as OldDataContainer;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Twig\Extension\AbstractExtension;
@@ -16,32 +17,12 @@ use Twig\TwigFunction;
  */
 class GluggiTwigExtension extends AbstractExtension
 {
-    /**
-     * @var TypeRegistry
-     */
-    private $registry;
+    private TypeRegistry $registry;
+    private GluggiConfig $config;
+    private ContainerInterface $locator;
+    private FormFactoryInterface $formFactory;
 
 
-    /**
-     * @var GluggiConfig
-     */
-    private $config;
-
-
-    /**
-     * @var ContainerInterface
-     */
-    private $locator;
-
-
-    /**
-     * @var FormFactoryInterface
-     */
-    private $formFactory;
-
-
-    /**
-     */
     public function __construct (
         ContainerInterface $locator,
         TypeRegistry $registry,
@@ -81,7 +62,7 @@ class GluggiTwigExtension extends AbstractExtension
     public function getDummy (string $type, array $options = []) : string
     {
         $twig = $this->locator->get("twig");
-        $hasModernRadBundle = \class_exists(DataContainer::class);
+        $hasModernRadBundle = \class_exists(DataContainer::class) || \class_exists(OldDataContainer::class);
         $allowedContentTypes = [
             "content",
             "form",
@@ -103,7 +84,7 @@ class GluggiTwigExtension extends AbstractExtension
         {
             if (!$hasModernRadBundle)
             {
-                throw new \InvalidArgumentException("The 'form' dummy content needs becklyn/rad-bundle v6+");
+                throw new \InvalidArgumentException("The 'form' dummy content needs becklyn/rad-bundle v6+ or becklyn/rad v8+");
             }
 
             $form = $this->formFactory->create(ExampleForm::class, null);
@@ -136,7 +117,7 @@ class GluggiTwigExtension extends AbstractExtension
     /**
      * @inheritdoc
      */
-    public function getFunctions ()
+    public function getFunctions () : array
     {
         return [
             new TwigFunction("gluggi", [$this, "renderGluggiComponent"], ["is_safe" => ["html"]]),
