@@ -3,7 +3,6 @@
 namespace Tests\Becklyn\GluggiBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class GluggiControllerTest extends WebTestCase
 {
