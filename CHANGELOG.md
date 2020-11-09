@@ -1,3 +1,9 @@
+3.4.0
+=====
+
+*   (feature) Add `variants.html.twig` template for automatic rendering of all permutations of a component.
+
+
 3.3.0
 =====
 
