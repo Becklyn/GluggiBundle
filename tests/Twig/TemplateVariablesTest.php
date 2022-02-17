@@ -3,17 +3,26 @@
 namespace Tests\Becklyn\GluggiBundle\Twig;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-
+use Tests\Becklyn\GluggiBundle\App\TestKernel;
 
 class TemplateVariablesTest extends WebTestCase
 {
+    /**
+     * @inheritDoc
+     */
+    protected static function getKernelClass () : string
+    {
+        return TestKernel::class;
+    }
+
+
     public function testStandaloneComponentView () : void
     {
         $client = static::createClient();
         $client->request("GET", "/atom/standalone_test");
         $content = $client->getResponse()->getContent();
 
-        self::assertContains("Test-standalone", $content);
+        self::assertStringContainsString("Test-standalone", $content);
     }
 
 
@@ -25,9 +34,9 @@ class TemplateVariablesTest extends WebTestCase
         $content = $client->getResponse()->getContent();
 
         // first check that the correct file is loaded
-        self::assertContains("Include", $content);
+        self::assertStringContainsString("Include", $content);
         // then check assertion
-        self::assertContains("Test-embedded", $content);
+        self::assertStringContainsString("Test-embedded", $content);
     }
 
 
@@ -39,8 +48,8 @@ class TemplateVariablesTest extends WebTestCase
         $content = $client->getResponse()->getContent();
 
         // first check that the correct file is loaded
-        self::assertContains("Include explicit", $content);
+        self::assertStringContainsString("Include explicit", $content);
         // then check assertion
-        self::assertContains("Test-standalone", $content);
+        self::assertStringContainsString("Test-standalone", $content);
     }
 }

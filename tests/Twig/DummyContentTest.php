@@ -3,9 +3,19 @@
 namespace Tests\Becklyn\GluggiBundle\Twig;
 
 use Symfony\Component\DomCrawler\Crawler;
+use Tests\Becklyn\GluggiBundle\App\TestKernel;
 
 class DummyContentTest extends AbstractGluggiTwigExtensionTest
 {
+    /**
+     * @inheritDoc
+     */
+    protected static function getKernelClass () : string
+    {
+        return TestKernel::class;
+    }
+
+
     /**
      * @return array
      */

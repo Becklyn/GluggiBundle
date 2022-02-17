@@ -40,7 +40,7 @@ jobs:
                   command: COMPOSER_MEMORY_LIMIT=-1 composer normalize --indent-size 4 --indent-style space --dry-run
             - run:
                   name: PHP CS Fixer
-                  command: ./vendor/bin/php-cs-fixer fix --diff --config vendor-bin/test/vendor/becklyn/php-cs/.php_cs.dist --dry-run --no-interaction
+                  command: ./vendor/bin/php-cs-fixer fix --diff --config vendor-bin/test/vendor/becklyn/php-cs/.php_cs.dist.php --dry-run --no-interaction
             - run:
                   name: PHPUnit
                   command: ./vendor/bin/simple-phpunit -c phpunit.xml --colors=always --testdox

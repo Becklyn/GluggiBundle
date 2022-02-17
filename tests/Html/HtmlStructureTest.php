@@ -3,9 +3,19 @@
 namespace Tests\Becklyn\GluggiBundle\Html;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Tests\Becklyn\GluggiBundle\App\TestKernel;
 
 class HtmlStructureTest extends WebTestCase
 {
+    /**
+     * @inheritDoc
+     */
+    protected static function getKernelClass () : string
+    {
+        return TestKernel::class;
+    }
+
+
     /**
      * @return array
      */

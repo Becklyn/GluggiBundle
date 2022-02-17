@@ -10,9 +10,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ContentController extends AbstractController
 {
-    /**
-     *
-     */
     public function contentActions (
         GluggiNormalizer $normalizer,
         DependenciesResolver $resolver,

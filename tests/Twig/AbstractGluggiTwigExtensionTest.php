@@ -15,9 +15,6 @@ abstract class AbstractGluggiTwigExtensionTest extends WebTestCase
     {
         self::bootKernel();
 
-        /** @var ContainerInterface $container */
-        $container = self::$container;
-
-        return $container->get(GluggiTwigExtension::class);
+        return $this->getContainer()->get(GluggiTwigExtension::class);
     }
 }

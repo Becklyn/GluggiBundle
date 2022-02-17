@@ -3,16 +3,26 @@
 namespace Tests\Becklyn\GluggiBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Tests\Becklyn\GluggiBundle\App\TestKernel;
 
 class GluggiControllerTest extends WebTestCase
 {
+    /**
+     * @inheritDoc
+     */
+    protected static function getKernelClass () : string
+    {
+        return TestKernel::class;
+    }
+
+
     public function testIndex () : void
     {
         $client = static::createClient();
         $client->request("GET", "/");
         $content = $client->getResponse()->getContent();
 
-        self::assertContains(
+        self::assertStringContainsString(
             "<title>Gluggi</title>",
             $content
         );
@@ -25,7 +35,7 @@ class GluggiControllerTest extends WebTestCase
         $client->request("GET", "/atom/example");
         $content = $client->getResponse()->getContent();
 
-        self::assertContains(
+        self::assertStringContainsString(
             "<title>Example // Atom // Gluggi</title>",
             $content
         );

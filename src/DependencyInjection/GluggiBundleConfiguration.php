@@ -11,7 +11,7 @@ class GluggiBundleConfiguration implements ConfigurationInterface
     /**
      * @inheritDoc
      */
-    public function getConfigTreeBuilder ()
+    public function getConfigTreeBuilder () : TreeBuilder
     {
         $treeBuilder = new TreeBuilder(GluggiBundle::BUNDLE_ALIAS);
 
