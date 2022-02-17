@@ -1,7 +1,8 @@
 framework:
     secret: secret
     test: ~
-    router: ~
+    router:
+        utf8: true
     profiler:
         collect: false
 
