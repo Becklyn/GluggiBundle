@@ -11,7 +11,7 @@
         }
     ],
     "require": {
-        "php": "^7.4",
+        "php": ">=7.4",
         "ext-json": "*",
         "becklyn/assets-bundle": "^2.3",
         "symfony/dependency-injection": "^4.1 || ^5.0",
