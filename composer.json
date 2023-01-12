@@ -1,15 +1,15 @@
 {
     "name": "becklyn/gluggi-bundle",
-    "type": "symfony-bundle",
     "description": "Modular layout preview system, to be used within a symfony app.",
-    "homepage": "https://github.com/Becklyn/GluggiBundle",
     "license": "BSD-3-Clause",
+    "type": "symfony-bundle",
     "authors": [
         {
             "name": "Becklyn Studios",
             "homepage": "https://becklyn.com/"
         }
     ],
+    "homepage": "https://github.com/Becklyn/GluggiBundle",
     "require": {
         "php": ">=7.4",
         "ext-json": "*",
@@ -37,14 +37,6 @@
         "becklyn/rad": "To use the 'form' dummy content.",
         "becklyn/rad-bundle": "To use the 'form' dummy content for projects that haven't upgraded to `becklyn/rad` yet."
     },
-    "config": {
-        "sort-packages": true
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "3.x-dev"
-        }
-    },
     "autoload": {
         "psr-4": {
             "Becklyn\\GluggiBundle\\": "src/"
@@ -53,6 +45,14 @@
     "autoload-dev": {
         "psr-4": {
             "Tests\\Becklyn\\GluggiBundle\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "3.x-dev"
         }
     }
 }
