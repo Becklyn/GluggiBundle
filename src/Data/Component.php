@@ -158,7 +158,6 @@ class Component
 
 
     /**
-     * @param Component $dependency
      */
     public function addDependency (self $dependency) : void
     {
@@ -167,7 +166,6 @@ class Component
 
 
     /**
-     * @param Component $component
      */
     public function addUsage (self $component) : void
     {

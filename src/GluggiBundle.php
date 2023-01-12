@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class GluggiBundle extends Bundle
 {
-    const BUNDLE_ALIAS = "gluggi";
+    public const BUNDLE_ALIAS = "gluggi";
 
 
     /**
