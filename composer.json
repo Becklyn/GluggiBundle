@@ -13,7 +13,7 @@
     "require": {
         "php": ">=7.4",
         "ext-json": "*",
-        "becklyn/assets-bundle": "^2.3",
+        "becklyn/assets-bundle": "dev-legacy_support",
         "symfony/dependency-injection": "^4.1 || ^5.0",
         "symfony/finder": "^4.1 || ^5.0",
         "symfony/form": "^4.1 || ^5.0",
