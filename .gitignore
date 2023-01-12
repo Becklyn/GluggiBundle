@@ -10,3 +10,4 @@
 /vendor
 /vendor-bin/*/composer.lock
 /vendor-bin/*/vendor
+/.php-cs-fixer.cache
